@@ -1,0 +1,184 @@
+/* Interactive controls have their own layout; the hero stage is decorative. */
+.hero-info{justify-content:flex-start;overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.o-contract{max-width:none;margin:8px 0}
+.o-contract .o-field{flex-direction:row;align-items:center;gap:1cqw;margin:0}
+.o-contract .o-field>span{flex:0 0 7.2cqw;font-size:11px;line-height:1.4}
+.o-contract select{flex:1;min-width:0;width:auto;min-height:36px;font-size:12px}
+.o-body,.o-body>*{min-width:0}
+.o-body button,.o-body .primary,.o-actions button,.o-unlocks button{font:400 14px/1.4 Arial,sans-serif;letter-spacing:0;min-height:40px;white-space:normal}
+.o-body .primary{font-weight:600;justify-content:center}
+.o-field,.o-field select{min-width:0;max-width:100%}
+.o-unit-card{display:flex;flex-direction:column;min-width:0}
+.o-unit-card h3{min-height:2.8em;line-height:1.4}
+.o-unit-status{min-height:3.4em;margin:0 0 13px;overflow-wrap:anywhere}
+.o-unit-relics{margin-top:auto;padding-top:8px}
+.o-unit-relics .o-field:last-child{margin-bottom:0}
+@media(max-width:540px){.o-unit-card h3,.o-unit-status{min-height:0}}
+.o-rule button{min-width:0;width:100%;padding:4px}
+.o-table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.o-table{table-layout:fixed;min-width:460px;overflow-wrap:anywhere}
+.o-table th:first-child{width:27%}
+#app:has(.modal:not(.hidden))>.lang-switch{visibility:hidden}
+.modal{z-index:40}
+#oathModal{z-index:50}
+#settingsModal,#helpModal,#codexModal{z-index:45}
+
+/* Reserve the bottom centre for team commands and the band above for upgrades. */
+.o-hud{bottom:12px;width:min(600px,44%);max-width:none;padding:8px 12px;font-size:12px}
+.o-objective-title{font-size:12px;line-height:1.5}
+.o-command-bar{gap:6px;margin-top:4px}
+.o-command-bar button{min-height:32px;font-size:12px;padding:5px 9px}
+.o-command-bar span{font-size:11px}
+#upgradePanel{bottom:128px;width:min(560px,42%)}
+#app:has(#upgradePanel:not(.hidden)) .hud-bottom-left{visibility:hidden}
+.upgrade-label,.upgrade-choices b{font-size:clamp(11px,.8cqw,15px)}
+.upgrade-label span,.upgrade-choices small{font-size:clamp(10px,.7cqw,13px)}
+.upgrade-choices button{min-height:76px}
+
+/* Short landscape remains readable with either a mouse or touch input. */
+@media(orientation:landscape) and (max-height:550px){
+  .home-copy{top:18%;bottom:10%;overflow-y:auto;padding-right:8px}
+  .home-copy>.eyebrow,.lang-zh .home-copy>.eyebrow{font-size:9px}
+  .home-tagline{font-size:12px}.home-desc,.lang-zh .home-desc{font-size:11px;line-height:1.6}
+  .primary.large{min-height:40px;font-size:12px}.home-links{flex-wrap:wrap;gap:6px}
+  .home-links button,.lang-zh .home-links button{font-size:11px;min-height:36px}
+  .hero-info{top:15%;bottom:21%;padding-bottom:8px}
+  #heroName,.lang-zh #heroName{font-size:27px;line-height:1.15;margin:4px 0 8px}
+  #heroTag{font-size:9px}#heroDesc{font-size:11px;line-height:1.5;display:none}
+  .screen-top button{font-size:11px;min-height:32px}
+  .select-heading .eyebrow{font-size:10px}.select-heading small{display:none}
+  .lang-switch{font-size:11px;min-height:36px;min-width:58px}
+  .abilities{gap:10px;margin:0 0 8px;padding:8px 0}
+  .ability-meta{font-size:9px;line-height:1.3}
+  .abilities strong,.lang-zh .abilities strong{font-size:12px;margin:4px 0;min-height:0}
+  .abilities p,.lang-zh .abilities p{font-size:11px;line-height:1.5}
+  .choice-row label{display:none}
+  .segmented button,.lang-zh .segmented button{font-size:11px;min-height:34px;padding:5px 3px}
+  .o-contract .o-field{flex-direction:column;align-items:stretch;gap:5px}
+  .o-contract .o-field>span{flex:auto}.o-contract select{width:100%;font-size:12px}
+  .selection-note,.lang-zh .selection-note{font-size:11px;line-height:1.5}
+  .select-bottom{bottom:3%;height:48px}.select-bottom>.primary{font-size:12px}
+  .hero-card span,.lang-zh .hero-card span{font-size:9px}.hero-card svg{width:22px;height:22px}
+  .stage-label{bottom:3%}#partyOpen{bottom:-12%;font-size:12px;min-height:38px}
+  #heroQuote{font-size:11px}.stage-code{font-size:9px}
+  .o-hud{width:34%;bottom:8px;padding:6px 8px}
+  .hud-bottom-left{display:none}
+  .o-objective-title,.o-hud .o-small{font-size:11px}
+  .o-command-bar{gap:4px}.o-command-bar button{font-size:11px;min-height:32px;padding:4px 7px}
+  .o-command-bar span{font-size:10px}
+  #upgradePanel{bottom:125px;width:44%;padding:8px}.upgrade-choices button{min-height:62px}
+  .hud-right button{width:34px;height:34px;font-size:17px}
+  #stageName,#timeText{font-size:10px}#waveText{font-size:18px}
+  #bossTitle{font-size:12px}#bossPhase{font-size:10px}#killsText{font-size:25px}#comboText{font-size:10px}
+  .skill-button small{font-size:10px;line-height:1.2}.skill-button{min-width:48px;min-height:48px}
+  .modal-card h2{font-size:24px}.modal-card>p,.subtle,.help-grid p{font-size:12px}
+  .modal-close{font-size:24px;min-width:40px;min-height:40px}
+  .help-grid strong,.help-grid kbd{font-size:12px}
+  .setting-line{font-size:12px;min-height:32px}.setting-line select{font-size:12px}
+  .pause-actions button{font-size:13px;min-height:40px}.pause-card{width:60%}
+}
+
+@media(orientation:portrait){
+  #app{--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+  #app{top:0;left:0;transform:none;width:100vw;height:100dvh;overflow:hidden}
+  #rotateHint{display:none}
+  button{min-height:40px}
+  .lang-switch{right:12px;top:max(8px,env(safe-area-inset-top));font-size:12px;min-width:72px;min-height:40px;padding:8px}
+  .screen-grain{pointer-events:none}
+  .eyebrow{font-size:10px;line-height:1.5;letter-spacing:.09em}
+  .primary,.primary.large{font-size:14px;letter-spacing:.05em;min-height:48px}
+  .primary b{font-size:20px}kbd{font-size:11px;padding:3px 5px}
+  #home{overflow-y:auto;padding:var(--safe-top) 20px calc(30px + var(--safe-bottom))}
+  .home-shade{position:fixed;background:linear-gradient(90deg,#070c12eb,#070c1299),linear-gradient(0deg,#080d13 0%,transparent 100%)}
+  .home-top{position:relative;top:auto;left:auto;right:auto;margin:22px 90px 45px 0}
+  .wordmark{font-size:18px;gap:10px}.brand-icon{font-size:28px}.brand-separator{height:22px}
+  .wordmark>span:last-child{font-size:8px;max-width:96px;line-height:1.5}.system-status{display:none}
+  .home-copy{position:relative;left:auto;top:auto;width:auto}
+  .home-copy>.eyebrow,.lang-zh .home-copy>.eyebrow{font-size:10px;line-height:1.6}
+  .home-copy h1{font-size:12.8vw;line-height:1.05;margin:26px 0 22px}
+  .home-copy h1 em{font-size:13.1vw}
+  .home-tagline{font-size:16px;line-height:1.5}
+  .home-desc,.lang-zh .home-desc{font-size:14px;line-height:1.8;max-width:none;margin:18px 0 28px}
+  .home-actions{width:100%}.primary.large{height:52px;padding:12px 16px}
+  .home-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .home-links button,.lang-zh .home-links button{font-size:12px;line-height:1.4;min-height:44px;border:1px solid var(--line);padding:10px}
+  .home-spec{display:none}.home-foot{position:relative;left:auto;right:auto;bottom:auto;display:grid;gap:12px;margin-top:36px;font-size:10px;line-height:1.6}
+
+  #select{overflow-y:auto;padding:var(--safe-top) 16px calc(20px + var(--safe-bottom));background:linear-gradient(#08111baa,#08111bee 270px)}
+  .select-shade{display:none}.screen-top{position:relative;left:auto;right:auto;top:auto;padding:12px 80px 12px 0;gap:8px;justify-content:flex-start}
+  .screen-top button{font-size:12px;letter-spacing:0;padding:7px}.select-heading{display:none}
+  .hero-stage{position:relative;left:auto;top:auto;bottom:auto;width:100%;height:150px;margin:8px 0 16px}
+  .stage-code{font-size:10px;top:0}.stage-label,.stage-scan,.stage-corner{display:none}
+  #heroQuote{font-size:12px;left:0;bottom:58px;max-width:90%}
+  #partyOpen{left:0;bottom:0;width:100%;min-width:0;min-height:44px;padding:10px 14px;font-size:13px;letter-spacing:.02em}
+  .hero-info{position:relative;left:auto;right:auto;top:auto;bottom:auto;overflow:visible;padding:0;display:block}
+  #heroTag{font-size:11px}#heroName,.lang-zh #heroName{font-size:34px;line-height:1.2;margin:10px 0 14px}
+  #heroDesc{display:block;font-size:14px;line-height:1.7;margin:0 0 20px}
+  .abilities{display:grid;grid-template-columns:1fr;gap:16px;padding:16px 0;margin-bottom:20px}
+  .ability-meta{font-size:10px;min-height:0}.ability-meta kbd{font-size:11px}
+  .abilities strong,.lang-zh .abilities strong{font-size:15px;line-height:1.5;margin:5px 0}
+  .abilities p,.lang-zh .abilities p{font-size:13px;line-height:1.7}
+  .choice-row{display:block;margin:16px 0}.choice-row label{display:block;width:auto;font-size:11px;margin-bottom:8px}
+  .segmented{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .segmented button,.lang-zh .segmented button{font-size:12px;padding:10px 6px;min-height:44px}
+  .o-contract .o-field{flex-direction:column;align-items:stretch;gap:8px}.o-contract .o-field>span{flex:auto;font-size:12px}
+  .o-contract select{width:100%;min-height:44px;font-size:13px}
+  .selection-note,.lang-zh .selection-note{font-size:12px;line-height:1.7;margin:16px 0}
+  .select-bottom{position:relative;left:auto;right:auto;bottom:auto;height:auto;display:flex;flex-direction:column;gap:16px;padding:8px 0 16px}
+  #roster{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .hero-card{min-height:74px;padding:10px 4px}.hero-card svg{width:28px;height:28px}
+  .hero-card span,.lang-zh .hero-card span{font-size:11px;letter-spacing:0}
+  .select-bottom>.primary{width:100%;font-size:15px;padding:14px 18px;min-height:52px}
+
+  .modal{padding:calc(12px + var(--safe-top)) 12px calc(12px + var(--safe-bottom))}.modal-card,.settings-card,.help-card,.codex-card,.pause-card{width:100%;max-height:100%;padding:24px 18px}
+  .modal-card h2{font-size:26px;line-height:1.2;margin:12px 36px 18px 0}
+  .modal-card>p,.subtle,.help-grid p{font-size:13px;line-height:1.7}
+  .modal-close{font-size:28px;width:44px;height:44px;right:8px;top:8px}
+  .pause-card{text-align:left}.pause-actions{gap:10px;margin-top:20px}.pause-actions button{font-size:14px;min-height:46px;padding:12px}
+  .setting-columns{grid-template-columns:1fr;gap:10px;margin:20px 0}
+  .setting-line{font-size:13px;min-height:44px;gap:12px;margin:12px 0}
+  .setting-line select{font-size:13px;max-width:60%;padding:10px;min-height:44px}
+  .setting-line input[type=checkbox]{width:24px;height:24px}.setting-line>span:last-child:not(:first-child){font-size:12px}
+  .diagnostic-buttons{gap:8px}.diagnostic-buttons button{font-size:12px;padding:10px;min-height:44px}#backendText{font-size:12px;line-height:1.5}
+  .help-grid{grid-template-columns:1fr;gap:22px;margin:20px 0}.help-grid strong{font-size:16px;margin:9px 0}.help-grid kbd{font-size:12px}
+  #bossCodex{grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.codex-entry{padding:12px;min-height:0}
+  .codex-entry strong{font-size:14px;line-height:1.4;margin:8px 0}.codex-entry p{font-size:12px;line-height:1.6}
+  .codex-entry small,.codex-entry .codex-num,.inspect-link{font-size:10px;line-height:1.5}.codex-icon{font-size:28px}.codex-entry .boss-thumb{height:100px}
+  #inspect{overflow-y:auto}.inspect-top{position:relative;left:auto;right:auto;top:auto;padding:12px 90px 12px 12px;font-size:10px}
+  .inspect-top button{font-size:12px;min-height:44px}.inspect-reticle{left:5%;top:75px;width:90%;height:230px;bottom:auto}.inspect-reticle span{font-size:10px}
+  .inspect-panel{top:330px;left:20px;right:20px;bottom:20px;padding-bottom:16px}
+  #inspectIndex,#inspectSub{font-size:12px}#inspectName,.lang-zh #inspectName{font-size:30px;margin:12px 0}
+  .inspect-panel>small,.inspect-panel h3{font-size:12px}.inspect-panel>p:not(#inspectSub){font-size:14px;line-height:1.7}
+  .inspect-controls{flex-wrap:wrap;margin:12px 0}.inspect-controls button,.inspect-panel nav button{font-size:12px;min-height:44px;padding:10px}
+
+  #hud{pointer-events:none}.hud-left{left:12px;top:calc(82px + var(--safe-top));width:64%;gap:8px}.player-badge{gap:8px}#hudPortrait{width:34px;height:34px}#hudPortrait svg{width:30px;height:30px}
+  #hudName{font-size:12px}#hudLevel{font-size:10px}.hp-meta{font-size:11px}.hp-meta small{font-size:9px}.vital-meta{font-size:9px}
+  .hud-center{left:12px;top:calc(12px + var(--safe-top));width:47%;text-align:left}#stageName{font-size:9px;line-height:1.4}#waveText{font-size:18px}#timeText{font-size:11px}.wavebar{display:none}
+  .hud-right{top:calc(57px + var(--safe-top));right:10px;gap:5px;width:80px;display:grid;grid-template-columns:1fr 1fr}
+  .hud-right button{width:36px;height:36px;min-height:36px;font-size:18px}.performance{display:none}
+  #partyHUD{left:12px;top:calc(157px + var(--safe-top));width:49%}.party-vital{font-size:10px;gap:3px;padding:5px 7px;margin-bottom:4px}.o-vital-gear{font-size:9px;margin:0}
+  #bossHud{left:12px;right:12px;top:calc(365px + var(--safe-top));width:auto}#bossTitle{font-size:12px}#bossPhase{font-size:10px}
+  #minimapWrap{right:12px;top:calc(157px + var(--safe-top));width:26%}#minimapWrap>span{font-size:9px}.siege-panel{width:100%;padding:5px;margin-top:5px}.siege-panel strong{font-size:9px}.siege-panel small{font-size:8px;white-space:normal}#musicState{display:none}
+  .hud-bottom-left{left:12px;bottom:250px}.killcounter small{font-size:9px}#killsText{font-size:24px}#comboText{font-size:10px}#buildText{font-size:9px;max-width:160px;line-height:1.5}
+  .skill-dock{right:12px;bottom:calc(18px + var(--safe-bottom));gap:9px}.skill-button{width:54px;min-height:66px;padding:6px 2px}.skill-icon{font-size:23px;width:38px;height:38px}.skill-icon svg{width:26px;height:26px}.skill-button small{font-size:9px;line-height:1.3;max-width:54px;min-height:24px}.skill-button kbd{display:none}.ultimate>span{font-size:14px}
+  #joystick{display:block;left:14px;bottom:calc(20px + var(--safe-bottom));width:110px;height:110px}#controlHint{display:none}
+  .o-hud{left:12px;right:12px;transform:none;bottom:calc(145px + var(--safe-bottom));width:auto;max-width:none;padding:8px 10px}
+  .o-objective-title,.o-hud .o-small{font-size:11px}.o-command-bar{gap:5px}.o-command-bar button{min-height:36px;font-size:12px;padding:6px 8px}.o-command-bar span{font-size:10px}
+  #upgradePanel{bottom:calc(260px + var(--safe-bottom));left:12px;transform:none;width:calc(100% - 24px);padding:10px}
+  .upgrade-choices{gap:7px}.upgrade-choices button{min-height:84px}.upgrade-label,.upgrade-choices b{font-size:12px}.upgrade-label span,.upgrade-choices small{font-size:10px}.up-icon{font-size:22px}
+  #downedNotice{left:12px;right:12px;bottom:calc(230px + var(--safe-bottom));font-size:11px;line-height:1.4;padding:6px}
+  #announcement{left:20px;right:20px;top:43%}#announcement small{font-size:11px}#announcement strong{font-size:25px;line-height:1.3}#announcement span{font-size:12px;line-height:1.5}
+  #toast{font-size:12px;max-width:90%;white-space:normal;text-align:center;padding:12px}
+  #result{overflow-y:auto}.result-content{position:relative;inset:auto;min-height:100%;padding:90px 20px 30px;justify-content:center}
+  .result-content h1{font-size:38px;line-height:1.15;margin:20px 0}.result-content>p{font-size:14px;line-height:1.7}
+  .result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px 12px;width:100%;padding:24px 0;margin:25px 0}
+  .result-stats strong{font-size:28px}.result-stats small{font-size:10px}.result-stats>div{gap:8px}
+  #resultBuild,.result-content>small{font-size:12px;line-height:1.7;margin-bottom:20px}.result-actions{flex-direction:column;width:100%;gap:10px}.result-actions button{font-size:14px;min-height:46px;padding:12px}
+  .oath-card{padding:16px}.o-top h2{font-size:24px;margin:8px 0 18px}.o-top .modal-close{min-width:44px;min-height:44px}
+  .o-body button,.o-body .primary,.o-actions button,.o-unlocks button,.o-tabs button{font-size:13px;min-height:44px}
+  .o-field select,.o-field input,.o-body textarea{font-size:14px;min-height:44px}
+  .o-rule{grid-template-columns:20px minmax(0,1fr) 40px 40px;grid-template-areas:'number condition condition condition' '. action up remove';gap:8px}
+  .o-rule>b{grid-area:number}.o-rule>.o-field:nth-child(2){grid-area:condition}.o-rule>.o-field:nth-child(3){grid-area:action}.o-rule>button:nth-child(4){grid-area:up}.o-rule>button:nth-child(5){grid-area:remove}
+  .o-route-card{padding:20px 16px}.o-route-card h2{font-size:26px}.o-route-option{padding:20px;min-height:160px}.o-route-map{gap:4px}.o-route-map span{flex:1;min-width:0;width:auto;font-size:11px}
+  .o-route-card>button{font-size:13px;min-height:44px;margin-right:8px}
+}

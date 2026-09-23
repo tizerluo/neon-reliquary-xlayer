@@ -1,0 +1,13 @@
+{
+  "name": "neon-reliquary-oath-expedition",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "python3 build.py",
+    "start": "python3 tools/live_server.py",
+    "test": "node --test tests/oath-*.test.cjs",
+    "test:legacy": "node tests/test_client.cjs && node tests/test_rescue.cjs && node tests/test_rescue_edges.cjs"
+  },
+  "dependencies": {"ethers": "6.16.0"},
+  "overrides": {"ws": "8.21.3"}
+}
