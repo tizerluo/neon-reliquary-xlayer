@@ -4,6 +4,8 @@
 
 A browser roguelite built around playable TapeOut NAND/LATCH circuits on X Layer. One leader and up to three companions fight through twelve encounters across three regions. The leader can be human-controlled or assigned to an external AI agent; each companion seat can hold a tactical circuit chip, an external AI agent, or remain empty. The default human-plus-three-chip squad is free to play and needs no wallet.
 
+Nandverse Arcade — Neon Reliquary was submitted to the TapeOut Genesis Transistor Hackathon on 2026-09-24. The [English competition demo](https://youtu.be/jwszzKPWcrI) shows the live game and on-chain chip verification. The accompanying videos cover [gameplay in English](https://youtu.be/5nsdvGTCElg) and [chip creation with 11 templates in English](https://youtu.be/_yW_HZ9HUjc); [Chinese competition demo](https://youtu.be/-xOcF6qaUAI), [Chinese gameplay](https://youtu.be/p7j430kNNXQ), and [Chinese chip guide](https://youtu.be/EBraOXO7ZwU) are also available. Each video pairs narration and captions in the same language.
+
 ## Play
 
 Open the [live game](https://1-2-231.tapekit.org/) or download [Neon_Reliquary_v3.html](Neon_Reliquary_v3.html) and open it in a modern browser. Keep **Oath Expedition** selected, choose a class and difficulty, then deploy. The file bundles the game, visuals, audio, and its browser-side Ethereum library; normal play does not fetch a model or require a server. The live game's file bytes are stored on X Layer and served to browsers through TapeKit's gateway and Service Worker. English and Chinese are available in the game.
