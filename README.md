@@ -4,6 +4,8 @@
 
 New to the game? Read the complete [English player guide](docs/PLAYER-GUIDE.en.md) or [中文完整玩法指南](docs/PLAYER-GUIDE.zh-CN.md). Both start with a wallet-free route for players and continue with AI companions, circuit design, free lab tests, and optional X Layer tapeout.
 
+Prefer to watch? The [complete English video guide](https://youtu.be/Pp3l9Mzx0sQ) (13:29) and [中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14）follow the same two paths, with matching narration and burned-in captions. Both are unlisted and available by link.
+
 A browser roguelite built around playable TapeOut NAND/LATCH circuits on X Layer. One leader and up to three companions fight through twelve encounters across three regions. The leader can be human-controlled or assigned to an external AI agent; each companion seat can hold a tactical circuit chip, an external AI agent, or remain empty. The default human-plus-three-chip squad is free to play and needs no wallet.
 
 Nandverse Arcade — Neon Reliquary was submitted to the TapeOut Genesis Transistor Hackathon on 2026-09-24. The [English competition demo](https://youtu.be/jwszzKPWcrI) shows the live game and on-chain chip verification. The accompanying videos cover [gameplay in English](https://youtu.be/5nsdvGTCElg) and [chip creation with 11 templates in English](https://youtu.be/_yW_HZ9HUjc); [Chinese competition demo](https://youtu.be/-xOcF6qaUAI), [Chinese gameplay](https://youtu.be/p7j430kNNXQ), and [Chinese chip guide](https://youtu.be/EBraOXO7ZwU) are also available. Each video pairs narration and captions in the same language.

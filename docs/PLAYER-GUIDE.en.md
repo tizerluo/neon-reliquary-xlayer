@@ -2,6 +2,8 @@
 
 [Play now](https://1-2-231.tapekit.org/) · [中文版](PLAYER-GUIDE.zh-CN.md) · [X Layer processor and 11 manufactured circuits](XLAYER-MAINNET.md)
 
+Watch the [complete English video guide](https://youtu.be/Pp3l9Mzx0sQ) (13:29) or [中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14）. Each version has narration and burned-in captions in the same language.
+
 Lead a four-member squad through three regions held by a machine legion. Play the leader yourself, reserve a seat for a real external AI agent, or give companions tactical circuits that you design. Start with an action roguelite; if a teammate's choice makes you curious, open the workshop and find out why it happened. You can eventually manufacture your own immutable circuit on X Layer.
 
 There are two paths through this guide. For a complete first-run loop, read through “Research and relics.” If you want to make circuits, continue with “Turn a rescue decision into a chip.” **Ordinary play, local editing, logic tests, and read-only imports of existing on-chain chips are free and require no wallet.** A wallet and OKB are needed only if you decide to manufacture a new version.
