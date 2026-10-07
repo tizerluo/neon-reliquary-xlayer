@@ -12,7 +12,7 @@ Nandverse Arcade — Neon Reliquary was submitted to the TapeOut Genesis Transis
 
 ## Play
 
-Open the [live game](https://1-2-231.tapekit.org/) in a modern browser. The October update candidate includes six HD heroes, eight bosses, four environments, procedural audio and recoverable asset loading. Its program and runtime modules are prepared for X Layer DeWeb, while 60 versioned visual assets use Cloudflare with SHA-256 verification. The existing live game stays active until the verified candidate is switched on; see [release status and build instructions](docs/HYBRID-DEPLOYMENT.md). For local HD play, run the server below. English and Chinese are available.
+Open the [live game](https://1-2-231.tapekit.org/) in a modern browser. The October hybrid edition includes six HD heroes, eight bosses, four environments, procedural audio and recoverable asset loading. Its program and runtime modules are stored on X Layer DeWeb, while 60 versioned visual assets use Cloudflare with SHA-256 verification. See [release status and build instructions](docs/HYBRID-DEPLOYMENT.md). For local HD play, run the server below. English and Chinese are available.
 
 Move with WASD or the arrow keys, aim with the pointer, dodge with Space, use the skill with E and the ultimate with R. Press P for the squad panel and Esc to pause. On touch screens, use the on-screen joystick and ability buttons; landscape is recommended for combat.
 
@@ -48,7 +48,7 @@ The checked-in HTML is built from src/ with Python's standard library. Node.js 1
     npm run test:legacy
     python3 tests/test_live_server.py
 
-The browser file includes ethers 6.16.0; its third-party license is retained in src/vendor/ethers.LICENSE.md. The automated suite covers circuit compilation/evaluation, gameplay rules, mixed squads, input, manufacturing readback, author provenance, and the local bridge. Paid mainnet actions require separate wallet confirmation. The 11 published chips were manufactured and read back on X Layer mainnet; desktop and mobile browser emulation have been exercised on the live gateway. Physical iPhone and a public player's own paid mint/tapeout flow have not been verified here. The October candidate has also been exercised in desktop Safari; this does not verify iPhone performance.
+The browser file includes ethers 6.16.0; its third-party license is retained in src/vendor/ethers.LICENSE.md. The automated suite covers circuit compilation/evaluation, gameplay rules, mixed squads, input, manufacturing readback, author provenance, and the local bridge. Paid mainnet actions require separate wallet confirmation. The 11 published chips were manufactured and read back on X Layer mainnet; desktop and mobile browser emulation have been exercised on the live gateway. Physical iPhone and a public player's own paid mint/tapeout flow have not been verified here. The October hybrid edition has also been exercised in desktop Safari; this does not verify iPhone performance.
 
 ## 中文速览
 

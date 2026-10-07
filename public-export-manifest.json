@@ -1,8 +1,8 @@
 {
   "schema": "nr-public-export-v1",
   "generator": "tools/export_public.py",
-  "sourceCommit": "5c5da19ed1510db6cd1e831d05a44e6d9ac5cac9",
-  "allowlistSha256": "a023574a08a6b7b98342fe0912254fe3fbacafff8cb5cfde4d9837625ff3df39",
+  "sourceCommit": "55cdb6a22734e4b42e877af2ab74f95e7fb430d8",
+  "allowlistSha256": "f5108e35396a6fbb1847b9e8451df25886d195706f9201b7eb4ce191d549f48d",
   "files": {
     ".gitignore": {
       "bytes": 178,
@@ -21,8 +21,8 @@
       "sha256": "7a3749da239360835f9e42d742f77501bdc33bea49543644204c08ccb74f34ba"
     },
     "README.md": {
-      "bytes": 8163,
-      "sha256": "263469d16f046c9a75572349e35a5e59c7bd070addbee152c3a4abd854c20abb"
+      "bytes": 8082,
+      "sha256": "b9f962bdc4000f0ba60e423fe55adf0f6607b24c564ac5f269e5e617314d5bff"
     },
     "TACTICAL-CHIP-WORKSHOP.md": {
       "bytes": 7214,
@@ -35,6 +35,10 @@
     "build.py": {
       "bytes": 2349,
       "sha256": "c5676035c4f9b6afc563a99a72218081723f773629111d01c6fbd5b041ab2f48"
+    },
+    "deploy/hybrid-receipt.json": {
+      "bytes": 41351,
+      "sha256": "ad8c11368661965a0c947b705cc7707f437dd36bf4e9697d3798e33d7fdf05e9"
     },
     "deploy/oath-icon.png": {
       "bytes": 18325,
@@ -53,8 +57,8 @@
       "sha256": "a7844a9bfd1ced9d8256521420c7ce620765d586b4955c1d722ebdd7b8c0f15e"
     },
     "deploy/public-export.json": {
-      "bytes": 2701,
-      "sha256": "a023574a08a6b7b98342fe0912254fe3fbacafff8cb5cfde4d9837625ff3df39"
+      "bytes": 2735,
+      "sha256": "f5108e35396a6fbb1847b9e8451df25886d195706f9201b7eb4ce191d549f48d"
     },
     "deploy/public-snapshots/evidence/live-coop/commands.jsonl": {
       "bytes": 1895,
@@ -93,8 +97,8 @@
       "sha256": "93d6d9fbb7d6f426dbaa68473e6fd9a00adf46c3ec4e3a662390eb63978a3d2f"
     },
     "docs/HYBRID-DEPLOYMENT.md": {
-      "bytes": 3320,
-      "sha256": "05cef31d5fe0d8eebe3b9ff4160caf7172dddcdc4bb4ee249eddee54584a2186"
+      "bytes": 5786,
+      "sha256": "38eb7d3959d129fb0faac97f3d54ed6d209c22a0eb28e4acac4460c6d635761f"
     },
     "docs/LOADING-EXPERIENCE.md": {
       "bytes": 3609,
@@ -109,20 +113,20 @@
       "sha256": "96d15bd6eefae36140ea523417deea5675828dcfcc962a9b51d990d707d3d0f8"
     },
     "docs/PLAYER-GUIDE.en.md": {
-      "bytes": 14970,
-      "sha256": "4cf90eec1f633613d523b0a045b64c3460d0cd7a23e6c8007cda16364eb54110"
+      "bytes": 15414,
+      "sha256": "bd610af9e96eec0b63b7437e7817842994c0088c7dd4016af4c5a3c70a06f84a"
     },
     "docs/PLAYER-GUIDE.zh-CN.md": {
-      "bytes": 14732,
-      "sha256": "9b46e154c89c1e93bcf2a113c1234a66cea69aba07687f7ce4b3f3c543c7fddb"
+      "bytes": 15093,
+      "sha256": "d05073237d97c00859c927e0af1b0e3e7f0d9ec003627b43deab7303e83210ee"
     },
     "docs/UI-ASSET-INTEGRATION.md": {
       "bytes": 8890,
       "sha256": "70a16ef3d066d4d0c7b11fe09d9a7dbc36d6dd565119f3d2fbed32d25e77ca2a"
     },
     "docs/XLAYER-MAINNET.md": {
-      "bytes": 5543,
-      "sha256": "90f726d4dd5ac9b8244e321283b429c6e227a22cecefb2b213886c0e6d32767d"
+      "bytes": 5732,
+      "sha256": "635c2190f7f59a97f608cde1c3642238c8260583bdce63eafa15240c68d28cf1"
     },
     "evidence/live-coop/commands.jsonl": {
       "bytes": 1895,

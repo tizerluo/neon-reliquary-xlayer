@@ -2,7 +2,9 @@
 
 [开始游玩](https://1-2-231.tapekit.org/) · [English guide](PLAYER-GUIDE.en.md) · [11 枚已流片芯片及链上资料](XLAYER-MAINNET.md)
 
-想看视频，可以观看[中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14），或[英文完整视频指南](https://youtu.be/Pp3l9Mzx0sQ)（13:29）。两个版本各自使用同语言的旁白和内嵌字幕。
+想看前版功能教程，可以观看[中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14），或[英文完整视频指南](https://youtu.be/Pp3l9Mzx0sQ)（13:29）。两个版本各自使用同语言的旁白和内嵌字幕，未展示 10 月高清与 OATH 更新。
+
+10 月正式版已加入高清英雄／Boss／场景、程序化音频和可恢复加载。首页「NANDVERSE／OATH」说明共享材料与生态代币；[OATH 已在 X Layer 发行](OATH-RELEASE.md)，消费与质押尚未开放。免费游玩、蓝图试验及既有芯片读回都不要求购买 OATH。
 
 你带领一支四人小队，穿过被机械军团占据的三片区域。你可以自己操作队长，让真正的外部 AI 控制某个席位，也可以给队友装上自己设计的战术电路。先作为动作游戏玩，再慢慢研究队友为什么这样行动；喜欢动手的人，还能把改好的逻辑制成 X Layer 上的芯片。
 

@@ -1,0 +1,1123 @@
+{
+  "schema": "nr-deweb-mainnet-publication-v1",
+  "chainId": 196,
+  "creator": "0xB5c09B3322e21D459570c9C882d56f5b0769559E",
+  "container": "0x12775C86BD6f9871c7891ee693Fe80Bc68CB8fE7",
+  "registry": "0xd6EFb7adCc9c83dC4924Ad56f6a8E4e969b9ADB6",
+  "url": "https://1-2-231.tapekit.org/",
+  "version": "nr-3fda53bf51b0aa1d",
+  "sourceCommit": "5c5da19ed1510db6cd1e831d05a44e6d9ac5cac9",
+  "sourceWorkingTreeDirty": false,
+  "programVersion": "program-ae019f0ef821fa55",
+  "artVersion": "art-644f06376532bf36",
+  "cdnBase": "https://nandverse-assets.pages.dev/assets/art-644f06376532bf36/",
+  "runtimeAssets": 60,
+  "runtimeModules": 50,
+  "assetBytes": 86701291,
+  "dewebBytes": 3777975,
+  "planSha256": "8eb6aef04830342fa7fc36546ef99f50d8c57cd47675f98e7cc03d353046de20",
+  "previousVersion": "nr-92bf31cdcc068661",
+  "writes": 49,
+  "cumulativeWrites": 285,
+  "actualGasCostWei": "0",
+  "cumulativeGasCostWei": "0",
+  "actualGasOKB": "0.0",
+  "cumulativeGasOKB": "0.0",
+  "approvedBudgetStopLineOKB": "0.04",
+  "activationTx": "0x2e95d5014fb7d1eedf5d1f35a04988d9005a5b5c928fa6e1e1e21c7b6dba75e1",
+  "activationBlock": 72621757,
+  "verifiedBeforeActivation": {
+    "planSha256": "8eb6aef04830342fa7fc36546ef99f50d8c57cd47675f98e7cc03d353046de20",
+    "version": "nr-3fda53bf51b0aa1d",
+    "checkedAtUtc": "2026-10-07T16:33:08.537Z",
+    "files": [
+      {
+        "path": "archive/pre-competition-84f7e7fe34da45a4.html",
+        "bytes": 931833,
+        "sha256": "84f7e7fe34da45a40c85e093d6ccc3a19644b39d2d23a2bdfd89e42fc68a51ba"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/licenses/ASSET-NOTICE.md",
+        "bytes": 1255,
+        "sha256": "e95ee88eb9a9411dcdb79fe3cb76e236b02ccf267b0ca7755f9a0fe8b64837c3"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/licenses/ethers.LICENSE.md",
+        "bytes": 1075,
+        "sha256": "44eea86637405118248327fbe9d9fa95d04c7a57221c7e8c155f736db9f1b612"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/LICENSE",
+        "bytes": 1081,
+        "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/build/three.core.js",
+        "bytes": 1458113,
+        "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/build/three.module.js",
+        "bytes": 662772,
+        "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/environments/RoomEnvironment.js",
+        "bytes": 4960,
+        "sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/loaders/GLTFLoader.js",
+        "bytes": 117570,
+        "sha256": "131c0f78c01d19368ae495caa65b3adaa10487810a36a05bb5901b769a35ac16"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/EffectComposer.js",
+        "bytes": 8501,
+        "sha256": "4e079a5886152d7e529a59aef644e968ab4d32c6a33ce016b36bf29b2eac26f7"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/MaskPass.js",
+        "bytes": 4694,
+        "sha256": "7cd08eee9d5d6f5578beaddbdcbe9c384f6873810af27f22ab7db3ceeb127aa3"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/Pass.js",
+        "bytes": 4218,
+        "sha256": "444b409c235ead986893c472e720da1b779a56985c7d10b279c7944b52bd61c5"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/RenderPass.js",
+        "bytes": 4280,
+        "sha256": "817f6c3cdcd0fd41515d112359ea0532568eefb5aabd3b33903957ebca1b8a6a"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/ShaderPass.js",
+        "bytes": 3228,
+        "sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+        "bytes": 15397,
+        "sha256": "ba8f2fcadfa6588384c9473498f974d81d120f02f0e63a0e59c265202a006b5a"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/shaders/CopyShader.js",
+        "bytes": 729,
+        "sha256": "a33057d5ac91c43304c186ac0e8816e62bb2ed471d3a00ff3018dfd5c0389718"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+        "bytes": 1291,
+        "sha256": "5044f780b6e6cf863947f64c36fe1587132f7fbe395ada863cd1e5f0388dcf1e"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/utils/BufferGeometryUtils.js",
+        "bytes": 37712,
+        "sha256": "9fb63427ce6641fa14fd0baff9cc4d1b5f9c3d85fd084bf2e90e803c44ec1797"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/utils/SkeletonUtils.js",
+        "bytes": 11535,
+        "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/arena-ambient.js",
+        "bytes": 14614,
+        "sha256": "0fa221b55cde723955fde91568404721e5cdf486a2ca46709f81028da6664759"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/arena-env.js",
+        "bytes": 8299,
+        "sha256": "667d48a15953e2cfbbe30a7aa753d2daa3225b24b45be39f8fb5acb748e75f62"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/arena-heat.js",
+        "bytes": 7521,
+        "sha256": "30512d5ef59ec58196e2e4edc6ab4defead60c8f716cb11df592a728d4002cb9"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/arena-reflections.mjs",
+        "bytes": 6652,
+        "sha256": "eb36188948eda26d109be0625ca4626568bb587b22a21df1513180721b7d0799"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/arena-surface.mjs",
+        "bytes": 4490,
+        "sha256": "273f79c3dc4e230897cbe6210e8e378c205d87de3b312d162eaf997ce476be6a"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/asset-loading.mjs",
+        "bytes": 6312,
+        "sha256": "e7b8fb009c01de18f17fc3fef3fa017ad8a22b78e032925e2d58795528644089"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-0.mjs",
+        "bytes": 4864,
+        "sha256": "21803a6d7d0b3cbb1109f0cf2a691dc3b3ce39debc062d6b1dab8c5fa17a5e57"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-1.mjs",
+        "bytes": 3747,
+        "sha256": "6d4c1ba37a39def1e5ed18d28e48136d7b1b5bfbfa7be74f020f88d129cb6be1"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-2.mjs",
+        "bytes": 4786,
+        "sha256": "e7baba4fa6706bfe4c32c2097b4b3dcdf7b34e049ea2fdbdbd2e2face69981c0"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-3.mjs",
+        "bytes": 2809,
+        "sha256": "97432daa60c477f4bfd24173e1a8d3cc7cf5f4bd2ffbf9d2b9696cb65a918562"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-4.mjs",
+        "bytes": 3486,
+        "sha256": "1369e9dd99090a85d8aeab23b2681a6fc91e415f29b27c40509613dd821babb6"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-5.mjs",
+        "bytes": 3565,
+        "sha256": "1fd48aa0bf1bd71e314bce8d2930bdbf19ede8abce4d4f0e3a86ead5f456e50a"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-6.mjs",
+        "bytes": 3856,
+        "sha256": "3ea925df21a48e6bbdaca94d3460d90aa6b6d935503ffd18e2d385a51e3c1b5f"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-7.mjs",
+        "bytes": 4657,
+        "sha256": "8213403903fc1f8d307991eca56959b1ad8cfd510c8a17000bd8783c3226e71b"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/common.mjs",
+        "bytes": 860,
+        "sha256": "a3936d08d2d65e6efde660f66a8fa26f1f4a3f2aecd8051e5faea667fcb2a03a"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/index.mjs",
+        "bytes": 1389,
+        "sha256": "6f252a320d5edc4e87cbb15aeec9543ed9a7be3120369c097ab7533b74ad8b50"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-fx.mjs",
+        "bytes": 3737,
+        "sha256": "7ae016da5a220556a13c1d802b083dcaa23e9ce7d6ab55c6ac8c6a950cf42820"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/boss-projectiles.mjs",
+        "bytes": 9383,
+        "sha256": "d2410a055fbf6f50811ef8b32008c44d68891f1855cf9fa6aa7bf7eee278afa9"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/bridge.js",
+        "bytes": 16727,
+        "sha256": "c9daa8d11dec9ff89bee4c597517904775e6ce867a9a81e1255c75399816cfb9"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/chest-rewards.mjs",
+        "bytes": 13804,
+        "sha256": "b6f98b15beee5dc6a7ce491ab57d3bb96508c5b3a1e422d266f0a22378b56c50"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/glow.js",
+        "bytes": 7738,
+        "sha256": "1701994157050a1ec24d50d18d7f8be95e26d07d0f48e4762ef83e08e4a21fda"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/aurelian.mjs",
+        "bytes": 6219,
+        "sha256": "6b9469e2c024852c06e3d9ac2c6c8d5899f2fa7f73d1899b867e5cae9e703e69"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/index.mjs",
+        "bytes": 1247,
+        "sha256": "d82b09daec730b6592e735e4ec5e8e32495cc1e9c2d7b1507116088c78341e33"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/isolde.mjs",
+        "bytes": 7467,
+        "sha256": "8b7cfd007ed9ec1ab163f8419aadb6728d008c2837e0c07c45dfc4f1530a1072"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/mordred.mjs",
+        "bytes": 7347,
+        "sha256": "6a6d2d9010c62a3ba2d4534c853442e0b89b66683ba988f38f0ed7c4e21ec4f7"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/nyx.mjs",
+        "bytes": 7501,
+        "sha256": "6372617db0d85715360db693c053aac2321526c8a6a2756d8824f99f9e2f9c31"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/seraph.mjs",
+        "bytes": 8554,
+        "sha256": "f71494695d86c220e7407557ae47b6ff2786bf8ec43eeea1a6119b3f0f41e88a"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/volt.mjs",
+        "bytes": 6933,
+        "sha256": "7c4f0b3400884dce35d36337742a3b58bef2c239604c75ea7f55a7ceabb1dd39"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/hero-weapon-fx.mjs",
+        "bytes": 22352,
+        "sha256": "c5077f2511d8b6cdcc813e084ed2200f324f1133fa33c4c835d1c213e8c5d662"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/pickup-fx-data.mjs",
+        "bytes": 2784,
+        "sha256": "b7705cb0f060b0c58a689462574b2dfca94e7958444520fbea3eef45f9934ab1"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/pickup-fx.mjs",
+        "bytes": 8642,
+        "sha256": "97fada8984094b55897e474a9aa61ac1adaf5b04a060cab061d7c59ae6d5e5c0"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/presentation.mjs",
+        "bytes": 3392,
+        "sha256": "378fc0109964ba270c63c5970aca6f13b77408ec0379391d3d977b9e91ac27e3"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/roster-bridge.js",
+        "bytes": 64725,
+        "sha256": "738b2fa9a29136900ed511a35d96cd8dfd4d0755034e0964a1f6784383041ce6"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/skill-fx-timeline.mjs",
+        "bytes": 7884,
+        "sha256": "e02f942af76b5803a0ced5093da36091b410be5679c30b2b64187ed2a0178f37"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/skill-fx.mjs",
+        "bytes": 28018,
+        "sha256": "a16bfa4158140f1f825024b0d478017b9a9b59b9ec3b9154f55b30366f88088c"
+      },
+      {
+        "path": "programs/program-ae019f0ef821fa55/visual-game/warning-decals.mjs",
+        "bytes": 6181,
+        "sha256": "72b8ee2ce578469640eb063f836cce8aaa3a54b7fa00fa8c4334da2195e44179"
+      },
+      {
+        "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+        "bytes": 1107732,
+        "sha256": "1fd8d2cfcec60bd930cbcd8306e8bfb1d0e05d956e27f0431395f8440d6c9527"
+      },
+      {
+        "path": "releases/nr-3fda53bf51b0aa1d/release-manifest.json",
+        "bytes": 8688,
+        "sha256": "58fadf8d326f4038c7df3d3b708e9a3ca34783116b38fc5bfa3436223fe98b5f"
+      }
+    ]
+  },
+  "exactReadback": [
+    {
+      "path": "archive/pre-competition-84f7e7fe34da45a4.html",
+      "bytes": 931833,
+      "sha256": "84f7e7fe34da45a40c85e093d6ccc3a19644b39d2d23a2bdfd89e42fc68a51ba"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/licenses/ASSET-NOTICE.md",
+      "bytes": 1255,
+      "sha256": "e95ee88eb9a9411dcdb79fe3cb76e236b02ccf267b0ca7755f9a0fe8b64837c3"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/licenses/ethers.LICENSE.md",
+      "bytes": 1075,
+      "sha256": "44eea86637405118248327fbe9d9fa95d04c7a57221c7e8c155f736db9f1b612"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/LICENSE",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/build/three.core.js",
+      "bytes": 1458113,
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/build/three.module.js",
+      "bytes": 662772,
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/environments/RoomEnvironment.js",
+      "bytes": 4960,
+      "sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/loaders/GLTFLoader.js",
+      "bytes": 117570,
+      "sha256": "131c0f78c01d19368ae495caa65b3adaa10487810a36a05bb5901b769a35ac16"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/EffectComposer.js",
+      "bytes": 8501,
+      "sha256": "4e079a5886152d7e529a59aef644e968ab4d32c6a33ce016b36bf29b2eac26f7"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/MaskPass.js",
+      "bytes": 4694,
+      "sha256": "7cd08eee9d5d6f5578beaddbdcbe9c384f6873810af27f22ab7db3ceeb127aa3"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/Pass.js",
+      "bytes": 4218,
+      "sha256": "444b409c235ead986893c472e720da1b779a56985c7d10b279c7944b52bd61c5"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/RenderPass.js",
+      "bytes": 4280,
+      "sha256": "817f6c3cdcd0fd41515d112359ea0532568eefb5aabd3b33903957ebca1b8a6a"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/ShaderPass.js",
+      "bytes": 3228,
+      "sha256": "e2500a5913b26bbf5148ceaae644c6edcff06a18b01494ee37bf856353d2ab9d"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/postprocessing/UnrealBloomPass.js",
+      "bytes": 15397,
+      "sha256": "ba8f2fcadfa6588384c9473498f974d81d120f02f0e63a0e59c265202a006b5a"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/shaders/CopyShader.js",
+      "bytes": 729,
+      "sha256": "a33057d5ac91c43304c186ac0e8816e62bb2ed471d3a00ff3018dfd5c0389718"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/shaders/LuminosityHighPassShader.js",
+      "bytes": 1291,
+      "sha256": "5044f780b6e6cf863947f64c36fe1587132f7fbe395ada863cd1e5f0388dcf1e"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/utils/BufferGeometryUtils.js",
+      "bytes": 37712,
+      "sha256": "9fb63427ce6641fa14fd0baff9cc4d1b5f9c3d85fd084bf2e90e803c44ec1797"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/vendor/three/examples/jsm/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/arena-ambient.js",
+      "bytes": 14614,
+      "sha256": "0fa221b55cde723955fde91568404721e5cdf486a2ca46709f81028da6664759"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/arena-env.js",
+      "bytes": 8299,
+      "sha256": "667d48a15953e2cfbbe30a7aa753d2daa3225b24b45be39f8fb5acb748e75f62"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/arena-heat.js",
+      "bytes": 7521,
+      "sha256": "30512d5ef59ec58196e2e4edc6ab4defead60c8f716cb11df592a728d4002cb9"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/arena-reflections.mjs",
+      "bytes": 6652,
+      "sha256": "eb36188948eda26d109be0625ca4626568bb587b22a21df1513180721b7d0799"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/arena-surface.mjs",
+      "bytes": 4490,
+      "sha256": "273f79c3dc4e230897cbe6210e8e378c205d87de3b312d162eaf997ce476be6a"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/asset-loading.mjs",
+      "bytes": 6312,
+      "sha256": "e7b8fb009c01de18f17fc3fef3fa017ad8a22b78e032925e2d58795528644089"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-0.mjs",
+      "bytes": 4864,
+      "sha256": "21803a6d7d0b3cbb1109f0cf2a691dc3b3ce39debc062d6b1dab8c5fa17a5e57"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-1.mjs",
+      "bytes": 3747,
+      "sha256": "6d4c1ba37a39def1e5ed18d28e48136d7b1b5bfbfa7be74f020f88d129cb6be1"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-2.mjs",
+      "bytes": 4786,
+      "sha256": "e7baba4fa6706bfe4c32c2097b4b3dcdf7b34e049ea2fdbdbd2e2face69981c0"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-3.mjs",
+      "bytes": 2809,
+      "sha256": "97432daa60c477f4bfd24173e1a8d3cc7cf5f4bd2ffbf9d2b9696cb65a918562"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-4.mjs",
+      "bytes": 3486,
+      "sha256": "1369e9dd99090a85d8aeab23b2681a6fc91e415f29b27c40509613dd821babb6"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-5.mjs",
+      "bytes": 3565,
+      "sha256": "1fd48aa0bf1bd71e314bce8d2930bdbf19ede8abce4d4f0e3a86ead5f456e50a"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-6.mjs",
+      "bytes": 3856,
+      "sha256": "3ea925df21a48e6bbdaca94d3460d90aa6b6d935503ffd18e2d385a51e3c1b5f"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/boss-7.mjs",
+      "bytes": 4657,
+      "sha256": "8213403903fc1f8d307991eca56959b1ad8cfd510c8a17000bd8783c3226e71b"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/common.mjs",
+      "bytes": 860,
+      "sha256": "a3936d08d2d65e6efde660f66a8fa26f1f4a3f2aecd8051e5faea667fcb2a03a"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-effects/index.mjs",
+      "bytes": 1389,
+      "sha256": "6f252a320d5edc4e87cbb15aeec9543ed9a7be3120369c097ab7533b74ad8b50"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-fx.mjs",
+      "bytes": 3737,
+      "sha256": "7ae016da5a220556a13c1d802b083dcaa23e9ce7d6ab55c6ac8c6a950cf42820"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/boss-projectiles.mjs",
+      "bytes": 9383,
+      "sha256": "d2410a055fbf6f50811ef8b32008c44d68891f1855cf9fa6aa7bf7eee278afa9"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/bridge.js",
+      "bytes": 16727,
+      "sha256": "c9daa8d11dec9ff89bee4c597517904775e6ce867a9a81e1255c75399816cfb9"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/chest-rewards.mjs",
+      "bytes": 13804,
+      "sha256": "b6f98b15beee5dc6a7ce491ab57d3bb96508c5b3a1e422d266f0a22378b56c50"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/glow.js",
+      "bytes": 7738,
+      "sha256": "1701994157050a1ec24d50d18d7f8be95e26d07d0f48e4762ef83e08e4a21fda"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/aurelian.mjs",
+      "bytes": 6219,
+      "sha256": "6b9469e2c024852c06e3d9ac2c6c8d5899f2fa7f73d1899b867e5cae9e703e69"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/index.mjs",
+      "bytes": 1247,
+      "sha256": "d82b09daec730b6592e735e4ec5e8e32495cc1e9c2d7b1507116088c78341e33"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/isolde.mjs",
+      "bytes": 7467,
+      "sha256": "8b7cfd007ed9ec1ab163f8419aadb6728d008c2837e0c07c45dfc4f1530a1072"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/mordred.mjs",
+      "bytes": 7347,
+      "sha256": "6a6d2d9010c62a3ba2d4534c853442e0b89b66683ba988f38f0ed7c4e21ec4f7"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/nyx.mjs",
+      "bytes": 7501,
+      "sha256": "6372617db0d85715360db693c053aac2321526c8a6a2756d8824f99f9e2f9c31"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/seraph.mjs",
+      "bytes": 8554,
+      "sha256": "f71494695d86c220e7407557ae47b6ff2786bf8ec43eeea1a6119b3f0f41e88a"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-skills/volt.mjs",
+      "bytes": 6933,
+      "sha256": "7c4f0b3400884dce35d36337742a3b58bef2c239604c75ea7f55a7ceabb1dd39"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/hero-weapon-fx.mjs",
+      "bytes": 22352,
+      "sha256": "c5077f2511d8b6cdcc813e084ed2200f324f1133fa33c4c835d1c213e8c5d662"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/pickup-fx-data.mjs",
+      "bytes": 2784,
+      "sha256": "b7705cb0f060b0c58a689462574b2dfca94e7958444520fbea3eef45f9934ab1"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/pickup-fx.mjs",
+      "bytes": 8642,
+      "sha256": "97fada8984094b55897e474a9aa61ac1adaf5b04a060cab061d7c59ae6d5e5c0"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/presentation.mjs",
+      "bytes": 3392,
+      "sha256": "378fc0109964ba270c63c5970aca6f13b77408ec0379391d3d977b9e91ac27e3"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/roster-bridge.js",
+      "bytes": 64725,
+      "sha256": "738b2fa9a29136900ed511a35d96cd8dfd4d0755034e0964a1f6784383041ce6"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/skill-fx-timeline.mjs",
+      "bytes": 7884,
+      "sha256": "e02f942af76b5803a0ced5093da36091b410be5679c30b2b64187ed2a0178f37"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/skill-fx.mjs",
+      "bytes": 28018,
+      "sha256": "a16bfa4158140f1f825024b0d478017b9a9b59b9ec3b9154f55b30366f88088c"
+    },
+    {
+      "path": "programs/program-ae019f0ef821fa55/visual-game/warning-decals.mjs",
+      "bytes": 6181,
+      "sha256": "72b8ee2ce578469640eb063f836cce8aaa3a54b7fa00fa8c4334da2195e44179"
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "bytes": 1107732,
+      "sha256": "1fd8d2cfcec60bd930cbcd8306e8bfb1d0e05d956e27f0431395f8440d6c9527"
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/release-manifest.json",
+      "bytes": 8688,
+      "sha256": "58fadf8d326f4038c7df3d3b708e9a3ca34783116b38fc5bfa3436223fe98b5f"
+    },
+    {
+      "path": "index.html",
+      "bytes": 602,
+      "sha256": "dd16ba701ac1748dbe5b5bb993078d6a9caf191ab6cb50b2f7a2fa94a828b45b"
+    }
+  ],
+  "transactions": [
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 0,
+      "role": "immutable",
+      "hash": "0xeeee34f582b6e01ba2498896629de76b4ba435c5bc74e920e365036a37346013",
+      "blockNumber": 72621227,
+      "gasUsed": "5691165",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 1,
+      "role": "immutable",
+      "hash": "0x889441fa69cd852bfd820f0f52f21891bb3214839fbb85d3bc639eb0350c16d4",
+      "blockNumber": 72621235,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 2,
+      "role": "immutable",
+      "hash": "0x83b78222e04a954267b332cadf7adf4617a71a8b6596faad96e6ea60d76659d3",
+      "blockNumber": 72621242,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 3,
+      "role": "immutable",
+      "hash": "0x0f869bfa37fc53b8c3e12094e5a7d5490718d136b98c09e5f27841b4af4a73cb",
+      "blockNumber": 72621250,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 4,
+      "role": "immutable",
+      "hash": "0x3dca6c2dfe459c3ffce9dfbe520f3a6f270455e8050dd314dcab0c0cc5697d62",
+      "blockNumber": 72621258,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 5,
+      "role": "immutable",
+      "hash": "0x5bd77191d894355f0ef8ffa83ceb8bb42f9a8d1257d4869b8698b6c259cbf814",
+      "blockNumber": 72621266,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 6,
+      "role": "immutable",
+      "hash": "0xfbbc73e4d5a64a1f0642bc83a0af492001ba8d0752e8a5f08cd8211098428998",
+      "blockNumber": 72621274,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 7,
+      "role": "immutable",
+      "hash": "0x77131201a3f0f8ca9d71cc621535193f47668bcfd58b6c34b1e22f58907e6088",
+      "blockNumber": 72621282,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 8,
+      "role": "immutable",
+      "hash": "0x471b684a4bd4ead743cd7c92ae25be7d3753d51639119323fa0bdad0ac5aaa2f",
+      "blockNumber": 72621290,
+      "gasUsed": "5521185",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 9,
+      "role": "immutable",
+      "hash": "0x86c5f3c8358ea1c9fbffd7e9f49287bb41a5ae18425a5fa4e7ba5a8fa5f9ccf2",
+      "blockNumber": 72621299,
+      "gasUsed": "5521173",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 10,
+      "role": "immutable",
+      "hash": "0xfd44afa72e88c3b9316ca9faa0d32a6f518a1aa4a724a121b73c733c368ec673",
+      "blockNumber": 72621307,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 11,
+      "role": "immutable",
+      "hash": "0xdfbe009585dd8a33dc494856b3ec0049f2f74d2e0a8742cf65d0b053340f87c7",
+      "blockNumber": 72621316,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 12,
+      "role": "immutable",
+      "hash": "0x527987a8533361cf9905b8b52f4096dda5d7424534a7796b2acf71cc9a6ea8fe",
+      "blockNumber": 72621324,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 13,
+      "role": "immutable",
+      "hash": "0xb62702b56f085f3ee5852f089c5e428fa2457c0bc20a6af577dc5366cc073c49",
+      "blockNumber": 72621332,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 14,
+      "role": "immutable",
+      "hash": "0x7481e5a849740ee6ba2676470ab919208f14a487cb1079998434afea333a2291",
+      "blockNumber": 72621342,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 15,
+      "role": "immutable",
+      "hash": "0xaf4e07c4109b559632f2c73e43b0bb2e27f336491279ef0feb67060ac6c63b66",
+      "blockNumber": 72621350,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 16,
+      "role": "immutable",
+      "hash": "0x10d2f387d05ef12ffe28c3d0c3790690660067e54a46a2db74454a6117cdfa78",
+      "blockNumber": 72621360,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 17,
+      "role": "immutable",
+      "hash": "0xc0a40b1365e184fe19fd9a92fe6b7e343ccef1744f2bf4bca5d4b3b105ab5acd",
+      "blockNumber": 72621368,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 18,
+      "role": "immutable",
+      "hash": "0x056144be0e8d38a5a6d3dece61ee788d8840c8d85cd5abb4fed35822a01406c3",
+      "blockNumber": 72621378,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 19,
+      "role": "immutable",
+      "hash": "0xc6fe324b17fa451ffaa7f752d77bf9a58f9a29345e34212b8fab4046a19d4077",
+      "blockNumber": 72621386,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 20,
+      "role": "immutable",
+      "hash": "0xb81b8bacd769894958f1b3484c23d2367b137b50e6b89a2b29d6f5378921a525",
+      "blockNumber": 72621394,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 21,
+      "role": "immutable",
+      "hash": "0x8eb1ce84351f1adfcf82069350947c79ba30dc82bd4a6e15d342d0483ad4d746",
+      "blockNumber": 72621403,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 22,
+      "role": "immutable",
+      "hash": "0x78c2c167f57614ff56cb1594d9e83191679293af0812f626a3316bb462708d37",
+      "blockNumber": 72621411,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 23,
+      "role": "immutable",
+      "hash": "0x2c9a3c435ccc0b8910c77e0b7d7dd693bcedef065fab0f1b0b158731c2a3cd5c",
+      "blockNumber": 72621419,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 24,
+      "role": "immutable",
+      "hash": "0x74a2755aa2eac67c1f35d3e4897bd7f9caadacf3dc69439190bffbef2bbfc06d",
+      "blockNumber": 72621427,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 25,
+      "role": "immutable",
+      "hash": "0xa705de3f91b4ff34410ee88167f33ec25251f4021bebf1e01f91a9a6e1c6912f",
+      "blockNumber": 72621435,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 26,
+      "role": "immutable",
+      "hash": "0xc5294b5de7c6148e3a7471af5163fdcecbb7c347c35c6ec89194bdcfa06eadf3",
+      "blockNumber": 72621443,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 27,
+      "role": "immutable",
+      "hash": "0x4d9ee9f09835c023bb98bdbd188b4814efc368e1be8115379d6ccab3ef02cdbc",
+      "blockNumber": 72621451,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 28,
+      "role": "immutable",
+      "hash": "0xa737327aef759a200a3a0450d3c159d2e4ca78d726f0626cee25b03039ab8fe2",
+      "blockNumber": 72621459,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 29,
+      "role": "immutable",
+      "hash": "0x6c63094f8cfc887c501af12ec672cb7868cf766a094e6b12756594dc063d4e02",
+      "blockNumber": 72621467,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 30,
+      "role": "immutable",
+      "hash": "0xaecf8031dcc4cc452fba922ee7580e89d6b808de5d9b72e09e187e0a9573b8e8",
+      "blockNumber": 72621475,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 31,
+      "role": "immutable",
+      "hash": "0x48c5002078928288c6ec75596e0d6c66730e320fe56ce0cbdf1f2eeed1a32e42",
+      "blockNumber": 72621484,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 32,
+      "role": "immutable",
+      "hash": "0x0bb6b2abc3561ca07a426d117642523f731d69c0b06a5c3adbf6e24e1ceb29d0",
+      "blockNumber": 72621492,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 33,
+      "role": "immutable",
+      "hash": "0x79372c3cf30581bc566c5802fb1799be75459ff073de97cf8526eaedea9cc6ea",
+      "blockNumber": 72621500,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 34,
+      "role": "immutable",
+      "hash": "0xa0dd090742fec1d68f3b616d9439bd4179bde02e307ca5bdcba796ad816e1210",
+      "blockNumber": 72621508,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 35,
+      "role": "immutable",
+      "hash": "0xd9f95fe882bedac2b3d0d9ec38d77aece3398bbbf3d79ec1f1ad0bba9bc0519f",
+      "blockNumber": 72621516,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 36,
+      "role": "immutable",
+      "hash": "0x353071e0dc92cb65ec7af042183e1709e60856c50769de77b7310c69d01d8cd5",
+      "blockNumber": 72621524,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 37,
+      "role": "immutable",
+      "hash": "0x8c84cd2355ce260126d5def660e610f8b759e6a681945cfefa4bfb6e2b84fb36",
+      "blockNumber": 72621532,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 38,
+      "role": "immutable",
+      "hash": "0xd3db519371ac93912718ee0aab440516dc120c0801242c3ae62a74455f9ffacb",
+      "blockNumber": 72621540,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 39,
+      "role": "immutable",
+      "hash": "0xc92216f280992c975396a43e26f70419f14de6f87a6b988dd7ff02d3001f915b",
+      "blockNumber": 72621548,
+      "gasUsed": "5521185",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 40,
+      "role": "immutable",
+      "hash": "0x5822c3c284bf6d6ad90b842c84d898808fc27c1a350f9d3797c24580280eecd3",
+      "blockNumber": 72621556,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 41,
+      "role": "immutable",
+      "hash": "0x87583d27c15b246729d91da4e7c333fb9c75b81d3d5f662faeb2dfc8a03218c7",
+      "blockNumber": 72621564,
+      "gasUsed": "5521197",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 42,
+      "role": "immutable",
+      "hash": "0x2b77dd5402fe6fa30157ff5271f6e1e232106f0407d3c8a2d3dfc307195eb2f2",
+      "blockNumber": 72621573,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 43,
+      "role": "immutable",
+      "hash": "0xdf4a0b6e1cd143ce6e00fdb440be2be0deb7acede6ff2727f6aeded1e563c3e0",
+      "blockNumber": 72621582,
+      "gasUsed": "5521185",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 44,
+      "role": "immutable",
+      "hash": "0xce144f62e8713931c80c497ff2a3d6f551ec61a3136bbf35a6178b9853b4995b",
+      "blockNumber": 72621589,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 45,
+      "role": "immutable",
+      "hash": "0x254b89fb005212aaf28699bb4d1867e1eaee5cf71c0a5ce914f9c7044c80cd18",
+      "blockNumber": 72621597,
+      "gasUsed": "5521209",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/index.html",
+      "chunk": 46,
+      "role": "immutable",
+      "hash": "0xd6c8764625f65a586ad563c17675baa8cca7a00c4ae6e1efeeff5941c27009b5",
+      "blockNumber": 72621605,
+      "gasUsed": "1058082",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "releases/nr-3fda53bf51b0aa1d/release-manifest.json",
+      "chunk": 0,
+      "role": "immutable",
+      "hash": "0x4bb625b613478b7ee0f574920a527a6ee4260f7aa0e191bd0a77ce933337413a",
+      "blockNumber": 72621613,
+      "gasUsed": "2318292",
+      "actualGasCostWei": "0",
+      "success": true
+    },
+    {
+      "path": "index.html",
+      "chunk": 0,
+      "role": "activate",
+      "hash": "0x2e95d5014fb7d1eedf5d1f35a04988d9005a5b5c928fa6e1e1e21c7b6dba75e1",
+      "blockNumber": 72621757,
+      "gasUsed": "354024",
+      "actualGasCostWei": "0",
+      "success": true
+    }
+  ],
+  "originalArchive": {
+    "path": "archive/pre-competition-84f7e7fe34da45a4.html",
+    "bytes": 931833,
+    "sha256": "84f7e7fe34da45a40c85e093d6ccc3a19644b39d2d23a2bdfd89e42fc68a51ba",
+    "mime": "text/html"
+  },
+  "oath": {
+    "token": "0x66e59AB78F32cdA17a69E3784B0B67E17b76eeEE",
+    "vault": "0x6fDD99885b32146FB7bA388E2dc4aC3e9dfDAa65",
+    "tracker": "0x7DcF8a05e89888621C757971BABC049d14cA74F5",
+    "createTx": "0x95271e9cafc580b023183afc52db762c11db5f20b1465b13714a385aa80702fd",
+    "blockNumber": 72618561,
+    "listingFeeWei": "0",
+    "initialBuyWei": "0",
+    "actualGasCostWei": "0",
+    "tradeUrl": "https://ignix.bot/launch?token=0x66e59ab78f32cda17a69e3784b0b67e17b76eeee"
+  },
+  "walletBalanceOKBAtCapture": "0.11255438134893525",
+  "completedAtUtc": "2026-10-07T16:39:17.788Z",
+  "capturedAtUtc": "2026-10-07T16:39:19.883Z",
+  "postActivationReadback": {
+    "blockNumber": 72622044,
+    "filesVerified": 57,
+    "recoveredAfterRpc502": true,
+    "rpcRetries": 0,
+    "verifiedAtUtc": "2026-10-07T16:39:17.788Z"
+  },
+  "feeNote": "Actual receipt costs for this publication only; future fees are not guaranteed. Approved budgets are stop lines, not an on-chain hard cap."
+}

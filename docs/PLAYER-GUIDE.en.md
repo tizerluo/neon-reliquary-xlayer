@@ -2,7 +2,9 @@
 
 [Play now](https://1-2-231.tapekit.org/) · [中文版](PLAYER-GUIDE.zh-CN.md) · [X Layer processor and 11 manufactured circuits](XLAYER-MAINNET.md)
 
-Watch the [complete English video guide](https://youtu.be/Pp3l9Mzx0sQ) (13:29) or [中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14）. Each version has narration and burned-in captions in the same language.
+Watch the previous-edition [complete English video guide](https://youtu.be/Pp3l9Mzx0sQ) (13:29) or [中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14）. Each version has narration and burned-in captions in the same language; these videos do not show the October HD and OATH update.
+
+The October live edition adds HD heroes, bosses and environments, procedural audio and recoverable loading. **Nandverse / OATH** on the home page explains shared materials and the ecosystem token. [OATH is issued on X Layer](OATH-RELEASE.md); consumption and staking are not open. Playing, testing blueprints and reading existing chips do not require an OATH purchase.
 
 Lead a four-member squad through three regions held by a machine legion. Play the leader yourself, reserve a seat for a real external AI agent, or give companions tactical circuits that you design. Start with an action roguelite; if a teammate's choice makes you curious, open the workshop and find out why it happened. You can eventually manufacture your own immutable circuit on X Layer.
 

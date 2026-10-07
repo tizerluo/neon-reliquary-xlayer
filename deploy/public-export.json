@@ -60,6 +60,7 @@
   "deploymentFiles": [
     "deploy/oath.json",
     "deploy/oath-receipt.json",
+    "deploy/hybrid-receipt.json",
     "deploy/vercel.json",
     "deploy/oath-icon.svg",
     "deploy/oath-icon.png",
