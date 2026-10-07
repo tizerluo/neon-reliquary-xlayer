@@ -31,14 +31,15 @@
         if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();oathClose();return;}
         if(e.key==='Tab'){const list=[...modal.querySelectorAll('button,input,select,textarea,a')].filter(x=>!x.disabled&&x.offsetParent!==null);if(!list.length)return;const first=list[0],last=list.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
       },true);
+      const economy=ob(oathText('NANDVERSE / OATH','NANDVERSE／OATH'),()=>oathOpen('economy'),'o-workshop-button');economy.id='economyHome';$('home').querySelector('.home-links').append(economy);
       mode='expedition';oathApplyLoadout();
     }
     function oathRender(){
-      if(!$('oathTabs'))return;$('oathTitle').textContent=oathText('The Oath Workshop','誓约工坊');$('oathHome').textContent=oathText('OATH WORKSHOP','誓约工坊');
-      const tabs=$('oathTabs');tabs.replaceChildren();for(const [id,en,zh]of [['squad','Squad','混编队伍'],['blueprint','Circuits & relics','芯片与圣物'],['lab','Circuit lab','电路试验'],['forge','TapeOut / X Layer','流片与链上读回']]){const b=ob(oathText(en,zh),()=>{OUI.tab=id;oathRender();},OUI.tab===id?'chosen':'');b.setAttribute('aria-current',OUI.tab===id?'page':'false');tabs.append(b);}
+      if(!$('oathTabs'))return;$('oathTitle').textContent=OUI.tab==='economy'?'Nandverse / OATH':oathText('The Oath Workshop','誓约工坊');$('oathHome').textContent=oathText('OATH WORKSHOP','誓约工坊');
+      const tabs=$('oathTabs');tabs.replaceChildren();for(const [id,en,zh]of [['economy','Nandverse / OATH','生态／OATH'],['squad','Squad','混编队伍'],['blueprint','Circuits & relics','芯片与圣物'],['lab','Circuit lab','电路试验'],['forge','TapeOut / X Layer','流片与链上读回']]){const b=ob(oathText(en,zh),()=>{OUI.tab=id;oathRender();},OUI.tab===id?'chosen':'');b.setAttribute('aria-current',OUI.tab===id?'page':'false');tabs.append(b);}
       $('oathBody').replaceChildren();oathNotice(OATH.warning?oathText('The saved profile could not be read. Export a backup before resetting. Changes stay in memory.','存档读取失败。请先备份再重置；当前更改仅留在内存。'):oathText('Free blueprints play immediately. Manufacturing creates a fixed on-chain version.','免费蓝图可以直接游玩。流片制造的是逻辑固定的链上版本。'));
       if(OATH.warning){const bar=oe('div','o-actions');bar.append(ob(oathText('Export damaged save','导出原存档'),()=>oathDownload('oath-save-backup.txt',localStorage.getItem(OD.KEY)||'')),ob(oathText('Reset this profile','重置此存档'),()=>{OATH.warning=null;oathSave();oathRender();}));$('oathBody').append(bar);}
-      ({squad:oathSquad,blueprint:oathBlueprint,lab:oathLab,forge:oathForge})[OUI.tab]();
+      ({economy:oathEconomy,squad:oathSquad,blueprint:oathBlueprint,lab:oathLab,forge:oathForge})[OUI.tab]();
     }
     function oathOptions(kind,empty=false){const opts=OD.list(OATH.profile).filter(r=>OC.decode(r.circuit).kind===kind).map(r=>[r.id,oathName(r)+(r.source.type==='xlayer'?oathText(' · chain',' · 链上'):'')]);if(empty)opts.unshift(['',oathText('Empty socket','空槽')]);return opts;}
     function oathSquad(){
@@ -46,13 +47,13 @@
       body.append(oe('p','o-intro',oathText('Choose your companions and two relics per member. Chips make decisions; external AI takes its own reserved seat. Changes lock when an expedition begins.','为每位成员选择控制来源与两件圣物。芯片自行决策，外部 AI 进入预留席位。远征开始后锁定配装。')));
       const grid=oe('div','o-squad-grid');
       for(let seat=0;seat<4;seat++){
-        const config=seat?l.slots[seat-1]:null,c=oe('section','o-unit-card'),h=oe('h3','',seat?oathText('Companion ','队友 ')+seat:oathText('Leader · your selected class','队长 · 当前选择的职业'));c.append(h);
+        const config=seat?l.slots[seat-1]:null,c=oe('section','o-unit-card'),h=oe('h3','',seat?oathText('Companion ','队友 ')+seat:oathText('Leader · your selected class','队长 · 当前选择的职业'));c.append(h);const portrait=oe('div','o-unit-portrait');portrait.innerHTML=heroPortrait(seat?config.heroId:selected);c.append(portrait);
         const connection=seat?PARTY.slots[seat-1]:OATH.leader,controller=seat?config.mode:l.leader;
         const status=connection.token?oathText('Connected: ','已连接：')+connection.name+(connection.pending?oathText(' · next encounter',' · 下一遭遇部署'):''):controller==='external'?oathText('Waiting for AI','等待 AI 加入'):controller==='chip'?oathText('Circuit controlled','电路控制'):controller==='human'?oathText('Human controlled','人类控制'):oathText('Seat closed','席位关闭');
         c.append(oe('p','o-small o-unit-status',status));
         const modeOptions=seat?[['chip',oathText('Tactical chip','战术芯片')],['external',oathText('External AI','外部 AI')],['off',oathText('Closed','关闭')]]:[['human',oathText('Human control','人类控制')],['external',oathText('External AI','外部 AI')]];
         c.append(of(oathText('Controller','控制来源'),os(modeOptions,seat?config.mode:l.leader,v=>{if(seat)config.mode=v;else l.leader=v;oathApplyLoadout();oathSave();oathRender();})));
-        if(seat)c.append(of(oathText('Class','职业'),os(HEROES.map((h,i)=>[i,h.name]),config.heroId,v=>{config.heroId=+v;oathApplyLoadout();oathSave();})));
+        if(seat)c.append(of(oathText('Class','职业'),os(HEROES.map((h,i)=>[i,h.name]),config.heroId,v=>{config.heroId=+v;portrait.innerHTML=heroPortrait(config.heroId);oathApplyLoadout();oathSave();})));
         if(seat&&config.mode==='chip')c.append(of(oathText('Decision circuit','战术电路'),os(oathOptions('tactic'),config.chip,v=>{config.chip=v;oathApplyLoadout();oathSave();})));
         if((seat?config.mode:l.leader)==='external')c.append(oe('p','o-small',oathText('Reserve seat '+seat+'. Join with nr_join, then send intentions through nr_command.','预留席位 '+seat+'。用 nr_join 加入，再通过 nr_command 下达意图。')));
         const rs=seat?config.relics:l.leaderRelics,relics=oe('div','o-unit-relics');

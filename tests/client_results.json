@@ -1,0 +1,26 @@
+[
+  {
+    "test": "Client normalizes JSON results and does not expose credentials",
+    "passed": true
+  },
+  {
+    "test": "Concurrent client commands serialize to increasing sequences",
+    "passed": true
+  },
+  {
+    "test": "Client refreshes run ID and skips paused or pending deployment",
+    "passed": true
+  },
+  {
+    "test": "Decision context rejects cross-run and expired decisions before sending",
+    "passed": true
+  },
+  {
+    "test": "Async decision spanning restart is discarded by run loop",
+    "passed": true
+  },
+  {
+    "test": "Explicit rule policy, abort lifecycle and leave",
+    "passed": true
+  }
+]

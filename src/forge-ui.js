@@ -28,9 +28,22 @@
       }
       read.append(ob(oathText('Verify and import · read only','校验并导入 · 只读'),()=>action(async()=>{progress.textContent=oathText('Reading provenance, bytes and execution…','正在读取来源、网表与执行结果……');install(await oathChain.readCircuit(cpu.value.trim(),id.value.trim()));}),'primary'));body.append(read);
       const mint=oe('section','o-forge-block');mint.append(oe('h3','',oathText('Manufacture a saved version','制造已保存版本')));
-      const blueprint=os(OD.list(OATH.profile).map(r=>[r.id,oathName(r)]),OUI.selected),quoteOut=oe('pre','o-netlist');let quote=null;
+      const blueprint=os(OD.list(OATH.profile).map(r=>[r.id,oathName(r)]),OUI.selected),quoteOut=oe('pre','o-netlist o-quote-breakdown');let quote=null;
       mint.append(of(oathText('Saved blueprint · edit and save before quoting','已存蓝图 · 编辑后请先保存再报价'),blueprint),ob(oathText('Connect wallet / X Layer','连接钱包 / X Layer'),()=>action(async()=>{const account=await oathChain.connect();oathNotice(oathText('Connected ','已连接 ')+account);quote=null;})));
-      const buildQuote=ob(oathText('Read material and fee quote','读取材料与费用报价'),()=>action(async()=>{const r=OD.find(OATH.profile,blueprint.value);quote=await oathChain.quote(cpu.value.trim(),r.circuit,oathChain.account);quoteOut.textContent=quote.c.nNand+' NAND + '+quote.c.nLatch+' LATCH · '+quote.c.bytes+' bytes\n'+oathText('Missing material: ','待补材料：')+quote.need[0]+' NAND / '+quote.need[1]+' LATCH\n'+oathText('Material price: ','材料单价：')+NRXLayer.format(quote.price)+' OKB\n'+oathText('Protocol fee per mint: ','每次铸造协议费：')+NRXLayer.format(quote.protocol)+' OKB\n'+oathText('Tapeout fee: ','流片费：')+NRXLayer.format(quote.fee)+' OKB\n'+oathText('Total before gas: ','合计（不含 Gas）：')+NRXLayer.format(quote.total)+' OKB\n'+oathText(quote.account?'Wallet balance included.':'No wallet: assumes no materials owned.',quote.account?'已考虑钱包现有材料。':'未连接钱包：按没有材料计算。');}));mint.append(buildQuote,quoteOut);
+      const buildQuote=ob(oathText('Read material and fee quote','读取材料与费用报价'),()=>action(async()=>{const r=OD.find(OATH.profile,blueprint.value);quote=await oathChain.quote(cpu.value.trim(),r.circuit,oathChain.account);quoteOut.textContent=[
+        oathText('Required: ','所需材料：')+quote.c.nNand+' NAND / '+quote.c.nLatch+' LATCH · '+quote.c.bytes+' bytes',
+        oathText('Wallet inventory: ','钱包库存：')+(quote.account?quote.balances[0]+' NAND / '+quote.balances[1]+' LATCH':oathText('not connected · unknown','未连接 · 未知')),
+        oathText('Missing material to buy: ','需购买的缺口：')+quote.need[0]+' NAND / '+quote.need[1]+' LATCH',
+        oathText('Material unit price: ','每门材料单价：')+NRXLayer.format(quote.price)+' OKB',
+        oathText('Material subtotal → Foundry: ','材料价款 → 铸造厂：')+NRXLayer.format(quote.materialSubtotal)+' OKB',
+        oathText('Material mint protocol fees: ','材料铸造协议费：')+NRXLayer.format(quote.mintProtocolSubtotal)+' OKB',
+        oathText('Protocol fee per required material type: ','每种缺口材料的协议费：')+NRXLayer.format(quote.protocol)+' OKB',
+        oathText('Chip tapeout fee: ','芯片流片费：')+NRXLayer.format(quote.fee)+' OKB',
+        oathText('Total before Gas: ','合计（不含 Gas）：')+NRXLayer.format(quote.total)+' OKB',
+        oathText('Gas is additional and shown by your wallet. Cancelling here spends nothing.','Gas 另计，以钱包确认为准。此处取消不会支出。'),
+        oathText('Quote block: ','报价区块：')+quote.block,
+        oathText(quote.account?'Your existing materials are included.':'Without a wallet, this is an estimate assuming zero inventory.',quote.account?'已计入钱包现有材料。':'未连接钱包，此报价按零库存估算。')
+      ].join('\n');}));mint.append(buildQuote,quoteOut);
       const confirm=oe('input');confirm.type='checkbox';mint.append(of(oathText('I reviewed this quote. Continue with paid wallet confirmations.','我已核对以上报价，继续进行付费钱包确认。'),confirm),ob(oathText('Mint material and tape out','铸造材料并流片'),()=>action(async()=>{if(!confirm.checked||!quote)throw Error('REVIEW_QUOTE_FIRST');const source=OD.find(OATH.profile,blueprint.value);if(quote.c.netlist!==source.circuit.netlist||quote.address.toLowerCase()!==cpu.value.trim().toLowerCase())throw Error('QUOTE_CHANGED_REVIEW_AGAIN');confirm.checked=false;const v=await oathChain.manufacture(quote,output);const parent=source.parent?OD.find(OATH.profile,source.parent):null;const pkg=NRProvenance.make(v.evidence,{blueprint:source.blueprint,parent:parent?.id,parentNetlistHash:parent?ethers.keccak256(parent.circuit.netlist):null});oathKeepProof(pkg);install(v);quote=null;progress.textContent+='\n'+oathText('Publication proof saved. Sign your authorship claim below, then export the certificate.','发布凭证已保存。请在下方签署作者声明，再导出凭证。');}),'primary'));
       body.append(mint);
       const deployment=oe('details','o-forge-block'),summary=oe('summary','',oathText('Create a new processor for the competition','为参赛创建新的处理器'));deployment.append(summary);

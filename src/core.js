@@ -30,7 +30,7 @@
     const STAGES = [{ name: '青岚古庭', sub: '雨过山门，妖影初现', color: '#85c9ba', rune: '#adc594' }, { name: '寒渊雪境', sub: '风雪封关，万骨争鸣', color: '#abcbe4', rune: '#b6dceb' }, { name: '赤烬废城', sub: '烽火照夜，群魔压境', color: '#d08f76', rune: '#e3b277' }, { name: '冥月天阙', sub: '八王齐现，剑定人间', color: '#bf9ccf', rune: '#c9b7df' }];
     const MOB_HP = [180, 135, 450, 155, 215, 310, 210, 560], MOB_SPEED = [90, 132, 64, 125, 78, 75, 76, 70], MOB_RADIUS = [14, 16, 19, 15, 18, 17, 16, 22];
     let storageOK = true;
-    let saved = { best: 0, totalKills: 0, runs: 0, wins: 0, bosses: [], settings: { music: .32, sfx: .55, quality: 'auto', shake: true, numbers: true }, hero: 0, diff: 1 };
+    let saved = { best: 0, totalKills: 0, runs: 0, wins: 0, bosses: [], settings: { music: .24, sfx: .55, quality: 'auto', shake: true, numbers: true }, hero: 0, diff: 1 };
     try {
         const s = JSON.parse(localStorage.getItem('neon-reliquary.v3') || localStorage.getItem('neon-reliquary.v2') || 'null');
         if (s) {
@@ -50,6 +50,8 @@
     } }
     if(saved.perfVersion!=='1.1'){saved.settings.quality='auto';saved.settings.backend='auto';saved.perfVersion='1.1';}
     let selected = clamp(saved.hero | 0, 0, 5), difficulty = clamp(saved.diff | 0, 0, 3), mode = 'campaign', state = 'loading', hero = HEROES[selected], options = saved.settings;
+    // 资源转场暂停模拟，但保留原状态，使暂停 / 返回与现有协作接口一致。
+    let visualWait = false;
     let canvas = $('game'); const mini = $('minimap').getContext('2d', { alpha: true });
     const images = {}, whiteSprites = {}, swordSprites = [], glows = [], atlasRects = {};
     let actorAtlas = null, whiteAtlas = null, shadowSprite = null;
@@ -64,6 +66,14 @@
     function announce(top, title, desc, duration = 2.6) { $('announcementTop').textContent = trLegacy(top); $('announcementTitle').textContent = trLegacy(title); $('announcementDesc').textContent = trLegacy(desc); hide('announcement'); void $('announcement').offsetWidth; show('announcement'); announcementTime = duration; }
     function setAccent() { hero = HEROES[selected]; document.documentElement.style.setProperty('--accent', hero.color); document.documentElement.style.setProperty('--aura', rgba(hero.color, .18)); }
     const audio = new NRAudio(options);
+    let ultCue = false; // 无双蓄满提示只响一次（不写进 run，保持战斗状态与原版逐字段一致）
+    // 音效定位：相对主角的声像与距离衰减；队友触发的声音更轻，避免盖过玩家自己的操作
+    function sfxAt(name, x, y, power = 1, actor = null) {
+        if (!P) return audio.sfx(name, 0, power);
+        if (actor && actor !== P && name.startsWith('tint')) return false; // 命中附色只属于玩家自己的英雄
+        const dx = x - P.x, dy = y - P.y, d = Math.hypot(dx, dy), fall = d < 420 ? 1 : Math.max(.12, 1 - (d - 420) / 900);
+        return audio.sfx(name, clamp(dx / 560, -.85, .85), power * fall * (actor && actor !== P ? .5 : 1));
+    }
     function createCanvas(w, h) { let c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
     function mulberry(a) { return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}
     function makePool(max, floatFields, intFields = []) { const p = { max, count: 0, free: [], a: new Uint8Array(max) }; for (let i = max - 1; i >= 0; i--)
@@ -80,10 +90,54 @@
     const B = makePool(2600, ['x', 'y', 'px', 'py', 'vx', 'vy', 'angle', 'age', 'life', 'damage', 'speed', 'orbit', 'turn', 'seed', 'tx1', 'ty1', 'tx2', 'ty2', 'tx3', 'ty3', 'tx4', 'ty4', 'trailClock'], ['target', 'targetGen', 'pierce', 'lastHit', 'flags','owner','hero']);
     const F = makePool(420, ['x', 'y', 'vx', 'vy', 'life', 'age', 'size'], ['color', 'kind']);
     const O = makePool(700, ['x', 'y', 'value', 'age'], ['kind']);
-    const HB = makePool(950, ['x', 'y', 'vx', 'vy', 'life', 'radius', 'damage', 'age', 'turn'], ['kind']);
+    const HB = makePool(950, ['x', 'y', 'px', 'py', 'vx', 'vy', 'life', 'radius', 'damage', 'age', 'turn'], ['kind', 'gen', 'boss', 'source', 'sourceGen', 'attackSeq']);
     const hashHead = new Int32Array(64 * 64), hashNext = new Int32Array(E.max);
     const CELL = 96, HALF = 3072;
     const rings = [], lines = [], warnings = [], numbers = [], traces = [], zones = [];
+    // 高清武器读取真实战斗结果：有限记录不会改变判定、随机数或飞剑轨迹。
+    const visualMode = new URLSearchParams(location.search).get('visual');
+    const weaponEvents = [], weaponEventOn = !visualMode || visualMode === 'hd';
+    let weaponEventSeq = 0;
+    function weaponEvent(kind, data) {
+        if (!weaponEventOn) return;
+        weaponEvents.push({ ...data, kind, id: ++weaponEventSeq, time: run.time });
+        if (weaponEvents.length > 128) weaponEvents.shift();
+    }
+    // 只记录被战斗系统接受的施法；表现层的 cue 不推迟或重复伤害。
+    const skillEvents = [];
+    let skillEventSeq = 0;
+    function skillEvent(kind, actor, angle, data = {}) {
+        if (!weaponEventOn) return;
+        const event = { id: ++skillEventSeq, kind, time: run.time, owner: actor.uid, hero: actor.heroId,
+            x: actor.x, y: actor.y, angle, duration: kind === 'channel' ? 4.2 : 1.02, ...data };
+        skillEvents.push(event);
+        if (skillEvents.length > 64) skillEvents.shift();
+        return event;
+    }
+    // 圣物匣只观察真实结算；清池、回收和表现层都不能生成奖励。
+    const pickupEvents = [];
+    let pickupEventSeq = 0;
+    function chestPickupEvent(i, unit, energyBefore, shieldBefore) {
+        if (!weaponEventOn || O.kind[i] !== 2) return;
+        pickupEvents.push({ id: ++pickupEventSeq, kind: 'chest', time: run.time, owner: unit.uid ?? 0,
+            x: O.x[i], y: O.y[i], rewards: { overclock: 8,
+                energy: Math.max(0, unit.ult - energyBefore), shield: Math.max(0, unit.shield - shieldBefore) } });
+        if (pickupEvents.length > 32) pickupEvents.shift();
+    }
+    // Boss 只记录真实起手、到期攻击、冲锋与危险区；所有随机抽样仍由原战斗流程完成。
+    const bossEvents = [];
+    let bossEventSeq = 0, bossZoneSeq = 0;
+    function bossMeta(i, angle = Math.atan2(E.dy[i], E.dx[i])) {
+        return { boss: E.type[i], source: i, generation: E.gen[i], sequence: Math.max(0, Math.floor(E.cool[i]) - 1),
+            rage: E.phase[i], x: E.x[i], y: E.y[i], angle, r: E.radius[i] };
+    }
+    function bossEvent(kind, source, data = {}) {
+        if (!weaponEventOn || !source) return;
+        const event = { ...source, ...data, kind, id: ++bossEventSeq, time: run.time };
+        bossEvents.push(event);
+        if (bossEvents.length > 128) bossEvents.shift();
+        return event;
+    }
     let renderEnemies = [], targetScratch = [];
     function buildHash() { hashHead.fill(-1); for (let i = 0; i < E.max; i++) {
         if (!E.a[i])
@@ -119,10 +173,10 @@
         let a = rand(0, TAU), s = rand(30, 150) * scale;
         particle(x, y, Math.cos(a) * s, Math.sin(a) * s, rand(.18, .48), rand(1.5, 4), color, j % 4 === 0 ? 1 : 0);
     } }
-    function ring(x, y, r, color = hero.color, life = .6, type = 0) { if (rings.length >= 36)
-        rings.shift(); rings.push({ x, y, r, color, life, age: 0, type }); }
-    function line(x1, y1, x2, y2, color = hero.color, width = 2, life = .18, kind = 0) { if (lines.length >= 56)
-        lines.shift(); lines.push({ x1, y1, x2, y2, color, width, life, age: 0, kind, seed: Math.random() * 100 }); }
+    function ring(x, y, r, color = hero.color, life = .6, type = 0, skill = false, boss = false) { if (rings.length >= 36)
+        rings.shift(); rings.push({ x, y, r, color, life, age: 0, type, skill, boss }); }
+    function line(x1, y1, x2, y2, color = hero.color, width = 2, life = .18, kind = 0, skill = false, boss = false) { if (lines.length >= 56)
+        lines.shift(); lines.push({ x1, y1, x2, y2, color, width, life, age: 0, kind, skill, boss, seed: Math.random() * 100 }); }
     function number(x, y, text, color = '#dfebf1', large = false) { if (!options.numbers || !visible(x,y,80) || numbers.length >= 18)
         return; numbers.push({ x: x + rand(-8, 8), y: y - 20, text: String(text), color, large, age: 0, life: large ? .9 : .65 }); }
     function spawnOrb(x, y, value, kind = 0) { let i = O.alloc(); if (i < 0) {
@@ -164,8 +218,9 @@
             E.timer[i] = 2;
             run.bossId = i;
             run.bossBorn = run.time;
+            audio.boss?.(type);
             audio.music('music_boss');
-            audio.sfx('boss');
+            audio.sfx('roar' + type);
             show('bossHud');
             $('bossTitle').textContent = BOSSES[type].name;
             $('bossPhase').textContent = tx('phase1') + ' · ' + BOSSES[type].sub;
@@ -223,7 +278,7 @@
                 number(E.x[i], E.y[i], Math.ceil(dmg), crit ? '#fbd184' : '#dee6df', crit);
             if (Math.random() < .13)
                 burst(E.x[i], E.y[i], 3);
-            audio.sfx((E.type[i]===2||E.type[i]===7||E.tier[i]>0)?'armor':'hit',clamp((E.x[i]-P.x)/430,-.8,.8));
+            sfxAt(E.tier[i]===2?'bosshit':(E.type[i]===2||E.type[i]===7||E.tier[i]>0)?'armor':'hit',E.x[i],E.y[i],1,actor);sfxAt('tint'+selected,E.x[i],E.y[i],1,actor);if(crit)sfxAt('crit',E.x[i],E.y[i],1,actor);
         }
         if(kick>180){E.stagger[i]=E.tier[i]===2?.07:.40;run.heavyHits++;}
         if (kick) {
@@ -233,8 +288,11 @@
         }
         if (selected === 5)
             E.slow[i] = 1.35;
-        if (selected === 4 && !P.downed && Math.random() < .08)
+        if (selected === 4 && !P.downed && Math.random() < .08) {
+            const before = P.hp;
             P.hp = Math.min(P.maxhp, P.hp + .16);
+            if (P.hp > before) { sfxAt('drain', E.x[i], E.y[i], 1, actor); weaponEvent('drain', { hero: 4, owner: P.uid, x: E.x[i], y: E.y[i], amount: P.hp - before }); }
+        }
         if (E.hp[i] <= 0)
             killEnemy(i,actor);
     }
@@ -242,6 +300,8 @@
         if (!E.a[i])
             return;
         let tier = E.tier[i], type = E.type[i], x = E.x[i], y = E.y[i];
+        if (E.slow[i] > 0 || E.freeze[i] > 0)
+            { sfxAt('shatter', x, y, 1, actor); weaponEvent('shatter', { hero: 5, owner: actor.uid, x, y, radius: E.radius[i], target: i, generation: E.gen[i] }); }
         E.release(i);
         run.kills++; run.lifetimeSum+=run.time-E.born[i];
         run.combo++;
@@ -262,7 +322,8 @@
             run.bosses++; coopBossClear(type);
             run.bossId = -1;
             hide('bossHud');
-            audio.sfx('level');
+            sfxAt('bossdie', x, y);
+            audio.bossDown?.();
             audio.music('music_battle');
             P.hp = Math.min(P.maxhp, P.hp + P.maxhp * .2);
             P.shield = Math.min(P.maxhp * .65, P.shield + 20);
@@ -277,12 +338,13 @@
             else if (mode === 'campaign' && run.wave >= 16)
                 finish(true);
         }
-        else if (run.kills % 5 === 0)
-            audio.sfx('kill');
+        else sfxAt(tier === 1 ? 'elitekill' : 'kill', x, y, 1, actor);
     }
     function areaDamage(x, y, r, amount, kick = 50, freeze = 0, actor=P) {
-        const P=actor,selected=P.heroId??0,hero=HEROES[selected]; queryCircle(x, y, r, i => { damageEnemy(i, amount, kick,true,actor); if (E.a[i] && freeze)
-        E.freeze[i] = E.tier[i] === 2 ? Math.min(freeze, .4) : freeze; }); }
+        const P=actor,selected=P.heroId??0,hero=HEROES[selected],frozen=[]; queryCircle(x, y, r, i => { damageEnemy(i, amount, kick,true,actor); if (E.a[i] && freeze){
+        E.freeze[i] = E.tier[i] === 2 ? Math.min(freeze, .4) : freeze;
+        if(weaponEventOn&&selected===5&&frozen.length<12)frozen.push({x:E.x[i],y:E.y[i],r:E.radius[i],target:i,generation:E.gen[i],duration:E.freeze[i]});} });
+        if(frozen.length){sfxAt('freeze',frozen[0].x,frozen[0].y,1,actor);skillEvent('freeze',actor,actor.ultAim??actor.aim,{points:frozen});} }
     function shootSword(x, y, angle, target, damage = P.damage, flags = 0, life = 2.25, orbit = -1, actor=P) {
         const P=actor,selected=P.heroId??0,hero=HEROES[selected]; let i = B.alloc(); if (i < 0)
         return -1; B.x[i] = B.px[i] = B.tx1[i] = B.tx2[i] = B.tx3[i] = B.tx4[i] = x; B.y[i] = B.py[i] = B.ty1[i] = B.ty2[i] = B.ty3[i] = B.ty4[i] = y; PREV.B.x[i]=x;PREV.B.y[i]=y;B.age[i] = 0; B.life[i] = life; B.angle[i] = angle; B.seed[i] = rand(-1, 1); B.speed[i] = hero.shotSpeed * (flags ? 1.1 : 1); B.vx[i] = Math.cos(angle) * B.speed[i]; B.vy[i] = Math.sin(angle) * B.speed[i]; B.damage[i] = damage; B.orbit[i] = orbit >= 0 ? orbit : hero.orbit; B.turn[i] = hero.turn; B.target[i] = target; B.targetGen[i] = target >= 0 ? E.gen[target] : 0; B.pierce[i] = P.pierce + (selected === 1 || selected === 5 ? 2 : 1) + (flags ? 1 : 0); B.lastHit[i] = -1; B.flags[i] = flags; B.owner[i]=P.uid; B.hero[i]=selected; B.trailClock[i] = 0; return i; }
@@ -303,15 +365,16 @@
                 B.vy[i] = Math.sin(aim + (j - (n - 1) / 2) * .035) * B.speed[i];
             }
         }
-        audio.sfx('shot');
+        sfxAt('shot' + selected, P.x, P.y, 1, actor);
     }
-    function enemyBullet(x, y, angle, speed = 170, damage = 10, r = 5, kind = 0, turn = 0) { const i = HB.alloc(); if (i < 0)
-        return; HB.x[i] = x; HB.y[i] = y;PREV.HB.x[i]=x;PREV.HB.y[i]=y; HB.vx[i] = Math.cos(angle) * speed; HB.vy[i] = Math.sin(angle) * speed; HB.radius[i] = r; HB.life[i] = 6; HB.age[i] = 0; HB.damage[i] = damage; HB.kind[i] = kind; HB.turn[i] = turn; }
-    function warnCircle(x, y, r, delay = .9, damage = 18, color = '#fa837d', zone = false) { if (warnings.length >= 80)
-        return; warnings.push({ type: 0, x, y, r, delay, age: 0, damage, color, zone }); }
-    function warnLine(x, y, angle, len = 900, width = 42, delay = 1, damage = 20, color = '#ffae79') { if (warnings.length >= 80)
-        return; warnings.push({ type: 1, x, y, angle, len, width, delay, age: 0, damage, color }); }
-    function dash() { if (state !== 'play' || P.downed || P.dashCD > 0)
+    function enemyBullet(x, y, angle, speed = 170, damage = 10, r = 5, kind = 0, turn = 0, boss = null) { const i = HB.alloc(); if (i < 0)
+        return -1; HB.x[i] = HB.px[i] = x; HB.y[i] = HB.py[i] = y;PREV.HB.x[i]=x;PREV.HB.y[i]=y; HB.vx[i] = Math.cos(angle) * speed; HB.vy[i] = Math.sin(angle) * speed; HB.radius[i] = r; HB.life[i] = 6; HB.age[i] = 0; HB.damage[i] = damage; HB.kind[i] = kind; HB.turn[i] = turn;
+        HB.gen[i]++; HB.boss[i] = boss ? boss.boss + 1 : 0; HB.source[i] = boss?.source ?? -1; HB.sourceGen[i] = boss?.generation ?? 0; HB.attackSeq[i] = boss?.sequence ?? 0; sfxAt(boss ? 'volley' + boss.boss : 'eshot', x, y); return i; }
+    function warnCircle(x, y, r, delay = .9, damage = 18, color = '#fa837d', zone = false, boss = null) { if (warnings.length >= 80)
+        return; const w = { type: 0, x, y, r, delay, age: 0, damage, color, zone, boss }; warnings.push(w); sfxAt('warn', x, y); return w; }
+    function warnLine(x, y, angle, len = 900, width = 42, delay = 1, damage = 20, color = '#ffae79', boss = null) { if (warnings.length >= 80)
+        return; const w = { type: 1, x, y, angle, len, width, delay, age: 0, damage, color, boss }; warnings.push(w); sfxAt('warnlane', x, y); return w; }
+    function dash() { if (state !== 'play' || visualWait || P.downed || P.dashCD > 0)
         return; let x = (keys.has('d') || keys.has('arrowright') ? 1 : 0) - (keys.has('a') || keys.has('arrowleft') ? 1 : 0) + joy.x, y = (keys.has('s') || keys.has('arrowdown') ? 1 : 0) - (keys.has('w') || keys.has('arrowup') ? 1 : 0) + joy.y; let l = Math.hypot(x, y); if (l < .15) {
         x = pointer.x - W / 2 + camera.x - P.x;
         y = pointer.y - H / 2 + camera.y - P.y;
@@ -325,60 +388,64 @@
 
     function arcDamage(a,range,half,damage,kick=400,freeze=0,actor=P){
         const P=actor,selected=P.heroId??0,hero=HEROES[selected];
-      let hits=0;const co=Math.cos(a),si=Math.sin(a),threshold=Math.cos(half);
+      let hits=0;const frozen=[],co=Math.cos(a),si=Math.sin(a),threshold=Math.cos(half);
       queryCircle(P.x,P.y,range,i=>{const dx=E.x[i]-P.x,dy=E.y[i]-P.y,d=Math.hypot(dx,dy)||1;
-        if(d<48||(dx*co+dy*si)/d>=threshold){damageEnemy(i,damage,kick,true,actor);if(E.a[i]&&freeze)E.freeze[i]=E.tier[i]===2?Math.min(.35,freeze):freeze;hits++;}
-      });return hits;
+        if(d<48||(dx*co+dy*si)/d>=threshold){damageEnemy(i,damage,kick,true,actor);if(E.a[i]&&freeze){E.freeze[i]=E.tier[i]===2?Math.min(.35,freeze):freeze;if(weaponEventOn&&selected===5&&frozen.length<12)frozen.push({x:E.x[i],y:E.y[i],r:E.radius[i],target:i,generation:E.gen[i],duration:E.freeze[i]});}hits++;}
+      });if(frozen.length)skillEvent('freeze',actor,a,{points:frozen});return hits;
     }
     function laneDamage(a,length,width,damage,kick=400,freeze=0,actor=P){
         const P=actor,selected=P.heroId??0,hero=HEROES[selected];
-      const co=Math.cos(a),si=Math.sin(a);let hits=0;
+      const co=Math.cos(a),si=Math.sin(a);let hits=0;const stunned=[];
       queryCircle(P.x,P.y,length,i=>{const dx=E.x[i]-P.x,dy=E.y[i]-P.y,t=dx*co+dy*si,perp=Math.abs(-dx*si+dy*co);
-        if(t>-25&&t<length&&perp<width+E.radius[i]){damageEnemy(i,damage,kick,true,actor);if(E.a[i]&&freeze)E.freeze[i]=E.tier[i]===2?.22:freeze;hits++;}
-      });return hits;
+        if(t>-25&&t<length&&perp<width+E.radius[i]){damageEnemy(i,damage,kick,true,actor);if(E.a[i]&&freeze){E.freeze[i]=E.tier[i]===2?.22:freeze;
+          // 只读实际存活的麻痹目标；固定预算不增加随机抽样或改变结算。
+          if(weaponEventOn&&selected===2&&stunned.length<8)stunned.push({x:E.x[i],y:E.y[i],r:E.radius[i],target:i,generation:E.gen[i],duration:E.freeze[i]});}hits++;}
+      });if(stunned.length){sfxAt('stun',stunned[0].x,stunned[0].y,1,actor);skillEvent('stun',actor,a,{points:stunned});}return hits;
     }
     function attackArcFX(a,range,half,actor=P){
         const P=actor,selected=P.heroId??0,hero=HEROES[selected];
       let ax=P.x+Math.cos(a-half)*range,ay=P.y+Math.sin(a-half)*range;
-      for(let j=1;j<=9;j++){let t=a-half+half*2*j/9,x=P.x+Math.cos(t)*range,y=P.y+Math.sin(t)*range;line(ax,ay,x,y,hero.color,j%2?9:6,.24,0);ax=x;ay=y;}
-      line(P.x,P.y,P.x+Math.cos(a)*range,P.y+Math.sin(a)*range,hero.color,13,.28,2);
+      for(let j=1;j<=9;j++){let t=a-half+half*2*j/9,x=P.x+Math.cos(t)*range,y=P.y+Math.sin(t)*range;line(ax,ay,x,y,hero.color,j%2?9:6,.24,0,true);ax=x;ay=y;}
+      line(P.x,P.y,P.x+Math.cos(a)*range,P.y+Math.sin(a)*range,hero.color,13,.28,2,true);
     }
     function castSkill(actor=P) {
         const P=actor,selected=P.heroId??0,hero=HEROES[selected];
-      if(state!=='play'||P.downed||P.skillCD>0)return;
+      if(state!=='play'||visualWait||P.downed||P.skillCD>0)return;
       const a=skillAim(actor),co=Math.cos(a),si=Math.sin(a),d=P.damage;
       P.aim=a;P.skillCD=hero.skillMax;P.castAnim=.52;P.inv=Math.max(P.inv,.30);P.magnet=2;P.hitPulse=.16;
-      audio.sfx('skill');shake=options.shake?3.6:0;
+      const visualCast=skillEvent('cast',actor,a);
+      sfxAt('skill'+selected,P.x,P.y,1,actor);shake=options.shake?3.6:0;
       let hits=0;
       if(selected===0){
         hits=arcDamage(a,355,.58,d*10,510,0,actor);P.shield=Math.min(P.maxhp*.5,P.shield+24);attackArcFX(a,330,.58,actor);
         for(let j=0;j<12;j++)shootSword(P.x,P.y,a+(j-5.5)*.07,-1,d*.85,1,1.15,0,actor);
       }else if(selected===1){
         hits=laneDamage(a,435,68,d*11,580,0,actor);attackArcFX(a,280,.38,actor);
-        line(P.x,P.y,P.x+co*440,P.y+si*440,hero.color,30,.38,2);
-        for(let k=0;k<3;k++)addZone({x:P.x+co*(100+k*120),y:P.y+si*(100+k*120),r:62,life:2.5,age:0,tick:.3,friendly:true,damage:d*.62,color:hero.color},actor);
+        line(P.x,P.y,P.x+co*440,P.y+si*440,hero.color,30,.38,2,true);
+        for(let k=0;k<3;k++){const z={x:P.x+co*(100+k*120),y:P.y+si*(100+k*120),r:62,life:2.5,age:0,tick:.3,friendly:true,damage:d*.62,color:hero.color,skill:true};addZone(z,actor);if(visualCast)(visualCast.points??=[]).push({x:z.x,y:z.y,r:z.r,duration:z.life});}
       }else if(selected===2){
         hits=laneDamage(a,430,79,d*10,430,1.0,actor);P.shield=Math.min(P.maxhp*.55,P.shield+32);
-        for(let k=-1;k<=1;k++)line(P.x-si*k*25,P.y+co*k*25,P.x+co*430-si*k*25,P.y+si*430+co*k*25,hero.color,4,.32,1);
+        for(let k=-1;k<=1;k++)line(P.x-si*k*25,P.y+co*k*25,P.x+co*430-si*k*25,P.y+si*430+co*k*25,hero.color,4,.32,1,true);
       }else if(selected===3){
         hits=arcDamage(a,140,.62,d*4.0,390,0,actor);
-        for(let k=0;k<4;k++)addZone({x:P.x+co*(85+k*82),y:P.y+si*(85+k*82),r:80,life:1.4,age:0,tick:.12+k*.12,friendly:true,damage:d*9.8,color:hero.color,bomb:true},actor);
-        line(P.x,P.y,P.x+co*405,P.y+si*405,hero.color,7,.30,1);
+        for(let k=0;k<4;k++){const z={x:P.x+co*(85+k*82),y:P.y+si*(85+k*82),r:80,life:1.4,age:0,tick:.12+k*.12,friendly:true,damage:d*9.8,color:hero.color,bomb:true,skill:true};addZone(z,actor);if(visualCast)(visualCast.points??=[]).push({x:z.x,y:z.y,r:z.r,duration:z.tick});}
+        line(P.x,P.y,P.x+co*405,P.y+si*405,hero.color,7,.30,1,true);
       }else if(selected===4){
         hits=arcDamage(a,325,.68,d*10.3,560,0,actor);P.hp=Math.min(P.maxhp,P.hp+P.maxhp*.17);P.shield=Math.min(P.maxhp*.50,P.shield+10);
         attackArcFX(a,290,.68,actor);number(P.x,P.y-45,'+'+Math.round(P.maxhp*.17),'#b8ecc7',true);
       }else{
         hits=arcDamage(a,340,.78,d*6.3,350,2.3,actor);attackArcFX(a,325,.78,actor);
-        for(let k=0;k<7;k++){let t=a+(k-3)*.19;line(P.x+Math.cos(t)*55,P.y+Math.sin(t)*55,P.x+Math.cos(t)*340,P.y+Math.sin(t)*340,hero.color,4,.35,2);}
+        for(let k=0;k<7;k++){let t=a+(k-3)*.19;line(P.x+Math.cos(t)*55,P.y+Math.sin(t)*55,P.x+Math.cos(t)*340,P.y+Math.sin(t)*340,hero.color,4,.35,2,true);}
       }
       if(selected===4)coopHealNearby(actor);
-      if(hits>0&&P.uid===0){audio.sfx('heavy',0,.8);toast('破阵命中 '+hits+' · 立即踏风冲出缺口',1.15);}
+      if(hits>0&&P.uid===0){audio.sfx('bosshit',0,.7);toast('破阵命中 '+hits+' · 立即踏风冲出缺口',1.15);}
     }
     function ultimate(actor=P){
         const P=actor,selected=P.heroId??0,hero=HEROES[selected];
-      if(state!=='play'||P.downed||P.ult<99.9||P.ultTime>0)return;
+      if(state!=='play'||visualWait||P.downed||P.ult<99.9||P.ultTime>0)return;
       P.ult=0;P.ultTime=4.2;P.ultTick=0;P.ultAim=skillAim(actor);P.aim=P.ultAim;P.inv=.70;P.shield=Math.min(P.maxhp*.6,P.shield+22);P.magnet=5;run.ults++;
-      audio.sfx('ultimate');if(P.uid===0)announce('无双破阵 · '+hero.name,hero.ult,'向指定方向持续凿穿 · 包围圈不会全屏消失',1.6);
+      skillEvent('channel',actor,P.ultAim);
+      sfxAt('ult'+selected,P.x,P.y,1,actor);if(P.uid===0)announce('无双破阵 · '+hero.name,hero.ult,'向指定方向持续凿穿 · 包围圈不会全屏消失',1.6);
       shake=options.shake?6:0;P.hitPulse=.16;
       const a=P.ultAim;attackArcFX(a,400,.6,actor);arcDamage(a,460,.62,P.damage*7,510,selected===5?1.3:0,actor);
       // Protect the immediate escape lane, rather than erasing every hostile projectile.
@@ -387,23 +454,29 @@
     function updateUltimate(dt,actor=P){
         const P=actor,selected=P.heroId??0,hero=HEROES[selected];
       if(P.ultTime<=0)return;P.ultTime=Math.max(0,P.ultTime-dt);P.ultTick-=dt;if(P.ultTick>0)return;
-      P.ultTick=selected===3?.17:.36;
+      P.ultTick=selected===3?.17:.36;sfxAt('pulse'+selected,P.x+Math.cos(P.ultAim)*160,P.y+Math.sin(P.ultAim)*160,.9,actor);
       // Player can steer by deliberately holding the aim button; otherwise keep the original breach.
       if(P.uid===0&&P.controller!=='external'&&pointer.held){let want=skillAim(actor),delta=Math.atan2(Math.sin(want-P.ultAim),Math.cos(want-P.ultAim));P.ultAim+=clamp(delta,-.18,.18);}
-      const a=P.ultAim,d=P.damage,co=Math.cos(a),si=Math.sin(a);P.aim=a;
+      const a=P.ultAim,d=P.damage,co=Math.cos(a),si=Math.sin(a),points=[];P.aim=a;
       if(selected===0||selected===5){
         for(let j=0;j<3;j++){const along=120+((Math.floor(run.time*9)+j*3)%9)*38,side=rand(-65,65),x=P.x+co*along-si*side,y=P.y+si*along+co*side;
-          line(x-35,y-190,x,y,hero.color,5,.26,2);areaDamage(x,y,72,d*(selected===5?3.8:4.5),240,selected===5?.7:0,actor);burst(x,y,5,selected,1.1);
+          line(x-35,y-190,x,y,hero.color,5,.26,2,true);areaDamage(x,y,72,d*(selected===5?3.8:4.5),240,selected===5?.7:0,actor);burst(x,y,5,selected,1.1);
+          if(weaponEventOn)points.push({x,y,r:72});
         }
+        skillEvent('pulse',actor,a,{points,age:4.2-P.ultTime});
       }else if(selected===1){
-        let sweep=a+Math.sin(run.time*12)*.18;laneDamage(sweep,455,68,d*4.3,310,0,actor);line(P.x,P.y,P.x+Math.cos(sweep)*480,P.y+Math.sin(sweep)*480,hero.color,24,.23,2);
+        let sweep=a+Math.sin(run.time*12)*.18;laneDamage(sweep,455,68,d*4.3,310,0,actor);line(P.x,P.y,P.x+Math.cos(sweep)*480,P.y+Math.sin(sweep)*480,hero.color,24,.23,2,true);
+        skillEvent('pulse',actor,sweep,{age:4.2-P.ultTime});
       }else if(selected===2){
-        let n=0;queryCircle(P.x,P.y,470,i=>{let dx=E.x[i]-P.x,dy=E.y[i]-P.y,di=Math.hypot(dx,dy)||1;if(n<10&&(dx*co+dy*si)/di>.74){n++;line(P.x,P.y,E.x[i],E.y[i],hero.color,3,.21,1);damageEnemy(i,d*4.5,220,true,actor);if(E.a[i])E.stagger[i]=.2;}});
+        let n=0;queryCircle(P.x,P.y,470,i=>{let dx=E.x[i]-P.x,dy=E.y[i]-P.y,di=Math.hypot(dx,dy)||1;if(n<10&&(dx*co+dy*si)/di>.74){n++;line(P.x,P.y,E.x[i],E.y[i],hero.color,3,.21,1,true);if(weaponEventOn)points.push({x:E.x[i],y:E.y[i],target:i,generation:E.gen[i]});damageEnemy(i,d*4.5,220,true,actor);if(E.a[i])E.stagger[i]=.2;}});
+        skillEvent('pulse',actor,a,{points,age:4.2-P.ultTime});
       }else if(selected===3){
         for(let j=0;j<16;j++){let t=a+(j-7.5)*.045;shootSword(P.x-si*(j-7.5)*5,P.y+co*(j-7.5)*5,t,-1,d*1.05,1,1.1,0,actor);}
+        skillEvent('pulse',actor,a,{age:4.2-P.ultTime});
       }else{
         let along=140+(Math.floor(run.time*8)%4)*70;
-        let x=P.x+co*along,y=P.y+si*along;ring(x,y,95,hero.color,.55,4);areaDamage(x,y,98,d*3.1,300,0,actor);P.hp=Math.min(P.maxhp,P.hp+.5);
+        let x=P.x+co*along,y=P.y+si*along;ring(x,y,95,hero.color,.55,4,true);areaDamage(x,y,98,d*3.1,300,0,actor);P.hp=Math.min(P.maxhp,P.hp+.5);
+        skillEvent('pulse',actor,a,{points:[{x,y,r:98}],age:4.2-P.ultTime});
       }
     }
 
@@ -411,17 +484,23 @@
         const P=actor;
         const type = E.type[i], rage = E.phase[i], seq = Math.floor(E.cool[i]++), x = E.x[i], y = E.y[i], a = Math.atan2(P.y - y, P.x - x), dd = DIFFS[difficulty];
         E.timer[i] = (rage ? 1.8 : 2.65) / (run.scaling?.tempo||1) / (1 + (difficulty * .08));
+        const source = { ...bossMeta(i, a), sequence: seq };
+        const visual = bossEvent('attack', source, { warnings: [], summons: [], shots: 0 });
+        const shot = (angle, speed, damage, kind) => { const j = enemyBullet(x, y, angle, speed, damage, 5.5, kind, 0, source); if (visual && j >= 0) visual.shots++; };
+        const circle = (x, y, r, delay, damage, color, zone = false) => { const w = warnCircle(x, y, r, delay, damage, color, zone, source); if (visual && w) visual.warnings.push({ type: 0, x, y, r, delay, zone }); };
+        const lane = (x, y, angle, len, width, delay, damage, color) => { const w = warnLine(x, y, angle, len, width, delay, damage, color, source); if (visual && w) visual.warnings.push({ type: 1, x, y, angle, len, width, delay }); };
+        const summon = (...args) => { const j = spawnEnemy(...args); if (j >= 0) sfxAt('summon', E.x[j], E.y[j]); if (visual && j >= 0) visual.summons.push({ x: E.x[j], y: E.y[j], r: E.radius[j], target: j, generation: E.gen[j] }); return j; };
         const fan = (n, arc, speed = 190, offset = a, kind = 0) => { for (let j = 0; j < n; j++)
-            enemyBullet(x, y, offset + (j - (n - 1) / 2) * arc / Math.max(1, n - 1), speed, 13 + type * 1.3, 5.5, kind); };
+            shot(offset + (j - (n - 1) / 2) * arc / Math.max(1, n - 1), speed, 13 + type * 1.3, kind); };
         const nova = (n, speed = 140, offset = run.time, kind = 0) => { for (let j = 0; j < n; j++)
-            enemyBullet(x, y, offset + j * TAU / n, speed, 12 + type * 1.1, 5.5, kind); };
+            shot(offset + j * TAU / n, speed, 12 + type * 1.1, kind); };
         if (type === 0) {
             if (seq % 3 === 0) {
-                warnCircle(x, y, 190 + rage * 50, .85, 26);
+                circle(x, y, 190 + rage * 50, .85, 26);
                 fan(9 + rage * 6, 1.5, 205);
             }
             else if (seq % 3 === 1) {
-                warnLine(x, y, a, 650, 66, .75, 28);
+                lane(x, y, a, 650, 66, .75, 28);
                 E.dx[i] = Math.cos(a);
                 E.dy[i] = Math.sin(a);
                 E.charge[i] = -.8;
@@ -429,32 +508,32 @@
             else {
                 nova(20 + rage * 12, 165);
                 for (let k = 0; k < 3 + rage; k++)
-                    warnCircle(P.x + rand(-110, 110), P.y + rand(-90, 90), 60, .85 + k * .14, 19);
+                    circle(P.x + rand(-110, 110), P.y + rand(-90, 90), 60, .85 + k * .14, 19);
             }
         }
         else if (type === 1) {
             if (seq % 2 === 0) {
                 for (let k = 0; k < 7 + rage * 4; k++)
-                    warnCircle(P.x + rand(-240, 240), P.y + rand(-170, 170), 53, .8 + k * .08, 18, '#9ecbee');
+                    circle(P.x + rand(-240, 240), P.y + rand(-170, 170), 53, .8 + k * .08, 18, '#9ecbee');
                 nova(16, 135, run.time, 2);
             }
             else {
                 for (let k = 0; k < 3; k++)
                     fan(7 + rage * 3, .75, 170 + k * 35, a + (k - 1) * .65, 2);
-                warnCircle(x, y, 245, 1.1, 23, '#9acde6');
+                circle(x, y, 245, 1.1, 23, '#9acde6');
             }
         }
         else if (type === 2) {
             if (seq % 3 < 2) {
-                warnLine(x, y, a, 720, 78, .58, 30, '#e0b37a');
+                lane(x, y, a, 720, 78, .58, 30, '#e0b37a');
                 E.dx[i] = Math.cos(a);
                 E.dy[i] = Math.sin(a);
                 E.charge[i] = -.65;
                 E.timer[i] = 1.25;
-                warnCircle(P.x, P.y, 92, 1.25, 28, '#e5b180');
+                circle(P.x, P.y, 92, 1.25, 28, '#e5b180');
             }
             else {
-                warnCircle(x, y, 260 + rage * 55, .85, 30, '#edbd90');
+                circle(x, y, 260 + rage * 55, .85, 30, '#edbd90');
                 nova(24 + rage * 12, 200, run.time, 1);
             }
         }
@@ -463,52 +542,52 @@
             if (seq % 2 === 0) {
                 for (let k = 0; k < 12 + rage * 8; k++) {
                     let a = k * TAU / (12 + rage * 8);
-                    spawnEnemy(k % 3 === 0 ? 6 : 0, 0, x + Math.cos(a) * 170, y + Math.sin(a) * 140);
+                    summon(k % 3 === 0 ? 6 : 0, 0, x + Math.cos(a) * 170, y + Math.sin(a) * 140);
                 }
-                ring(x, y, 185, '#c7a2ef', 1, 3);
+                ring(x, y, 185, '#c7a2ef', 1, 3, false, true);
             }
             else {
                 for (let k = 0; k < 5 + rage * 3; k++)
-                    warnCircle(P.x + rand(-240, 240), P.y + rand(-180, 180), 76, 1 + k * .1, 20, '#bc89ef');
+                    circle(P.x + rand(-240, 240), P.y + rand(-180, 180), 76, 1 + k * .1, 20, '#bc89ef');
             }
         }
         else if (type === 4) {
             if (seq % 2 === 0) {
                 const offset = seq * .32;
                 for (let k = 0; k < 4 + rage * 2; k++)
-                    warnLine(x, y, offset + k * TAU / (4 + rage * 2), 1000, 43, .95, 29, '#f6be69');
-                warnCircle(x, y, 125, .85, 24, '#efbe74');
+                    lane(x, y, offset + k * TAU / (4 + rage * 2), 1000, 43, .95, 29, '#f6be69');
+                circle(x, y, 125, .85, 24, '#efbe74');
             }
             else {
                 nova(32 + rage * 16, 155, run.time, 1);
                 for (let k = 0; k < 5; k++)
-                    warnCircle(P.x + rand(-200, 200), P.y + rand(-130, 130), 70, .75 + k * .13, 24, '#f1b96e');
+                    circle(P.x + rand(-200, 200), P.y + rand(-130, 130), 70, .75 + k * .13, 24, '#f1b96e');
             }
         }
         else if (type === 5) {
             for (let k = 0; k < 4 + rage * 2; k++)
-                warnCircle(P.x + rand(-250, 250), P.y + rand(-180, 180), 86, 1 + k * .13, 19, '#d99cfa', true);
+                circle(P.x + rand(-250, 250), P.y + rand(-180, 180), 86, 1 + k * .13, 19, '#d99cfa', true);
             nova(20 + rage * 12, 120, run.time, 3);
             if (seq % 3 === 0)
                 for (let k = 0; k < 8; k++) {
                     let a = k * TAU / 8;
-                    spawnEnemy(6, 0, x + Math.cos(a) * 160, y + Math.sin(a) * 100);
+                    summon(6, 0, x + Math.cos(a) * 160, y + Math.sin(a) * 100);
                 }
         }
         else if (type === 6) {
             for (let k = -1; k <= 1; k++)
                 fan(6 + rage * 3, .64, 160 + Math.abs(k) * 40, a + k * .65, 4);
             for (let k = 0; k < 4 + rage * 2; k++)
-                warnCircle(P.x + rand(-220, 220), P.y + rand(-150, 150), 74, 1 + k * .1, 18, '#98dcb0', true);
+                circle(P.x + rand(-220, 220), P.y + rand(-150, 150), 74, 1 + k * .1, 18, '#98dcb0', true);
             if (seq % 3 === 0)
                 nova(30, 125, run.time, 4);
         }
         else {
             nova(36 + rage * 24, 170, run.time, 1);
             for (let k = 0; k < 8 + rage * 6; k++)
-                warnCircle(P.x + rand(-330, 330), P.y + rand(-220, 220), 57, .85 + k * .055, 22, '#ff9c80');
+                circle(P.x + rand(-330, 330), P.y + rand(-220, 220), 57, .85 + k * .055, 22, '#ff9c80');
             if (seq % 3 === 2) {
-                warnLine(x, y, a, 900, 100, .85, 36, '#ffb79a');
+                lane(x, y, a, 900, 100, .85, 36, '#ffb79a');
                 E.dx[i] = Math.cos(a);
                 E.dy[i] = Math.sin(a);
                 E.charge[i] = -.9;
@@ -531,7 +610,9 @@
                 E.timer[i] = 1.1;
                 $('bossPhase').textContent = '第二式 · 狂暴';
                 announce('剑锋触怒妖王', BOSSES[type].name + ' · 狂暴', '攻击节奏加快，预留踏风闪避', 1.8);
-                ring(E.x[i], E.y[i], 310, BOSSES[type].color, 1, 3);
+                ring(E.x[i], E.y[i], 310, BOSSES[type].color, 1, 3, false, true);
+                audio.bossRage?.(); audio.sfx('roar' + type, 0, .8, { rate: .86 });
+                bossEvent('enrage', bossMeta(i), { duration: 1 });
                 for (let j = 0; j < 3; j++)
                     spawnEnemy(j % 6, 1, E.x[i] + rand(-200, 200), E.y[i] + rand(-130, 130));
             }
@@ -546,6 +627,7 @@
                 if (E.charge[i] >= 0) {
                     E.charge[i] = tier === 2 ? .62 : .5;
                     burst(E.x[i], E.y[i], 8, 1, 1.5);
+                    if (tier === 2) { sfxAt('charge', E.x[i], E.y[i]); bossEvent('charge', bossMeta(i), { duration: .62 }); }
                 }
             }
             else if (E.charge[i] > 0) {
@@ -666,8 +748,10 @@
                     let next = hashNext[e];
                     if (E.a[e] && B.lastHit[b] !== e && pointSegmentSq(E.x[e], E.y[e], ax, ay, bx, by) < (E.radius[e] + (selected === 1 ? 8 : 4)) ** 2) {
                         B.lastHit[b] = e;
-                        let ex = E.x[e], ey = E.y[e];
+                        let ex = E.x[e], ey = E.y[e], generation = E.gen[e];
                         damageEnemy(e, B.damage[b], selected === 1 ? 42 : 8,true,actor);
+                        weaponEvent('hit', { hero: selected, owner: actor.uid, x: ex, y: ey, angle: B.angle[b],
+                            target: e, generation, killed: !E.a[e] });
                         if (selected === 2 && Math.random() < .22) {
                             let chain = -1, best = 120 ** 2;
                             queryCircle(ex, ey, 120, k => { if (k !== e) {
@@ -679,6 +763,8 @@
                             } });
                             if (chain >= 0 && E.a[chain]) {
                                 line(ex, ey, E.x[chain], E.y[chain], hero.color, 1.5, .18, 1);
+                                if (lines.length) lines[lines.length - 1].weapon = true;
+                                sfxAt('chain', E.x[chain], E.y[chain], 1, actor); weaponEvent('chain', { hero: 2, owner: actor.uid, x: ex, y: ey, x2: E.x[chain], y2: E.y[chain] });
                                 damageEnemy(chain, B.damage[b] * .55, 0, false,actor);
                             }
                         }
@@ -760,6 +846,7 @@
                 continue;
             }
             let ax = HB.x[i], ay = HB.y[i];
+            HB.px[i] = ax; HB.py[i] = ay;
             if (HB.turn[i]) {
                 const target=partyTarget(ax,ay,i);let dx = target.x - ax, dy = target.y - ay, d = Math.hypot(dx, dy) || 1, s = Math.hypot(HB.vx[i], HB.vy[i]), t = dt * HB.turn[i];
                 HB.vx[i] += (dx / d * s - HB.vx[i]) * t;
@@ -774,7 +861,7 @@
             }}
         }
     }
-    function addZone(z,actor=P){if(z.friendly)z.owner=actor.uid;if(zones.length>=128)zones.shift();zones.push(z);}
+    function addZone(z,actor=P){if(z.friendly)z.owner=actor.uid;if(z.boss){z.id=++bossZoneSeq;sfxAt('zone',z.x,z.y);bossEvent('zone',z.boss,{x:z.x,y:z.y,r:z.r,duration:z.life,zoneId:z.id});}if(zones.length>=128)zones.shift();zones.push(z);}
     function updateWarnings(dt) {
         for (let k = warnings.length - 1; k >= 0; k--) {
             let a = warnings[k];
@@ -783,16 +870,20 @@
                 continue;
             if (a.type === 0) {
                 for(const unit of partyActors())if(dist2(unit.x-a.x,unit.y-a.y)<(a.r+9)**2)hurtActor(unit,a.damage,a.x,a.y);
-                ring(a.x, a.y, a.r, a.color, .5, 2);
+                ring(a.x, a.y, a.r, a.color, .5, 2, false, !!a.boss);
                 burst(a.x, a.y, 16, 1, 1.8);
+                sfxAt(a.boss ? 'boom' + a.boss.boss : 'boom', a.x, a.y, clamp(a.r / 150, .45, 1.1));
+                bossEvent('impact', a.boss, { x: a.x, y: a.y, r: a.r, shape: 'circle', zone: a.zone, duration: .5 });
                 if (a.zone)
-                    addZone({ x: a.x, y: a.y, r: a.r, life: 3.4, age: 0, tick: 0, friendly: false, damage: a.damage * .34, color: a.color });
+                    addZone({ x: a.x, y: a.y, r: a.r, life: 3.4, age: 0, tick: 0, friendly: false, damage: a.damage * .34, color: a.color, boss: a.boss });
             }
             else {
                 let bx = a.x + Math.cos(a.angle) * a.len, by = a.y + Math.sin(a.angle) * a.len;
                 for(const unit of partyActors())if(pointSegmentSq(unit.x,unit.y,a.x,a.y,bx,by)<(a.width/2+10)**2)hurtActor(unit,a.damage,a.x,a.y);
-                line(a.x, a.y, bx, by, a.color, a.width, .42, 3);
+                line(a.x, a.y, bx, by, a.color, a.width, .42, 3, false, !!a.boss);
                 burst(bx, by, 16, 1, 1.6);
+                sfxAt(a.boss ? 'boom' + a.boss.boss : 'boom', (a.x + bx) / 2, (a.y + by) / 2, .8);
+                bossEvent('impact', a.boss, { x: a.x, y: a.y, angle: a.angle, len: a.len, width: a.width, shape: 'line', duration: .42 });
             }
             warnings.splice(k, 1);
         }
@@ -805,8 +896,9 @@
                 if (z.friendly) {
                     const owner=actorByUid(z.owner??0);if(owner)areaDamage(z.x, z.y, z.r, z.damage, z.bomb ? 230 : 15,0,owner);
                     if (z.bomb) {
-                        ring(z.x, z.y, z.r, z.color, .7, 3);
+                        ring(z.x, z.y, z.r, z.color, .7, 3, !!z.skill);
                         burst(z.x, z.y, 24, selected, 1.5);
+                        if(owner&&z.skill){sfxAt('bomb',z.x,z.y,1,owner);skillEvent('bomb',owner,owner.aim,{points:[{x:z.x,y:z.y,r:z.r}]});}
                         z.life = z.age + .16;
                     }
                 }
@@ -823,7 +915,7 @@
         P.pierce=Math.min(3,P.pierce+1);
         P.formation++;
         toast('剑境突破 · 穿透 +1 · 护体剑阵扩展');
-    } ring(P.x, P.y, 220, hero.color, .7, 3); audio.sfx('level'); coopLevelUp(); if(P.controller==='external'){while(P.pending)chooseUpgrade(P.path);}
+    } ring(P.x, P.y, 220, hero.color, .7, 3); audio.sfx('levelup'); coopLevelUp(); if(P.controller==='external'){while(P.pending)chooseUpgrade(P.path);}
     }
     function chooseUpgrade(path) { if (!P || P.pending <= 0 || state !== 'play')
         return; P.path = path; P.upgrades[path]++; if (path === 0)
@@ -840,7 +932,7 @@
         P.regen += .12;
         P.speed = Math.min(330, P.speed + 4);
     } P.pending--; P.chooseTime = 8; if (P.pending <= 0)
-        hide('upgradePanel'); audio.sfx('pickup'); updateHUD(); }
+        hide('upgradePanel'); audio.sfx('upgrade'); updateHUD(); }
     function updateOrbs(dt) {
         for (let i = 0; i < O.max; i++) {
             if (!O.a[i])
@@ -860,13 +952,15 @@
                     number(unit.x, unit.y - 40, '+' + O.value[i], '#b3efc0');
                 }
                 else {
+                    const energyBefore=unit.ult,shieldBefore=unit.shield;
                     unit.boost=8;
                     unit.ult=Math.min(100,unit.ult+20);
                     unit.shield=Math.min(unit.maxhp*.8,unit.shield+12);
-                    toast('拾获剑匣 · 8 秒剑意激荡 · 无双蓄能 +20');
-                    ring(P.x, P.y, 180, '#f3d287', .65, 3);
+                    toast(chestRewardText(Math.max(0,unit.ult-energyBefore),Math.max(0,unit.shield-shieldBefore)));
+                    ring(unit.x, unit.y, 180, '#f3d287', .65, 3);
+                    chestPickupEvent(i, unit, energyBefore, shieldBefore);
                 }
-                audio.sfx('pickup');
+                sfxAt(O.kind[i] === 0 ? 'orb' : O.kind[i] === 1 ? 'heal' : 'chest', O.x[i], O.y[i], 1, unit);
                 O.release(i);
             }
         }
@@ -894,17 +988,17 @@
             if (list[k].age >= list[k].life)
                 list.splice(k, 1);
         } shake *= Math.exp(-12 * dt); flash = Math.max(0, flash - dt); phaseFlash = Math.max(0, phaseFlash - dt); }
-    function setStage(z, silent = false) { run.stage = z % 4; props.length = 0; let rng = mulberry(2496 + z); for (let i = 0; i < 105; i++) {
+    function setStage(z, silent = false) { const changed = run.stage !== z % 4; run.stage = z % 4; audio.stage?.(run.stage); props.length = 0; let rng = mulberry(2496 + z); for (let i = 0; i < 105; i++) {
         let a = rng() * TAU, r = 350 + rng() * 1300, x = Math.cos(a) * r, y = Math.sin(a) * r * .9;
         props.push({ x, y, type: i % 7 === 0 ? 1 : i % 3 === 0 ? 0 : 2, scale: .58 + rng() * .7 });
     } props.sort((a, b) => a.y - b.y); phaseFlash = 1.2; if (!silent) {
         if(!P.downed)P.hp = Math.min(P.maxhp, P.hp + P.maxhp * .2);
-        announce('第 ' + (z + 1) + ' 境 · 剑路渐深', STAGES[run.stage].name, STAGES[run.stage].sub, 2.8);
-    } }
+        announce('第 ' + (z + 1) + ' 境 · 剑路渐深', STAGES[run.stage].name, STAGES[run.stage].sub, 2.8); audio.sfx('stage');
+    } if(changed&&state==='play'&&typeof beginVisualTransition==='function')beginVisualTransition('region'); }
     function startWave(w, initial = false) { run.wave = w; run.waveClock = 0;coopWaveStart(); run.bossSpawned = false; const stage = Math.floor((w - 1) / 4) % 4; if (stage !== run.stage)
         setStage(stage);
     else if (!initial)
-        toast('第 ' + w + ' 潮 · 妖潮再起', 1.5); if (!initial)
+        { toast('第 ' + w + ' 潮 · 妖潮再起', 1.5); audio.sfx('wave'); } if (!initial)
         spawnPack(Math.round(Math.min(65+w*4,155)*(run.scaling?.density||1))); }
     function director(dt){
       if(run.expedition){expeditionDirector(dt);return;}
@@ -952,9 +1046,11 @@
       run.pressure=clamp((occupied/12)*.55+(near/34)*.45,0,1);run.peakPressure=Math.max(run.peakPressure,run.pressure);
       if(run.pressure>.77&&near>18&&!run.trapped){run.trapped=true;run.trapX=P.x;run.trapY=P.y;run.trapAt=run.time;}
       if(run.trapped&&near<9&&dist2(P.x-run.trapX,P.y-run.trapY)>170*170){
-        run.trapped=false;run.breakouts++;P.ult=Math.min(100,P.ult+9);audio.sfx('level',0,.65);toast('冲出重围！ · 无双蓄能 +9',1.5);
+        run.trapped=false;run.breakouts++;P.ult=Math.min(100,P.ult+9);audio.sfx('breakout');toast('冲出重围！ · 无双蓄能 +9',1.5);
       }
       audio.battle(run.pressure,run.bossId>=0,run.phase,P.hp/P.maxhp,P.ultTime>0);
+      // 无双蓄满时提示一次
+      if(P.ult>=99.9&&P.ultTime<=0&&!P.downed){if(!ultCue){ultCue=true;audio.sfx('ultready');}}else ultCue=false;
     }
 
     function startGame() {
@@ -969,7 +1065,7 @@
         save();
         for (const pool of [E, B, F, O, HB])
             pool.clear();
-        for (const list of [rings, lines, warnings, numbers, traces, zones])
+        for (const list of [rings, lines, warnings, numbers, traces, zones, weaponEvents, skillEvents, bossEvents, pickupEvents])
             list.length = 0;
         hashHead.fill(-1);
         keys.clear();
@@ -1016,7 +1112,7 @@
         audio.init();
         audio.music('music_battle');
         $('hudName').textContent = hero.name;
-        $('hudPortrait').innerHTML = crest(selected);
+        $('hudPortrait').innerHTML = heroPortrait(selected);
         $('skillSymbol').textContent = hero.symbol;
         $('skillLabel').textContent = hero.skill;
         $('ultLabel').textContent = hero.ult;
@@ -1030,14 +1126,15 @@
         renderer?.resetRun();
         updateHUD();
         if(run.expedition)expeditionRoute();
+        else if(typeof beginVisualTransition==='function')beginVisualTransition('deploy');
     }
     function step(dt) {
-        if (state !== 'play' || !P || run.ended)
+        if (state !== 'play' || visualWait || !P || run.ended)
             return;
         frameNo++;
         run.time += dt;
         director(dt);
-        if (state !== 'play')
+        if (state !== 'play' || visualWait)
             return;
         oathTick(dt);
         if(!P.downed){

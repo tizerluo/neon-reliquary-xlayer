@@ -1,0 +1,103 @@
+{
+  "schema": "nr-public-export-allowlist-v1",
+  "publicRepository": "https://github.com/tizerluo/neon-reliquary-xlayer.git",
+  "topLevel": [
+    "README.md",
+    "Neon_Reliquary_v3.html",
+    "build.py",
+    "package.json",
+    "package-lock.json",
+    "requirements.txt",
+    "manifest.json",
+    "tool_schemas.json",
+    "DESIGN-BASELINE.md",
+    "IMPLEMENTATION.md",
+    "TACTICAL-CHIP-WORKSHOP.md",
+    "WEBMCP_INTEGRATION.md"
+  ],
+  "trees": {
+    "src": [
+      ".js",
+      ".css",
+      ".html",
+      ".md"
+    ],
+    "visual-game": [
+      ".js",
+      ".mjs"
+    ],
+    "tests": [
+      ".cjs",
+      ".py",
+      ".js",
+      ".json",
+      ".md"
+    ],
+    "tools": [
+      ".cjs",
+      ".js",
+      ".mjs",
+      ".py",
+      ".md"
+    ],
+    "examples": [
+      ".py",
+      ".js",
+      ".cjs",
+      ".json",
+      ".md"
+    ],
+    "upstream": [
+      ".js",
+      ".py",
+      ".md"
+    ],
+    "docs": [
+      ".md",
+      ".json"
+    ]
+  },
+  "deploymentFiles": [
+    "deploy/oath.json",
+    "deploy/vercel.json",
+    "deploy/oath-icon.svg",
+    "deploy/oath-icon.png",
+    "deploy/public-export.json",
+    "deploy/public-snapshots/evidence/live-coop/commands.jsonl",
+    "deploy/public-snapshots/evidence/rescue-fix/after.json",
+    "deploy/public-snapshots/evidence/rescue-fix/edge-results.json"
+  ],
+  "historicalEvidence": [
+    "evidence/live-coop/commands.jsonl",
+    "evidence/rescue-fix/after.json",
+    "evidence/rescue-fix/edge-results.json"
+  ],
+  "excluded": [
+    "research",
+    "art",
+    "previews",
+    "node_modules",
+    "dist",
+    "release",
+    ".qa-tmp",
+    ".vercel",
+    ".wrangler",
+    "HANDOFF.md",
+    "*.env",
+    "private session files"
+  ],
+  "sanitization": "Historical local home paths and runtime credential values are removed; authors and public chain addresses are retained.",
+  "vendorChecksums": {
+    "src/vendor/ethers.umd.min.js": "9a85a5aa81305f85e6546452fd2093a8a68932bed3cec4f6491e4d031a90bc95"
+  },
+  "legacyDestinationFiles": {
+    "evidence/live-coop/commands.jsonl": "47fc35ec80e82a632ce067c0b724385a1cfabd29c60a1ece0a74fdba8f14b04f",
+    "evidence/rescue-fix/after.json": "954388fd126e509a392926378b5962cdc0403191aa648ea41c2970d70285aa12",
+    "evidence/rescue-fix/edge-results.json": "2accb3c4a25d762d39eb568bc407044eeee672ff2b12e63fb8b00c47c23f5024"
+  },
+  "historicalSnapshots": {
+    "evidence/live-coop/commands.jsonl": "deploy/public-snapshots/evidence/live-coop/commands.jsonl",
+    "evidence/rescue-fix/after.json": "deploy/public-snapshots/evidence/rescue-fix/after.json",
+    "evidence/rescue-fix/edge-results.json": "deploy/public-snapshots/evidence/rescue-fix/edge-results.json"
+  }
+}

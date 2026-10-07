@@ -1,0 +1,31 @@
+/* 符文仅使用 opacity / transform 动画，不依赖正在准备的三维画布。 */
+.loading-crest{width:clamp(88px,10cqw,160px);height:clamp(88px,10cqw,160px);--load-color:#cbb585}
+.loading-crest,.art-loading-rune,.battle-loading-rune{will-change:transform;animation:load-orbit 18s linear infinite}
+@keyframes load-orbit{to{transform:rotate(360deg)}}
+.loading-crest svg,.art-loading-rune svg,.battle-loading-rune svg{display:block;width:100%;height:100%;overflow:visible;fill:none;stroke:var(--load-color);stroke-width:.8}
+.rune-orbit{stroke-dasharray:54 10 4 10;transform-origin:60px 60px;animation:rune-turn 12s linear infinite;opacity:.6}
+.rune-inner{stroke-dasharray:3 7;transform-origin:60px 60px;animation:rune-turn 18s linear infinite reverse;opacity:.6}
+.rune-star{stroke-width:.65;opacity:.65}.rune-cross{opacity:.55}.rune-heart{fill:var(--load-color);stroke:none;animation:rune-breathe 2.6s ease-in-out infinite}
+@keyframes rune-turn{to{transform:rotate(360deg)}}@keyframes rune-breathe{50%{opacity:.3;transform:scale(.7)}}
+.rune-heart{transform-origin:60px 60px}
+#loading{gap:clamp(14px,1.6cqw,24px)}#loadText{font-size:clamp(11px,.8cqw,14px)}
+#loading .load-line{width:clamp(150px,22cqw,330px)}#loadFill{width:32%!important;animation:load-sweep 1.8s ease-in-out infinite}
+.art-loading{position:absolute;z-index:4;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;max-width:40%;width:max-content;padding:10px 14px;color:#d3dfdf;background:linear-gradient(115deg,#061018e8,#07111aca);border:1px solid #a7caca24;box-shadow:0 10px 25px #03081033;pointer-events:none;--load-color:#86d8d2}
+.art-loading-rune{width:37px;height:37px;flex:none}.art-loading-copy{min-width:0}.art-loading strong{font:clamp(10px,.75cqw,13px) var(--mono);font-weight:400;letter-spacing:.05em}.art-loading-copy>span{display:block;font:clamp(9px,.6cqw,11px) var(--mono);color:#9db1b8;margin:5px 0 7px;line-height:1.5}
+.art-load-line{height:1px;width:100%;min-width:100px;background:#99b9c52b;overflow:hidden}.art-load-line i{display:block;background:var(--load-color);width:32%;height:100%;transition:width .15s linear;box-shadow:0 0 9px var(--load-color)}.art-load-line.indeterminate i{animation:load-sweep 1.8s ease-in-out infinite}
+@keyframes load-sweep{0%{transform:translateX(-110%)}100%{transform:translateX(410%)}}
+.art-load-retry{pointer-events:auto;font:11px var(--mono);padding:8px 11px;border-color:#acced247;color:var(--load-color);white-space:nowrap}
+[data-loading-state="missing"] .art-loading-rune,[data-loading-state="missing"] .battle-loading-rune,[data-loading-state="missing"] .rune-orbit,[data-loading-state="missing"] .rune-inner,[data-loading-state="missing"] .rune-heart{animation:none;opacity:.4}
+[data-loading-state="missing"] .art-load-line{display:none}
+.battle-loading{position:absolute;inset:0;z-index:25;background-size:cover;background-position:center;--load-color:#86d8d2}
+.battle-loading-veil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#07121cb8,#03080feb 72%)}
+.battle-loading-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;gap:14px}
+.battle-loading-content .eyebrow{color:var(--load-color);font-size:clamp(10px,.8cqw,14px)}.battle-loading-rune{width:clamp(90px,12cqw,180px);height:clamp(90px,12cqw,180px);margin:4px 0}
+.battle-loading-content h2{font:clamp(24px,3cqw,44px) var(--serif);letter-spacing:.08em;color:#e2d8c6}.lang-zh .battle-loading-content h2{font-family:Arial,'PingFang SC',sans-serif}
+.battle-load-phase{font:clamp(12px,.9cqw,16px) var(--mono);color:#c0d2d7}.battle-loading-content .art-load-line{width:clamp(160px,25cqw,350px);margin:3px 0}.battle-load-detail{font:clamp(10px,.75cqw,13px)/1.6 var(--mono);color:#94aeb7;max-width:480px}
+.battle-load-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:18px}.battle-load-actions button{font:clamp(10px,.75cqw,13px) var(--mono);padding:11px 16px}.art-load-back{background:transparent;color:#9bb0b8;border-color:transparent}
+.ui-portrait img{opacity:0;transition:opacity .25s ease}.ui-portrait.portrait-ready img{opacity:1}.ui-portrait:not(.portrait-ready):not(.portrait-missing):after{content:'';position:absolute;inset:17% 22%;border:1px solid #9dbfc12c;background:radial-gradient(ellipse,#9dbfc11c,transparent 70%);animation:portrait-breathe 2s ease-in-out infinite;pointer-events:none}
+@keyframes portrait-breathe{50%{opacity:.35}}
+@media(orientation:portrait){.art-loading{max-width:88%;padding:7px 11px;gap:8px}.art-loading-rune{width:29px;height:29px}.art-loading strong{font-size:10px}.art-loading-copy>span{font-size:9px;margin:3px 0 5px}.art-loading[data-view="select"]{padding:6px 9px}.art-loading[data-view="select"] .art-loading-rune{width:25px;height:25px}.art-loading[data-view="select"] .art-loading-copy>span{display:none}.art-loading[data-view="select"] .art-load-line{margin-top:5px}.battle-loading-content{padding:24px 18px}.battle-load-actions{gap:6px}}
+@media(orientation:landscape) and (max-height:550px){.art-loading{padding:6px 9px;gap:7px;max-width:44%}.art-loading-rune{width:26px;height:26px}.art-loading strong{font-size:9px}.art-loading-copy>span{font-size:8px}.battle-loading-content{gap:8px;padding:20px}.battle-loading-rune{width:68px;height:68px;margin:0}.battle-load-actions{margin-top:8px}.battle-load-actions button{padding:7px 11px}.battle-loading-content h2{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.loading-crest,.art-loading-rune,.battle-loading-rune,.rune-orbit,.rune-inner,.rune-heart,#loadFill,.art-load-line.indeterminate i,.ui-portrait:after{animation:none!important}.ui-portrait img,.art-load-line i{transition:none!important}}

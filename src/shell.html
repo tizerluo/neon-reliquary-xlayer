@@ -1,12 +1,14 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#090c12"><title>NEON RELIQUARY — Oath Expedition</title><style>__CSS__
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#090c12"><title>NEON RELIQUARY — Oath Expedition</title><script>__ASSET_CONFIG__</script><link rel="preload" as="image" href="visual-lab/assets/ui/arena-cathedral.png" fetchpriority="high"><script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script><style>__CSS__
 __OATH_CSS__
-__RESPONSIVE_CSS__</style></head><body>
+__RESPONSIVE_CSS__
+__LOADING_CSS__
+__ECONOMY_CSS__</style></head><body>
 <div id="app">
 <canvas id="game" aria-label="Neon Reliquary game"></canvas><canvas id="overlay" aria-hidden="true"></canvas><div class="screen-grain"></div>
-<div id="loading"><div class="loading-crest">✧</div><div class="eyebrow" data-i18n="boot">FORGING THE CITADEL</div><p id="loadText" data-i18n="bootDesc">Preparing geometry, light and sound…</p><div class="load-line"><i id="loadFill"></i></div></div>
+<div id="loading"><div class="loading-crest"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rune-orbit" cx="60" cy="60" r="52"/><circle class="rune-inner" cx="60" cy="60" r="38"/><path class="rune-star" d="M60 24 91 78 29 78Z M60 96 29 42 91 42Z"/><path class="rune-cross" d="M60 4V13 M116 60H107 M60 116V107 M4 60H13"/><circle class="rune-heart" cx="60" cy="60" r="5"/></svg></div><div class="eyebrow" data-i18n="boot">FORGING THE CITADEL</div><p id="loadText" role="status" aria-live="polite" data-i18n="bootDesc">Preparing your first view…</p><div class="load-line"><i id="loadFill"></i></div></div>
 <button class="lang-switch" id="langBtn" aria-label="Switch interface language">EN <span>/</span> ZH</button>
 <section id="home" class="screen hidden"><div class="home-shade"></div><header class="home-top"><div class="wordmark"><span class="brand-icon">♜</span> NR<span class="brand-separator"></span><span data-i18n="edition">A GOTHIC CYBERFANTASY</span></div><span class="system-status"><i></i><span data-i18n="online">LOCAL SYSTEM · READY</span></span></header>
-<div class="home-copy"><div class="eyebrow"><span class="short-rule"></span><span data-i18n="subtitle">THE LAST LIGHT DOES NOT GO QUIETLY.</span></div><h1>NEON<br><em>RELIQUARY</em><span class="title-dot">.</span></h1><p class="home-tagline" data-i18n="tagline">Steel remembers. The machine does not forgive.</p><p class="home-desc" data-i18n="homeDesc"></p><div class="home-actions"><button class="primary large" id="enterBtn"><span data-i18n="enter">ENTER THE CITADEL</span><b>↗</b></button><div class="home-links"><button id="codexBtn" data-i18n="codex">ARCHIVE</button><button id="helpHomeBtn" data-i18n="help">FIELD MANUAL</button><button id="settingsHomeBtn" data-i18n="settings">SETTINGS</button></div></div></div>
+<div class="home-model-stage" aria-hidden="true"></div><div class="home-copy"><div class="eyebrow"><span class="short-rule"></span><span data-i18n="subtitle">THE LAST LIGHT DOES NOT GO QUIETLY.</span></div><h1>NEON<br><em>RELIQUARY</em><span class="title-dot">.</span></h1><p class="home-tagline" data-i18n="tagline">Steel remembers. The machine does not forgive.</p><p class="home-desc" data-i18n="homeDesc"></p><div class="home-actions"><button class="primary large" id="enterBtn"><span data-i18n="enter">ENTER THE CITADEL</span><b>↗</b></button><small id="audioHint" class="audio-hint" data-i18n="audioHint">MUSIC BEGINS WITH YOUR FIRST CLICK</small><div class="home-links"><button id="codexBtn" data-i18n="codex">ARCHIVE</button><button id="helpHomeBtn" data-i18n="help">FIELD MANUAL</button><button id="settingsHomeBtn" data-i18n="settings">SETTINGS</button></div></div></div>
 <div class="home-spec"><div class="spec-line"></div><span class="eyebrow" data-i18n="menuHero">THE AETHER ORDER</span><strong data-i18n="menuQuote">BOUND BY STEEL.<br>REBORN IN LIGHT.</strong><span class="spec-index">// NR—06 / 2089</span></div>
 <footer class="home-foot"><span data-i18n="homeFoot">STEEL & CIRCUITRY / REAL-TIME 3D</span><span id="homeRecord"></span><span id="saveState" data-i18n="local">OFFLINE · NO ACCOUNT REQUIRED</span></footer></section>
 <section id="select" class="screen hidden"><div class="select-shade"></div><header class="screen-top"><button id="backHomeBtn" class="quiet" data-i18n="back">← BACK</button><div class="select-heading"><span class="eyebrow" data-i18n="choose">CHOOSE YOUR OATH</span><small data-i18n="selectHint">Six orders. One last stand.</small></div><button id="helpSelectBtn" class="quiet" data-i18n="help">FIELD MANUAL</button></header>
@@ -27,12 +29,14 @@ __RESPONSIVE_CSS__</style></head><body>
 <div id="codexModal" class="modal hidden"><div class="modal-card codex-card"><button class="modal-close" id="codexClose" aria-label="Close">×</button><span class="eyebrow" data-i18n="restricted">// RESTRICTED ARCHIVE</span><h2 data-i18n="archiveTitle"></h2><p class="subtle" data-i18n="archiveDesc"></p><div id="bossCodex"></div></div></div>
 <section id="result" class="screen hidden"><div class="result-veil"></div><div class="result-content"><div id="resultEyebrow" class="eyebrow"></div><h1 id="resultTitle"></h1><p id="resultDesc"></p><div class="result-stats" id="resultStats"></div><div id="resultBuild"></div><div class="result-actions"><button id="againBtn" class="primary" data-i18n="again"></button><button id="selectAgainBtn" data-i18n="change"></button><button id="resultHomeBtn" class="quiet" data-i18n="home"></button></div><small id="resultRecord"></small></div></section>
 <div id="perfDetails" class="hidden"></div><button id="recoveryBtn" class="hidden" data-i18n="recovery"></button><div id="rotateHint"><div>⤾</div><strong data-i18n="rotate"></strong><p data-i18n="rotateDesc"></p></div>
-</div><script>__I18N__</script><script>__AUDIO__</script><script>__RENDERER__</script><script>__MODELS__</script><script>__ETHERS__</script><script>__CIRCUITS__</script><script>__OATH_DATA__</script><script>__PROVENANCE__</script><script>__XLAYER__</script><script>__CORE__
+</div><script>__I18N__</script><script>__AUDIO__</script><script>__WARNING_DATA__</script><script>__UI_BOUNDS__
+__RENDERER__</script><script>__MODELS__</script><script>__LOADING_UI__</script><script>__ETHERS__</script><script>__CIRCUITS__</script><script>__OATH_DATA__</script><script>__PROVENANCE__</script><script>__XLAYER__</script><script>__CORE__
 __COOP__
 __OATH__
 __EXPEDITION__
 __OATH_UI__
 __FORGE_UI__
+__ECONOMY_UI__
 __INSPECTOR__
 __RUNTIME__
 </script></body></html>

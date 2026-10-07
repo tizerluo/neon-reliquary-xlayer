@@ -39,7 +39,8 @@
    const need=[BigInt(c.nNand)>balances[0]?BigInt(c.nNand)-balances[0]:0n,BigInt(c.nLatch)>balances[1]?BigInt(c.nLatch)-balances[1]:0n];
    if(need[0]+need[1]>cpu.supply-cpu.minted)throw Error('INSUFFICIENT_MATERIAL_SUPPLY');
    const mint=need.map(n=>n?cpu.price*n+cpu.protocol:0n);
-   return{...cpu,block,c,balances,need,mint,total:mint[0]+mint[1]+cpu.fee,account:account||null,quotedAt:Date.now()};
+   const materialSubtotal=(need[0]+need[1])*cpu.price,mintProtocolSubtotal=mint[0]+mint[1]-materialSubtotal;
+   return{...cpu,block,c,balances,need,mint,materialSubtotal,mintProtocolSubtotal,total:mint[0]+mint[1]+cpu.fee,account:account||null,quotedAt:Date.now()};
   }
   async connect(){
    if(!this.ethereum?.request)throw Error('WALLET_UNAVAILABLE');

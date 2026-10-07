@@ -4,15 +4,15 @@
 
 New to the game? Read the complete [English player guide](docs/PLAYER-GUIDE.en.md) or [中文完整玩法指南](docs/PLAYER-GUIDE.zh-CN.md). Both start with a wallet-free route for players and continue with AI companions, circuit design, free lab tests, and optional X Layer tapeout.
 
-Prefer to watch? The [complete English video guide](https://youtu.be/Pp3l9Mzx0sQ) (13:29) and [中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14）follow the same two paths, with matching narration and burned-in captions. Both are unlisted and available by link.
+Previous-edition feature tutorials (these do not show the October HD/OATH update): The [complete English video guide](https://youtu.be/Pp3l9Mzx0sQ) (13:29) and [中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14）follow the same two paths, with matching narration and burned-in captions. Both are unlisted and available by link.
 
 A browser roguelite built around playable TapeOut NAND/LATCH circuits on X Layer. One leader and up to three companions fight through twelve encounters across three regions. The leader can be human-controlled or assigned to an external AI agent; each companion seat can hold a tactical circuit chip, an external AI agent, or remain empty. The default human-plus-three-chip squad is free to play and needs no wallet.
 
-Nandverse Arcade — Neon Reliquary was submitted to the TapeOut Genesis Transistor Hackathon on 2026-09-24. The [English competition demo](https://youtu.be/jwszzKPWcrI) shows the live game and on-chain chip verification. The accompanying videos cover [gameplay in English](https://youtu.be/5nsdvGTCElg) and [chip creation with 11 templates in English](https://youtu.be/_yW_HZ9HUjc); [Chinese competition demo](https://youtu.be/-xOcF6qaUAI), [Chinese gameplay](https://youtu.be/p7j430kNNXQ), and [Chinese chip guide](https://youtu.be/EBraOXO7ZwU) are also available. Each video pairs narration and captions in the same language.
+Nandverse Arcade — Neon Reliquary was submitted to the TapeOut Genesis Transistor Hackathon on 2026-09-24. The previous-edition [English competition demo](https://youtu.be/jwszzKPWcrI) shows the live game and on-chain chip verification. The accompanying videos cover [gameplay in English](https://youtu.be/5nsdvGTCElg) and [chip creation with 11 templates in English](https://youtu.be/_yW_HZ9HUjc); [Chinese competition demo](https://youtu.be/-xOcF6qaUAI), [Chinese gameplay](https://youtu.be/p7j430kNNXQ), and [Chinese chip guide](https://youtu.be/EBraOXO7ZwU) are also available. Each video pairs narration and captions in the same language.
 
 ## Play
 
-Open the [live game](https://1-2-231.tapekit.org/) or download [Neon_Reliquary_v3.html](Neon_Reliquary_v3.html) and open it in a modern browser. Keep **Oath Expedition** selected, choose a class and difficulty, then deploy. The file bundles the game, visuals, audio, and its browser-side Ethereum library; normal play does not fetch a model or require a server. The live game's file bytes are stored on X Layer and served to browsers through TapeKit's gateway and Service Worker. English and Chinese are available in the game.
+Open the [live game](https://1-2-231.tapekit.org/) in a modern browser. The October update candidate includes six HD heroes, eight bosses, four environments, procedural audio and recoverable asset loading. Its program and runtime modules are prepared for X Layer DeWeb, while 60 versioned visual assets use Cloudflare with SHA-256 verification. The existing live game stays active until the verified candidate is switched on; see [release status and build instructions](docs/HYBRID-DEPLOYMENT.md). For local HD play, run the server below. English and Chinese are available.
 
 Move with WASD or the arrow keys, aim with the pointer, dodge with Space, use the skill with E and the ultimate with R. Press P for the squad panel and Esc to pause. On touch screens, use the on-screen joystick and ability buttons; landscape is recommended for combat.
 
@@ -26,6 +26,12 @@ The **TapeOut** panel features the [Nandverse Foundry processor and 11 manufactu
 
 The **Author Provenance** panel can package the original tapeout transaction, publisher address, exact netlist, ABI, and blueprint lineage. Participants can sign their own author, collaborator, commissioner, adaptation, or publisher declarations and export/import the package. Import rechecks signatures and on-chain data. This is evidence of publication and self-declarations, not a legal authorship finding or an automatic royalty payment.
 
+## Nandverse and OATH
+
+The home page's **Nandverse / OATH** entry separates free gameplay, shared NAND/LATCH material sales and the OATH ecosystem plan. Material quotes show required units, owned inventory, missing units, material charges, protocol fees, tapeout fees and the quote block; gas is additional. Future games, author orders, revenue buybacks, consumption and staking are labelled as plans until implemented.
+
+OATH is currently preparing for launch. Accepted launch settings and the real receipt fields are recorded in [OATH release status](docs/OATH-RELEASE.md); no placeholder contract or trading link is presented as live. [Economy boundaries](docs/NANDVERSE-ECONOMY.md) explain the five cumulative stages.
+
 ## Optional external AI
 
 Reserve the leader or companion seats for external AI in the squad panel. The public gameplay interface accepts periodic observations and tactical intentions while the browser runs movement, combat, and cooldowns. A human can take over the leader and revoke its agent credential. The seven-tool contract is described in [WEBMCP_INTEGRATION.md](WEBMCP_INTEGRATION.md), with example clients in [examples/](examples/).
@@ -34,16 +40,16 @@ For a local agent connection, run python3 tools/live_server.py and open http://1
 
 ## Build and verify
 
-The checked-in HTML is built from src/ with Python's standard library. Node.js 18+ is needed for the automated JavaScript tests.
+The checked-in HTML is built from src/ with Python's standard library. Node.js 18+ and Python are needed for the build and automated JavaScript tests. Install the pinned runtime dependencies before previewing HD modules.
 
-    python3 build.py
     npm ci --ignore-scripts
+    python3 build.py
     npm test
     npm run test:legacy
     python3 tests/test_live_server.py
 
-The browser file includes ethers 6.16.0; its third-party license is retained in src/vendor/ethers.LICENSE.md. The automated suite covers circuit compilation/evaluation, gameplay rules, mixed squads, input, manufacturing readback, author provenance, and the local bridge. Paid mainnet actions require separate wallet confirmation. The 11 published chips were manufactured and read back on X Layer mainnet; desktop and mobile browser emulation have been exercised on the live gateway. Physical iPhone/Safari and a public player's own paid mint/tapeout flow have not been verified here.
+The browser file includes ethers 6.16.0; its third-party license is retained in src/vendor/ethers.LICENSE.md. The automated suite covers circuit compilation/evaluation, gameplay rules, mixed squads, input, manufacturing readback, author provenance, and the local bridge. Paid mainnet actions require separate wallet confirmation. The 11 published chips were manufactured and read back on X Layer mainnet; desktop and mobile browser emulation have been exercised on the live gateway. Physical iPhone and a public player's own paid mint/tapeout flow have not been verified here. The October candidate has also been exercised in desktop Safari; this does not verify iPhone performance.
 
 ## 中文速览
 
-打开[链上网页](https://1-2-231.tapekit.org/)或下载 Neon_Reliquary_v3.html，选择“誓约远征”即可免费游玩。默认是人类队长和三名战术芯片队友，无需钱包。队长也可交给外部 AI；三个队友席位可分别选芯片或外部 AI。工坊里可以一键选取 11 枚已流片的演示芯片，免费读回校验并装备，也可以编辑自己的芯片行动和圣物触发规则，先做免费逻辑试验，再按需连接 X Layer 钱包流片。对局成绩保存在本地，不等于链上认证成绩。初次游玩和深入制作芯片的步骤见[中文完整玩法指南](docs/PLAYER-GUIDE.zh-CN.md)。
+打开[链上网页](https://1-2-231.tapekit.org/)，选择“誓约远征”即可免费游玩。本地高清版需要完整仓库资源、安装依赖并通过 HTTP 服务打开；只下载 HTML 时使用兼容画面，不能视为高清版。上述视频为前版功能教程，未展示本轮高清与 OATH 更新。默认是人类队长和三名战术芯片队友，无需钱包。队长也可交给外部 AI；三个队友席位可分别选芯片或外部 AI。工坊里可以一键选取 11 枚已流片的演示芯片，免费读回校验并装备，也可以编辑自己的芯片行动和圣物触发规则，先做免费逻辑试验，再按需连接 X Layer 钱包流片。对局成绩保存在本地，不等于链上认证成绩。初次游玩和深入制作芯片的步骤见[中文完整玩法指南](docs/PLAYER-GUIDE.zh-CN.md)。

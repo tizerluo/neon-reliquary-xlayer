@@ -1,0 +1,16 @@
+.home-links{flex-wrap:wrap;gap:.3cqw .9cqw}
+.o-ecosystem-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}
+.o-ecosystem-card,.o-phase-flow{border:1px solid var(--line);background:rgba(9,16,24,.78);padding:16px;border-radius:4px}
+.o-ecosystem-card h3{margin:0 0 10px;color:#d6c49e;font:14px var(--mono)}
+.o-ecosystem-card p,.o-phase-flow p{font:13px/1.75 Arial,sans-serif;color:#b4c4c8;margin:8px 0}
+.o-ecosystem-card small{display:block;color:#82b9bc;font:11px/1.7 var(--mono)}
+.o-token-status{display:inline-block;padding:6px 10px;border:1px solid #4c7974;color:#9ce1cf;font:12px var(--mono);margin-bottom:10px}
+.o-economy-phases{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.o-economy-phases button{flex:1;min-width:125px;padding:12px;font:12px/1.5 var(--mono)}
+.o-economy-phases button.chosen{border-color:#81c6c8;color:#abe1d7;background:#14312e}
+.o-phase-flow h4{font:14px var(--mono);color:#d6c49e;margin:0 0 12px}
+.o-flow-line{padding:10px 0;border-bottom:1px solid var(--line);line-height:1.8;overflow-wrap:anywhere}
+.o-flow-line:last-child{border-bottom:0}
+.o-economy-address{overflow-wrap:anywhere;font:12px/1.8 var(--mono)}
+.o-quote-breakdown{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.85}
+@media(max-width:650px){.o-ecosystem-grid{grid-template-columns:1fr}.o-economy-phases button{min-width:42%;flex:auto}.o-ecosystem-card{padding:12px}}

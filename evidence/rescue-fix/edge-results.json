@@ -1,0 +1,71 @@
+[
+  {
+    "test": "Both ordinary knight and cleric approach and revive without invincibility",
+    "passed": true,
+    "details": [
+      {
+        "hero": 0,
+        "hp": 48,
+        "rescues": 1
+      },
+      {
+        "hero": 4,
+        "hp": 63.6,
+        "rescues": 1
+      }
+    ]
+  },
+  {
+    "test": "Repeated overlapping danger cannot reverse rescue approach",
+    "passed": true,
+    "details": {
+      "normal": {
+        "x": 1,
+        "y": 0
+      },
+      "rescue": {
+        "x": -1,
+        "y": 0
+      }
+    }
+  },
+  {
+    "test": "No automatic escape dash interrupts revive channel with 3 threats",
+    "passed": true,
+    "details": {
+      "hp": 48,
+      "dashCD": 0
+    }
+  },
+  {
+    "test": "Arrival brakes an already active dash",
+    "passed": true,
+    "details": {
+      "x": 46.11666666666667
+    }
+  },
+  {
+    "test": "Rescue clearing skill faces corridor even when closest enemy is behind",
+    "passed": true,
+    "details": {
+      "aim": 3.141592653589793,
+      "cooldown": 9
+    }
+  },
+  {
+    "test": "Manual skill suppression and explicit hold remain respected",
+    "passed": true
+  },
+  {
+    "test": "Cleric heals nearby living ally even without an enemy target",
+    "passed": true,
+    "details": {
+      "playerHP": 45.6,
+      "cooldown": 9
+    }
+  },
+  {
+    "test": "Full simulation pause prevents revive progress",
+    "passed": true
+  }
+]

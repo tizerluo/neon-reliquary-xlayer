@@ -1,0 +1,132 @@
+{
+  "generator": "tools/ui/portraits.html",
+  "modelVariant": "current game GLB",
+  "assets": {
+    "hero-aurelian": {
+      "source": "chars/aurelian-game.glb",
+      "sourceSHA256": "dd3851803d719942b651d7a5155402d1b0c525b24d330723c7b672ab5c66bfc6",
+      "file": "hero-aurelian.png",
+      "bytes": 101328,
+      "SHA256": "c50c5203ddfde1b27c267295590dbc6b78d127824c00af85f1847e83f79cb61b"
+    },
+    "hero-mordred": {
+      "source": "chars/mordred-game.glb",
+      "sourceSHA256": "c67a51cdeb843014130473c775eab3efb0a6c4d5af20ba011cf049f16d0cdb43",
+      "file": "hero-mordred.png",
+      "bytes": 94877,
+      "SHA256": "eccaa699547d04f5c12fadb21ec07edea9b05bedac531c5b7ce8fcfe7ce81d87"
+    },
+    "hero-volt": {
+      "source": "chars/volt-game.glb",
+      "sourceSHA256": "af89d0d15074b8527b61153e06e93d52f40115cc7aabca284ee440fb7fd7a9b7",
+      "file": "hero-volt.png",
+      "bytes": 91533,
+      "SHA256": "fe51a027d41bd5911e3c53fced5c95d05eb46ba220f379e5a0e3439a04d4b4de"
+    },
+    "hero-nyx": {
+      "source": "nyx-void-artificer-game.glb",
+      "sourceSHA256": "f4c7aaf56448275e508543f2dd918ac212ec5ea49038e49276a83391a0ede0b7",
+      "file": "hero-nyx.png",
+      "bytes": 85073,
+      "SHA256": "977b8636b8995f0561924023917e0c7d63f1696368c37cf74aa2fec079a5f00a"
+    },
+    "hero-seraph": {
+      "source": "chars/seraph-game.glb",
+      "sourceSHA256": "8038a5c3336abe0e863070669f11c113759bdc35637300ba4a26f58a76f40d35",
+      "file": "hero-seraph.png",
+      "bytes": 83098,
+      "SHA256": "e4c7db8736098a0424fd8dad135c115c7538c7079c1787f8a39a1fb164dcdbff"
+    },
+    "hero-isolde": {
+      "source": "chars/isolde-game.glb",
+      "sourceSHA256": "b1b48a293033a5d16a1b2e8381a57c8a226eae36cb734cab51e8754b8f12e8fc",
+      "file": "hero-isolde.png",
+      "bytes": 96674,
+      "SHA256": "5b7eed314c9e481c03187fcffbc770b05ccd615219ee1709c85b54db205286ba"
+    },
+    "boss-0": {
+      "source": "chars/boss-0-game.glb",
+      "sourceSHA256": "c97a2de01359729b577c4ab97f671c328e595071bcef953f04e5ac881b8e1dc3",
+      "file": "boss-0.png",
+      "bytes": 136519,
+      "SHA256": "03e4a51a67230bc22b4ad1eb4437df95c2ee5f1ee407aecca9578ba2f087c31f"
+    },
+    "boss-1": {
+      "source": "chars/boss-1-game.glb",
+      "sourceSHA256": "35496de36575187fa5b4b874751761b3bae43748a7f53be1d58361956d2a5b82",
+      "file": "boss-1.png",
+      "bytes": 42935,
+      "SHA256": "a920e189596a9977af0a0ceef0ad7fad81beb3f6d86a5b2ae220cf7f313cb750"
+    },
+    "boss-2": {
+      "source": "chars/boss-2-game.glb",
+      "sourceSHA256": "c2bcf5130b5047143fad825d6045f995b125458df9b929337f50c3fd35dd0805",
+      "file": "boss-2.png",
+      "bytes": 68758,
+      "SHA256": "a0c310558da4a79f778e21003b539ddd3d8f14934e7a7fb051eeb53ee3a2e7f9"
+    },
+    "boss-3": {
+      "source": "chars/boss-3-game.glb",
+      "sourceSHA256": "c58a8913dfe3db428d4539865b474b5039264e04cf5ccfc92c712341cbfd0f71",
+      "file": "boss-3.png",
+      "bytes": 107722,
+      "SHA256": "ae4f0de70229f5822401d864faa099633a18c42a5871cd8515dc2ad586aca275"
+    },
+    "boss-4": {
+      "source": "chars/boss-4-game.glb",
+      "sourceSHA256": "9cb0e54c6e5e6f8e025e3a4cb9b007f98c26b98fbf34639c0045a18205837e14",
+      "file": "boss-4.png",
+      "bytes": 81801,
+      "SHA256": "fba7938b976446892aafa7bbcb8b6c0de8890b167c66aecd0b2d9dd708750a7a"
+    },
+    "boss-5": {
+      "source": "chars/boss-5-game.glb",
+      "sourceSHA256": "e1de9fb36b3c34f32afe688aa997e449b56c8bbdb305b61e7e953b6d6710ae3c",
+      "file": "boss-5.png",
+      "bytes": 81262,
+      "SHA256": "59b3df41455989f3d429c26f029e76c26c563065cd57fae874058d4606c8bd33"
+    },
+    "boss-6": {
+      "source": "chars/boss-6-game.glb",
+      "sourceSHA256": "9c5a8f27d3b666db4fa03a1f616fab6196a5213b5d751c436ccefb769d3e82c9",
+      "file": "boss-6.png",
+      "bytes": 67743,
+      "SHA256": "b0088eee56a06a82841f080aaafe032951f28ff776cb2199b11277a53a410857"
+    },
+    "boss-7": {
+      "source": "chars/boss-7-game.glb",
+      "sourceSHA256": "538b974c9625b9ab7685c8e770e6c0faf7d46afb72f7e8daf5174f66b6c678ce",
+      "file": "boss-7.png",
+      "bytes": 56420,
+      "SHA256": "1e7a50e7ab7db86f3783fc79513da0900986fbd47aaa882505745e09c613b655"
+    },
+    "arena-cathedral": {
+      "source": "arenas/cathedral.glb",
+      "sourceSHA256": "b7c3cd393828968eac9870b47872527996f27c07ad767b530967fb682edb1f23",
+      "file": "arena-cathedral.png",
+      "bytes": 865274,
+      "SHA256": "365acc54cc8650770a40085e75e4ec5b91b7cf6eb0d66fb2288b61adff44aeb9"
+    },
+    "arena-archive": {
+      "source": "arenas/archive.glb",
+      "sourceSHA256": "7a6e59775a0431e3c01f3613413c1079cc2721e088bf23257024c17db8bf3c51",
+      "file": "arena-archive.png",
+      "bytes": 767306,
+      "SHA256": "f499150412fbf44c91d9c55bd8564991bd533558aeb3949a97a7fd9ee3ddfc77"
+    },
+    "arena-foundry": {
+      "source": "arenas/foundry.glb",
+      "sourceSHA256": "02c8fc44f0b5fbd4a201cd2474217573bb8711c9c9ee6c738f924a9b6d0bdbc5",
+      "file": "arena-foundry.png",
+      "bytes": 770939,
+      "SHA256": "871c25633201cc46b263ed8843a22c6eeb51f9741fe91cd0d5ef3ec502f7fb90"
+    },
+    "arena-throne": {
+      "source": "arenas/throne.glb",
+      "sourceSHA256": "23a4e47414c98eed0e47c08cfe8f2dd9bb272651e4af926451b11bb9ebcb8077",
+      "file": "arena-throne.png",
+      "bytes": 681841,
+      "SHA256": "d9c745f71180d2c1dd9ecd7e648bb9a5db356b27994faec2d10eb75a4c991a81"
+    }
+  }
+}

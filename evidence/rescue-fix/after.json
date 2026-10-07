@@ -1,0 +1,45 @@
+{
+  "variant": "after",
+  "scope": "Real core.js + coop.js combat in Node VM; rendering, audio and DOM stubbed. Player downed position is a deliberate fixture; no invincibility, enemy clearing or teleporting rescuer.",
+  "scenarios": [
+    {
+      "seed": 82103,
+      "revivedAt": 9.133333333333026,
+      "minDistance": 40.677835027911286,
+      "maxProgress": 2.395833333333333,
+      "nearSeconds": 1.9333333333333313,
+      "actorHP": 121.59983333333454,
+      "actorDowned": false,
+      "damageTaken": 64.31250000000001,
+      "playerHP": 49.6,
+      "kills": 43,
+      "passed": true
+    },
+    {
+      "seed": 17,
+      "revivedAt": 8.016666666666422,
+      "minDistance": 31.535560330626886,
+      "maxProgress": 2.395833333333333,
+      "nearSeconds": 1.9333333333333313,
+      "actorHP": 113.38666666666725,
+      "actorDowned": false,
+      "damageTaken": 71.67666666666679,
+      "playerHP": 50.400000000000006,
+      "kills": 94,
+      "passed": true
+    },
+    {
+      "seed": 91,
+      "revivedAt": 6.149999999999862,
+      "minDistance": 7.924874379008842,
+      "maxProgress": 2.395833333333333,
+      "nearSeconds": 1.9333333333333313,
+      "actorHP": 234,
+      "actorDowned": false,
+      "damageTaken": 0,
+      "playerHP": 65.6,
+      "kills": 346,
+      "passed": true
+    }
+  ]
+}

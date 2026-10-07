@@ -25,3 +25,5 @@
 }
 
 @media(pointer:coarse) and (orientation:landscape) and (max-height:550px){.hero-stage .stage-label{bottom:1%;}#partyOpen{z-index:2;}}
+
+.audio-hint{display:block;margin:.6cqw 0 -.1cqw;color:#91a8af;font:clamp(8px,.58cqw,12px) var(--mono);letter-spacing:.08em}

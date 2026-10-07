@@ -1,0 +1,32 @@
+[
+  {
+    "test": "Desktop party button, fill local bots and dismissal panel",
+    "passed": true
+  },
+  {
+    "test": "Human keyboard movement while three companions remain active",
+    "passed": true
+  },
+  {
+    "test": "Party modal pauses and requires explicit human resume",
+    "passed": true
+  },
+  {
+    "test": "All eight native boss models via real archive UI, rotation and return",
+    "passed": true
+  },
+  {
+    "test": "844x390 touch simulation: bilingual party panel, scroll, four units and joystick",
+    "passed": true,
+    "details": {
+      "width": 636,
+      "scroll": 636,
+      "height": 349,
+      "content": 437
+    }
+  },
+  {
+    "test": "No desktop/touch uncaught JavaScript errors",
+    "passed": true
+  }
+]

@@ -10,11 +10,12 @@
       const seed=crypto.getRandomValues(new Uint32Array(1))[0];
       run.expedition={seed,chapter:0,node:0,phase:'route',contract:['scarcity','hunted'].includes($('oathContract')?.value)?$('oathContract').value:'none',cleared:0,research:0,buffs:[],choices:[],clock:0,objective:null,bossWindow:false,resultRecorded:false};
     }
-    function expeditionRoute(){if(!run?.expedition||run.ended)return;state='route';run.expedition.phase='route';resetInput();audio.pause(true);hide('hud');hide('bossHud');hide('upgradePanel');expeditionRenderRoute();show('routeModal');coopHUD();oathHUD();}
+    function expeditionRoute(){if(!run?.expedition||run.ended)return;state='route';run.expedition.phase='route';resetInput();audio.music('music_camp');hide('hud');hide('bossHud');hide('upgradePanel');expeditionRenderRoute();show('routeModal');coopHUD();oathHUD();}
     function expeditionOptions(){const ex=run.expedition;if(ex.node===3)return['boss'];if(ex.chapter===0&&ex.node===0)return['clear','rescue'];const types=['clear','escort','defend','rescue'];const k=(ex.seed+ex.chapter*7+ex.node*3)>>>0;return[types[k%4],types[(k+1)%4]];}
     function expeditionChoose(type){
       const ex=run?.expedition;if(state!=='route'||!ex||!expeditionOptions().includes(type))return false;
       for(const pool of [E,B,HB,O,F])pool.clear();for(const arr of [warnings,zones,rings,lines,numbers,traces])arr.length=0;
+      audio.sfx('route');
       ex.phase='encounter';ex.type=type;ex.clock=0;ex.startKills=run.kills;ex.choices.push(type);ex.spawn=0;ex.marker=0;
       run.wave=ex.chapter*4+ex.node+1;run.waveClock=0;run.waveLength=EX_TYPES[type].seconds;run.bossId=-1;run.bossSpawned=false;
       setStage(ex.chapter,true);P.x=-350;P.y=0;
@@ -23,6 +24,7 @@
       state='play';hide('routeModal');hide('campModal');show('hud');audio.init();audio.pause(false);audio.music(type==='boss'?'music_boss':'music_battle');
       if(type==='boss')spawnEnemy([1,4,7][ex.chapter],2,P.x+350,P.y-80);else spawnPack(28,true);
       buildHash();snapPrevious();lastFrame=performance.now();simAccumulator=0;
+      if(typeof beginVisualTransition==='function')beginVisualTransition('deploy');
       announce(oathText('CHAPTER ','区域 ')+(ex.chapter+1),EX_TYPES[type][language],EX_TYPES[type].tip[language==='en'?0:1],4);
       coopEvent('expedition_encounter',{chapter:ex.chapter+1,node:ex.node+1,encounterType:type});return true;
     }
@@ -60,11 +62,11 @@
       ex.cleared++;ex.research+=ex.type==='boss'?15:5;ex.phase='camp';ex.objective=null;
       coopEvent('encounter_complete',{chapter:ex.chapter+1,node:ex.node+1,encounterType:ex.type});
       if(ex.chapter===2&&ex.node===3){finish(true);return;}
-      state='camp';resetInput();hide('hud');hide('bossHud');hide('upgradePanel');audio.pause(true);expeditionRenderCamp();show('campModal');coopHUD();oathHUD();
+      state='camp';resetInput();hide('hud');hide('bossHud');hide('upgradePanel');audio.music('music_camp');audio.sfx('camp');expeditionRenderCamp();show('campModal');coopHUD();oathHUD();
     }
     function expeditionReward(kind){
       const ex=run?.expedition;if(state!=='camp'||ex?.phase!=='camp'||!['mend','edge','battery'].includes(kind))return false;
-      ex.buffs.push(kind);
+      ex.buffs.push(kind);audio.sfx('reward');
       for(const a of partyActors()){
         if(a.downed)coopRevive(a,'camp');
         if(kind==='mend'){a.maxhp+=6;a.hp=Math.min(a.maxhp,a.hp+a.maxhp*.45);}

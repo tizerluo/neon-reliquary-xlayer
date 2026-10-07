@@ -2,12 +2,28 @@
   "name": "neon-reliquary-oath-expedition",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "python3 build.py",
+    "build:static": "python3 tools/export_static.py",
+    "build:visual-assets": "blender --background --python tools/sculpt_retopo_bake.py",
+    "build:visual-assets:base": "blender --background --python tools/build_visual_lab.py",
+    "render:visual-review": "blender -b art/oath-knight-highpoly-retopo.blend --python tools/render_character_review.py",
+    "build:nyx": "blender --background --python tools/build_nyx.py",
+    "render:nyx-review": "blender -b art/nyx-void-artificer.blend --python tools/render_nyx_review.py",
     "start": "python3 tools/live_server.py",
+    "visual:lab": "python3 -m http.server 4173 --bind 127.0.0.1",
     "test": "node --test tests/oath-*.test.cjs",
-    "test:legacy": "node tests/test_client.cjs && node tests/test_rescue.cjs && node tests/test_rescue_edges.cjs"
+    "test:legacy": "node tests/test_client.cjs && node tests/test_rescue.cjs && node tests/test_rescue_edges.cjs",
+    "audio:review": "node tools/audio_review.cjs"
   },
-  "dependencies": {"ethers": "6.16.0"},
-  "overrides": {"ws": "8.21.3"}
+  "dependencies": {
+    "ethers": "6.16.0",
+    "three": "0.186.0"
+  },
+  "overrides": {
+    "ws": "8.21.3"
+  }
 }

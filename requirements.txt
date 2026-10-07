@@ -1,0 +1,6 @@
+# 系统 Python 3 的依赖（Blender 脚本用 Blender 自带的 Python，不读这个文件）
+# build.py 与本地服务器只用标准库；下面两个给校验与印样脚本用：
+#   Pillow —— tools/contact_sheet.py、tools/*/sheet.py 拼印样
+#   numpy  —— tools/arenas/verify.py 的贴图色彩统计（缺了会跳过这一项，其余校验照常）
+Pillow>=10
+numpy>=1.26
