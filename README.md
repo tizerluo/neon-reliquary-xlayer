@@ -30,7 +30,7 @@ The **Author Provenance** panel can package the original tapeout transaction, pu
 
 The home page's **Nandverse / OATH** entry separates free gameplay, shared NAND/LATCH material sales and the OATH ecosystem plan. Material quotes show required units, owned inventory, missing units, material charges, protocol fees, tapeout fees and the quote block; gas is additional. Future games, author orders, revenue buybacks, consumption and staking are labelled as plans until implemented.
 
-OATH is currently preparing for launch. Accepted launch settings and the real receipt fields are recorded in [OATH release status](docs/OATH-RELEASE.md); no placeholder contract or trading link is presented as live. [Economy boundaries](docs/NANDVERSE-ECONOMY.md) explain the five cumulative stages.
+Nandverse OATH is issued on X Layer: [0x66e59AB78F32cdA17a69E3784B0B67E17b76eeEE](https://ignix.bot/launch?token=0x66e59ab78f32cda17a69e3784b0b67e17b76eeee). The [confirmed launch receipt and settings](docs/OATH-RELEASE.md) record buy/sell tax 1%, holders/project 20/80, native OKB dividends, no minimum holding and zero initial purchase. Consumption and staking remain planned. [Economy boundaries](docs/NANDVERSE-ECONOMY.md) explain the five cumulative stages.
 
 ## Optional external AI
 

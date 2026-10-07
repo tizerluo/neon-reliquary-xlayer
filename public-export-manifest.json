@@ -1,8 +1,8 @@
 {
   "schema": "nr-public-export-v1",
   "generator": "tools/export_public.py",
-  "sourceCommit": "11b4dbdf610d3ab2a9c7f7bb639a80d33fa4d207",
-  "allowlistSha256": "3f5abf847110498db95b1514176cb83fed087699f2a0ce4752e415b8fe835f3e",
+  "sourceCommit": "5c5da19ed1510db6cd1e831d05a44e6d9ac5cac9",
+  "allowlistSha256": "a023574a08a6b7b98342fe0912254fe3fbacafff8cb5cfde4d9837625ff3df39",
   "files": {
     ".gitignore": {
       "bytes": 178,
@@ -17,12 +17,12 @@
       "sha256": "065a28cdce35e88f83b2671bca75b64694cd6c90018a8ebf2fd9203335464906"
     },
     "Neon_Reliquary_v3.html": {
-      "bytes": 1099997,
-      "sha256": "9762f3872f1f6805988ffe6296ca2c41fb9d5ef6b36579ef9bb86200814d2879"
+      "bytes": 1100477,
+      "sha256": "7a3749da239360835f9e42d742f77501bdc33bea49543644204c08ccb74f34ba"
     },
     "README.md": {
-      "bytes": 8000,
-      "sha256": "ad74f167c8471f79bfa9461bfb3da2ee074b379a1aff9fed75aca64a9e023166"
+      "bytes": 8163,
+      "sha256": "263469d16f046c9a75572349e35a5e59c7bd070addbee152c3a4abd854c20abb"
     },
     "TACTICAL-CHIP-WORKSHOP.md": {
       "bytes": 7214,
@@ -44,13 +44,17 @@
       "bytes": 456,
       "sha256": "ddc9f3486c179728951e1502f92535c622b157c181da4b90b5449449e72c2a9f"
     },
+    "deploy/oath-receipt.json": {
+      "bytes": 2114,
+      "sha256": "c77e39ca86089e8da6ed2165207c6abb2315472915008745b00d58d017e89508"
+    },
     "deploy/oath.json": {
-      "bytes": 576,
-      "sha256": "a8c42f15d9f272f33d1d315b5596e8513a42c723a8c8dfb77fda19962b5e39e1"
+      "bytes": 1062,
+      "sha256": "a7844a9bfd1ced9d8256521420c7ce620765d586b4955c1d722ebdd7b8c0f15e"
     },
     "deploy/public-export.json": {
-      "bytes": 2669,
-      "sha256": "3f5abf847110498db95b1514176cb83fed087699f2a0ce4752e415b8fe835f3e"
+      "bytes": 2701,
+      "sha256": "a023574a08a6b7b98342fe0912254fe3fbacafff8cb5cfde4d9837625ff3df39"
     },
     "deploy/public-snapshots/evidence/live-coop/commands.jsonl": {
       "bytes": 1895,
@@ -89,20 +93,20 @@
       "sha256": "93d6d9fbb7d6f426dbaa68473e6fd9a00adf46c3ec4e3a662390eb63978a3d2f"
     },
     "docs/HYBRID-DEPLOYMENT.md": {
-      "bytes": 3114,
-      "sha256": "b99858c483fe8bc365839eea6aba4ce05e009ab07943f29e1f33b891c1ec0c9d"
+      "bytes": 3320,
+      "sha256": "05cef31d5fe0d8eebe3b9ff4160caf7172dddcdc4bb4ee249eddee54584a2186"
     },
     "docs/LOADING-EXPERIENCE.md": {
       "bytes": 3609,
       "sha256": "ee300e569850c2cbea2ce9612ea0b7ba5c79625a6fc372830a5c026f3cd4ffb8"
     },
     "docs/NANDVERSE-ECONOMY.md": {
-      "bytes": 2272,
-      "sha256": "22ae42f31f59d237b78a4255e8fe399ac685aa7ee12b00828f0253018d1f61c0"
+      "bytes": 2489,
+      "sha256": "8b83065b5276c61c52c1cec82bc02622798a3cb5d5010412a8e07148d0fdaef6"
     },
     "docs/OATH-RELEASE.md": {
-      "bytes": 2336,
-      "sha256": "780ee9c1fc473b6f6eb9e924d2065ff27a4478780e62b6deab61b04daeeabafd"
+      "bytes": 2929,
+      "sha256": "96d15bd6eefae36140ea523417deea5675828dcfcc962a9b51d990d707d3d0f8"
     },
     "docs/PLAYER-GUIDE.en.md": {
       "bytes": 14970,
@@ -117,8 +121,8 @@
       "sha256": "70a16ef3d066d4d0c7b11fe09d9a7dbc36d6dd565119f3d2fbed32d25e77ca2a"
     },
     "docs/XLAYER-MAINNET.md": {
-      "bytes": 5088,
-      "sha256": "7f8b76d86e1e5730d355b231b29ab2253f73760db99dfb4dd5085b1a5b8f0eab"
+      "bytes": 5543,
+      "sha256": "90f726d4dd5ac9b8244e321283b429c6e227a22cecefb2b213886c0e6d32767d"
     },
     "evidence/live-coop/commands.jsonl": {
       "bytes": 1895,
@@ -253,8 +257,8 @@
       "sha256": "8cc21dccdf09cd46ecf9267ec852f30f17f29659e8ad132e31575149aef783d0"
     },
     "src/runtime.js": {
-      "bytes": 35719,
-      "sha256": "82641f5ccd7a5190d94f518c62f69b64e1be2d85959af1add9cf6d1cd3b2aa38"
+      "bytes": 35723,
+      "sha256": "d5c2839e61fab9deb481115418b6cbe77b2ab0b178920ce685f08ae2408dcd39"
     },
     "src/shell.html": {
       "bytes": 13927,

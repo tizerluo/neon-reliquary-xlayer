@@ -1,5 +1,5 @@
 {
-  "status": "preparing",
+  "status": "launched",
   "name": "Nandverse OATH",
   "symbol": "OATH",
   "chainId": 196,
@@ -13,13 +13,18 @@
   "initialBuy": "0",
   "antiSnipe": false,
   "graduationProtectionDays": 1,
-  "address": null,
-  "vault": null,
-  "transactionHash": null,
-  "tradeUrl": null,
-  "blockNumber": null,
+  "address": "0x66e59AB78F32cdA17a69E3784B0B67E17b76eeEE",
+  "vault": "0x6fDD99885b32146FB7bA388E2dc4aC3e9dfDAa65",
+  "transactionHash": "0x95271e9cafc580b023183afc52db762c11db5f20b1465b13714a385aa80702fd",
+  "tradeUrl": "https://ignix.bot/launch?token=0x66e59ab78f32cda17a69e3784b0b67e17b76eeee",
+  "blockNumber": 72618561,
   "consumptionOpen": false,
   "stakingOpen": false,
   "minimumHolding": "0",
-  "dividendAsset": "quote"
+  "dividendAsset": "quote",
+  "tracker": "0x7DcF8a05e89888621C757971BABC049d14cA74F5",
+  "manager": "0x96b51c57e5346d0c0198899243cf851d1e23c309",
+  "metadataURI": "https://api.ignix.bot/v1/ignix/meta/0x66e59ab78f32cda17a69e3784b0b67e17b76eeee",
+  "listingFeeOKB": "0",
+  "issuanceGasOKB": "0.0"
 }

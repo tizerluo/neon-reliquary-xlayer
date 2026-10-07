@@ -1,6 +1,6 @@
 # October competition update
 
-Status: candidate prepared on 2026-10-07; the original DeWeb edition remains live until upload readback and activation finish. OATH has not been issued.
+Status: the hybrid edition was activated on 2026-10-07 after full chain readback; Cloudflare serves the unchanged 60 HD assets. OATH was issued at block 72618561. This source records its real addresses for the configuration increment. The original September HTML is preserved at `archive/pre-competition-84f7e7fe34da45a4.html` in the same on-chain container.
 
 The default HD edition integrates the visual, procedural audio and recoverable loading work from visual commit `5d1b6e94ba1e4a967b47314c925b724e4f4ab69d` into the development source. It retains the circuit workshop, X Layer readback, author provenance, local saves and seven WebMCP tools. Existing source records, explicit credits and on-chain publisher evidence are preserved; a publishing account is not treated as proof of original authorship.
 

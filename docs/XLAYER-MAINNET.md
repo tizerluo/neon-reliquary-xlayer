@@ -1,5 +1,7 @@
 # Nandverse Arcade on X Layer
 
+**2026-10-07 update:** the formal entry now opens the hybrid HD program. Program/dependencies are versioned on X Layer; 60 HD assets are hosted on Cloudflare. The processor, 11 chip templates, material contracts and provenance facts remain the same. [Hybrid deployment](HYBRID-DEPLOYMENT.md) and [confirmed OATH launch](OATH-RELEASE.md) describe the update. The byte count/hash below document the preserved September edition, not the new hybrid package.
+
 Neon Reliquary is the first playable game using the Nandverse Foundry processor. The game can be [played in a browser](https://1-2-231.tapekit.org/) without a wallet. Creating and testing local circuit blueprints is free; a player pays only when choosing to manufacture an immutable version.
 
 | Parameter | Mainnet value |
