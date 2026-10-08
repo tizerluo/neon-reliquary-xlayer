@@ -1,7 +1,7 @@
 {
   "schema": "nr-public-export-v1",
   "generator": "tools/export_public.py",
-  "sourceCommit": "4da920411f284b0bfb57dc7319470d77c35a531c",
+  "sourceCommit": "20b7357b0807c1486fc714c5492cb5b7837b1a6f",
   "allowlistSha256": "f5108e35396a6fbb1847b9e8451df25886d195706f9201b7eb4ce191d549f48d",
   "files": {
     ".gitignore": {
@@ -21,8 +21,8 @@
       "sha256": "5e9226c478699f20f385d503f6d3df1d8b2239c83fed7411bd687bcba6ae9181"
     },
     "README.md": {
-      "bytes": 8338,
-      "sha256": "ac0c4be92ee92fc40a7093b81d0b032624847d2e1246352610eb5c4c130daf1c"
+      "bytes": 9166,
+      "sha256": "fb4919d4bae47a92c7d60adba495dd44a3428ae3a3a6f3b0d5486b3515f8da90"
     },
     "TACTICAL-CHIP-WORKSHOP.md": {
       "bytes": 7214,
@@ -88,6 +88,10 @@
       "bytes": 6633,
       "sha256": "6498433efca80e14b2a015a295a93a1440fc6f3dc086ccb09f039720b6c025c8"
     },
+    "docs/COMPETITION-VIDEO-2026-10.md": {
+      "bytes": 4065,
+      "sha256": "30db379a3e8ee3a260d17cd43de68ebed216105225643db405e1f31ea3c86ff8"
+    },
     "docs/DEV-ENVIRONMENT.md": {
       "bytes": 4139,
       "sha256": "00cd863634d1daf27e5a66421c1b6230c39d8714c5fde91b1d848a7266bdfa9f"
@@ -97,8 +101,8 @@
       "sha256": "93d6d9fbb7d6f426dbaa68473e6fd9a00adf46c3ec4e3a662390eb63978a3d2f"
     },
     "docs/HYBRID-DEPLOYMENT.md": {
-      "bytes": 7327,
-      "sha256": "0d25c778a3af286855f4e75744ff8e36e6f24d169bab6f93a17893ca1e1c952b"
+      "bytes": 7696,
+      "sha256": "5fa0fbed1c173a0c0327dca8625bb9b453811f1c70f3e51e37b791cdac4bf0f9"
     },
     "docs/IPHONE-VISUAL-FIX-2026-10-08.md": {
       "bytes": 4919,
@@ -117,20 +121,20 @@
       "sha256": "96d15bd6eefae36140ea523417deea5675828dcfcc962a9b51d990d707d3d0f8"
     },
     "docs/PLAYER-GUIDE.en.md": {
-      "bytes": 15414,
-      "sha256": "bd610af9e96eec0b63b7437e7817842994c0088c7dd4016af4c5a3c70a06f84a"
+      "bytes": 15761,
+      "sha256": "fa1abdaa45b7d1ca4d5c9d143eec13b0806e4a1bf50d0d19ce3d823f89c56d81"
     },
     "docs/PLAYER-GUIDE.zh-CN.md": {
-      "bytes": 15093,
-      "sha256": "d05073237d97c00859c927e0af1b0e3e7f0d9ec003627b43deab7303e83210ee"
+      "bytes": 15428,
+      "sha256": "2eafa9e5206dfd37f654175904083aed218fe0ce10d448c227da1fc314a10e93"
     },
     "docs/UI-ASSET-INTEGRATION.md": {
       "bytes": 8890,
       "sha256": "70a16ef3d066d4d0c7b11fe09d9a7dbc36d6dd565119f3d2fbed32d25e77ca2a"
     },
     "docs/XLAYER-MAINNET.md": {
-      "bytes": 5732,
-      "sha256": "635c2190f7f59a97f608cde1c3642238c8260583bdce63eafa15240c68d28cf1"
+      "bytes": 5965,
+      "sha256": "81cb52fb2fe9750bd11f1bcbc73f07707e1ca4c00ccef251cda0065abc6f01c0"
     },
     "evidence/live-coop/commands.jsonl": {
       "bytes": 1895,

@@ -2,6 +2,8 @@
 
 [Play now](https://1-2-231.tapekit.org/) · [中文版](PLAYER-GUIDE.zh-CN.md) · [X Layer processor and 11 manufactured circuits](XLAYER-MAINNET.md)
 
+The [October competition update](https://youtu.be/G7RmBifrycg) (2:57.8, English narration and captions) shows the HD game, hybrid DeWeb, chip readback and OATH launch. It preserves October 7 footage with October 8 release annotations; [video scope](COMPETITION-VIDEO-2026-10.md) explains the dates, historical quote and mobile browser emulation.
+
 Watch the previous-edition [complete English video guide](https://youtu.be/Pp3l9Mzx0sQ) (13:29) or [中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14）. Each version has narration and burned-in captions in the same language; these videos do not show the October HD and OATH update.
 
 The October live edition adds HD heroes, bosses and environments, procedural audio and recoverable loading. **Nandverse / OATH** on the home page explains shared materials and the ecosystem token. [OATH is issued on X Layer](OATH-RELEASE.md); consumption and staking are not open. Playing, testing blueprints and reading existing chips do not require an OATH purchase.

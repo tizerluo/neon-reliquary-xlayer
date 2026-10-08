@@ -2,6 +2,8 @@
 
 [开始游玩](https://1-2-231.tapekit.org/) · [English guide](PLAYER-GUIDE.en.md) · [11 枚已流片芯片及链上资料](XLAYER-MAINNET.md)
 
+[本轮英文参赛视频](https://youtu.be/G7RmBifrycg)（2:57.8，英文旁白与字幕）展示高清游戏、hybrid DeWeb、芯片读回和 OATH 发行。视频保留 10 月 7 日素材，补充 10 月 8 日正式版标注；[视频说明](COMPETITION-VIDEO-2026-10.md)记录日期、历史报价与手机浏览器模拟范围。
+
 想看前版功能教程，可以观看[中文完整玩法视频](https://youtu.be/VyF5jggNrfE)（11:14），或[英文完整视频指南](https://youtu.be/Pp3l9Mzx0sQ)（13:29）。两个版本各自使用同语言的旁白和内嵌字幕，未展示 10 月高清与 OATH 更新。
 
 10 月正式版已加入高清英雄／Boss／场景、程序化音频和可恢复加载。首页「NANDVERSE／OATH」说明共享材料与生态代币；[OATH 已在 X Layer 发行](OATH-RELEASE.md)，消费与质押尚未开放。免费游玩、蓝图试验及既有芯片读回都不要求购买 OATH。
