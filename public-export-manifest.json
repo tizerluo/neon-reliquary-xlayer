@@ -1,7 +1,7 @@
 {
   "schema": "nr-public-export-v1",
   "generator": "tools/export_public.py",
-  "sourceCommit": "55cdb6a22734e4b42e877af2ab74f95e7fb430d8",
+  "sourceCommit": "4da920411f284b0bfb57dc7319470d77c35a531c",
   "allowlistSha256": "f5108e35396a6fbb1847b9e8451df25886d195706f9201b7eb4ce191d549f48d",
   "files": {
     ".gitignore": {
@@ -17,12 +17,12 @@
       "sha256": "065a28cdce35e88f83b2671bca75b64694cd6c90018a8ebf2fd9203335464906"
     },
     "Neon_Reliquary_v3.html": {
-      "bytes": 1100477,
-      "sha256": "7a3749da239360835f9e42d742f77501bdc33bea49543644204c08ccb74f34ba"
+      "bytes": 1100624,
+      "sha256": "5e9226c478699f20f385d503f6d3df1d8b2239c83fed7411bd687bcba6ae9181"
     },
     "README.md": {
-      "bytes": 8082,
-      "sha256": "b9f962bdc4000f0ba60e423fe55adf0f6607b24c564ac5f269e5e617314d5bff"
+      "bytes": 8338,
+      "sha256": "ac0c4be92ee92fc40a7093b81d0b032624847d2e1246352610eb5c4c130daf1c"
     },
     "TACTICAL-CHIP-WORKSHOP.md": {
       "bytes": 7214,
@@ -37,8 +37,8 @@
       "sha256": "c5676035c4f9b6afc563a99a72218081723f773629111d01c6fbd5b041ab2f48"
     },
     "deploy/hybrid-receipt.json": {
-      "bytes": 41351,
-      "sha256": "ad8c11368661965a0c947b705cc7707f437dd36bf4e9697d3798e33d7fdf05e9"
+      "bytes": 93868,
+      "sha256": "1fecbd2c7bd45fa168305fe8c596a8e21ea44198a396d8f383db4dafbd367980"
     },
     "deploy/oath-icon.png": {
       "bytes": 18325,
@@ -97,8 +97,12 @@
       "sha256": "93d6d9fbb7d6f426dbaa68473e6fd9a00adf46c3ec4e3a662390eb63978a3d2f"
     },
     "docs/HYBRID-DEPLOYMENT.md": {
-      "bytes": 5786,
-      "sha256": "38eb7d3959d129fb0faac97f3d54ed6d209c22a0eb28e4acac4460c6d635761f"
+      "bytes": 7327,
+      "sha256": "0d25c778a3af286855f4e75744ff8e36e6f24d169bab6f93a17893ca1e1c952b"
+    },
+    "docs/IPHONE-VISUAL-FIX-2026-10-08.md": {
+      "bytes": 4919,
+      "sha256": "2de91333e0f9809f5c6c6cdccc6009ea8b484ece85edf6c5a08ece5b2f559a1a"
     },
     "docs/LOADING-EXPERIENCE.md": {
       "bytes": 3609,
@@ -257,8 +261,8 @@
       "sha256": "edd7c2e0d832f712ce53beb9e681cadcff7ae5b08658868fce619791ec3bf7b0"
     },
     "src/responsive.css": {
-      "bytes": 17993,
-      "sha256": "8cc21dccdf09cd46ecf9267ec852f30f17f29659e8ad132e31575149aef783d0"
+      "bytes": 18140,
+      "sha256": "5bad976ba729656f2a5e992de382bebd9a3e80b2cde4727a92fdc78bc84cdc4a"
     },
     "src/runtime.js": {
       "bytes": 35723,
@@ -359,6 +363,10 @@
     "tests/oath-pickup-details.test.cjs": {
       "bytes": 4966,
       "sha256": "f9af1109b9f3e80ec4f5f02f903a26396a004500fdb6bf19ef1016aa7aefb020"
+    },
+    "tests/oath-presentation-actors.test.cjs": {
+      "bytes": 4703,
+      "sha256": "b974e08f5bb08ad3972b9781d31392472b1169cceb1f4fcfe1c7ed16b77f67a3"
     },
     "tests/oath-presentation.test.cjs": {
       "bytes": 3873,
@@ -1176,13 +1184,17 @@
       "bytes": 8642,
       "sha256": "97fada8984094b55897e474a9aa61ac1adaf5b04a060cab061d7c59ae6d5e5c0"
     },
+    "visual-game/presentation-actors.mjs": {
+      "bytes": 941,
+      "sha256": "f2bf5bb2da3c05eb36c73002f444573ecee94626682d2706453b91870b5a7871"
+    },
     "visual-game/presentation.mjs": {
       "bytes": 3392,
       "sha256": "378fc0109964ba270c63c5970aca6f13b77408ec0379391d3d977b9e91ac27e3"
     },
     "visual-game/roster-bridge.js": {
-      "bytes": 64725,
-      "sha256": "738b2fa9a29136900ed511a35d96cd8dfd4d0755034e0964a1f6784383041ce6"
+      "bytes": 64413,
+      "sha256": "38c367c233d510913731cc40e131e2bac2cd88f3dd85dfacae1423744a6e85ef"
     },
     "visual-game/skill-fx-timeline.mjs": {
       "bytes": 7884,

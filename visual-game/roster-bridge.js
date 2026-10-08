@@ -14,6 +14,7 @@ import { createPickupDetails } from './pickup-fx.mjs';
 import { pickupStyle } from './pickup-fx-data.mjs';
 import { createChestRewards } from './chest-rewards.mjs';
 import { HEROES, presentationFor, presentationRect, fitPresentationCamera } from './presentation.mjs';
+import { createPresentationActors } from './presentation-actors.mjs';
 import { createAssetStore, yieldForPaint } from './asset-loading.mjs';
 
 const query = new URLSearchParams(location.search);
@@ -219,8 +220,8 @@ export async function createRosterBridge(app) {
 
   const heroActors = new Map();   // 'leader' / 'a{uid}' -> Actor
   const bossActors = new Map();   // 敌人槽位 -> { gen, actor }
-  let displayActor = null, presentation = null, displayKey = null;
-  const displayActors = new Map(); // 最近四个展示对象复用骨骼实例，切回时不再重新克隆。
+  let displayActor = null, presentation = null;
+  const displayActors = createPresentationActors(); // 最近四个展示对象复用独立骨骼实例。
   const displayBox = new THREE.Box3();
   const spinQ = new THREE.Quaternion();
   const afterimages = [];
@@ -1049,22 +1050,14 @@ export async function createRosterBridge(app) {
         for (const im of rec.bins || []) im.count = 0;
       }
       trailMesh.count = sparkMesh.count = 0;
-      if (displayKey !== presentation.key) {
-        if (displayActor) displayActor.root.visible = false;
-        displayKey = presentation.key; displayActor = displayActors.get(displayKey) || null;
-        if (displayActor) { displayActors.delete(displayKey); displayActors.set(displayKey, displayActor); }
-      }
-      if (!displayActor && ready(displayKey)) {
+      displayActor = displayActors.show(presentation.key, () => {
+        if (!ready(presentation.key)) return null;
         const def = presentation.kind === 'hero' ? HEROES[presentation.hero]
-          : { id: displayKey, spin: BOSS_SPIN[presentation.boss] };
-        displayActor = new Actor(assets.get(displayKey), def);
-        displayActor.play('Idle');
-        displayActors.set(displayKey, displayActor);
-        if (displayActors.size > 4) {
-          const oldest = displayActors.keys().next().value;
-          displayActors.get(oldest).dispose(); displayActors.delete(oldest);
-        }
-      }
+          : { id: presentation.key, spin: BOSS_SPIN[presentation.boss] };
+        const actor = new Actor(assets.get(presentation.key), def);
+        actor.play('Idle');
+        return actor;
+      });
       if (displayActor) {
         const a = displayActor;
         a.root.scale.setScalar(7.8 / a.rec.size.y);
@@ -1105,7 +1098,7 @@ export async function createRosterBridge(app) {
         fitPresentationCamera(camera, new THREE.Box3(new THREE.Vector3(-3, 0, -2), new THREE.Vector3(3, 8, 2)), width / height, presentationRect(frame.state, width / height));
       }
     } else {
-    displayActor?.dispose(); displayActor = null; displayKey = null;
+    displayActors.hide(); displayActor = null;
     for (const a of heroActors.values()) a.root.visible = true;
     for (const b of bossActors.values()) b.actor.root.visible = true;
     camera.left = -native.width / 2;
@@ -1242,7 +1235,8 @@ export async function createRosterBridge(app) {
     metrics: () => ({
       mode: 'hd', visible, error, glow: glowOn,
       presentation: presentation ? { ...presentation, state: flags.presentationState,
-        ready: presentation.kind === 'battle' || !!(flags.presentation && displayKey === presentation.key && displayActor) } : null,
+        ready: presentation.kind === 'battle' || !!(flags.presentation && displayActors.metrics().active === presentation.key && displayActor?.root.visible && displayActor.root.parent === scene) } : null,
+      presentationActors: displayActors.metrics(),
       assets: Object.fromEntries([...assets].map(([k, r]) => [k, r.state + (r.count ? `:${r.count}` : '')])),
       heroes: heroActors.size, bosses: bossActors.size, shadows: shadowCount,
       afterimages: afterimages.filter(image => image.root.visible).length,
